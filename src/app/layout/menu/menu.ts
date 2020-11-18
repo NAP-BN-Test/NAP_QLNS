@@ -2,30 +2,12 @@ export const ModulesList = [
   {
     indexMenu: 0,
     label: 'DANH MỤC',
-    link: 'account-management',
+    link: 'type-timekeeping',
     children: [
       {
         indexMenu: 0,
-        label: 'Quản lý Account',
-        link: 'account-management',
-      },
-      {
-        indexMenu: 0,
-        label: 'Quản lý nhân viên',
-        link: 'staff-management',
-      },
-      { indexMenu: 0, label: 'Quản lý bộ phận', link: 'department-management' },
-      { indexMenu: 0, label: 'Quản lý chi nhánh', link: 'branch-management' },
-
-      {
-        indexMenu: 0,
-        label: 'Quản lý loại tài sản',
-        link: 'type-assets-management',
-      },
-      {
-        indexMenu: 0,
-        label: 'Quản lý hàng hóa',
-        link: 'goods-management',
+        label: 'Danh mục loại chấm công',
+        link: 'type-timekeeping',
       },
     ],
   },

@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     //       this.mService.setToken(data.token);
 
     //       this.mService.getApiService().setUserInfo(data.obj);
-    this.router.navigate(['menu/account-management'], {
+    this.router.navigate(['menu/type-timekeeping'], {
       queryParams: { page: 1 },
     });
     //       } else {

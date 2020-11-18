@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { TypeTimekeepingComponent } from './components/category-management/type-timekeeping/type-timekeeping.component';
 import { LoginComponent } from './layout/login/login.component';
 import { MenuComponent } from './layout/menu/menu.component';
 
@@ -12,7 +13,12 @@ const routes: Routes = [
   {
     path: 'menu',
     component: MenuComponent,
-    children: [],
+    children: [
+      {
+        path: 'type-timekeeping',
+        component: TypeTimekeepingComponent,
+      },
+    ],
   },
   {
     path: 'login',

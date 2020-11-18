@@ -16,9 +16,30 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MenuComponent } from './layout/menu/menu.component';
+import { TypeTimekeepingComponent } from './components/category-management/type-timekeeping/type-timekeeping.component';
+import { HolidayComponent } from './components/category-management/holiday/holiday.component';
+import { EmployeeStatusComponent } from './components/category-management/employee-status/employee-status.component';
+import { SearchBoardComponent } from './materials/search-board/search-board.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AddUpdateTypeTimekeepingComponent } from './dialogs/add-update-type-timekeeping/add-update-type-timekeeping.component';
+import { TablePaginatorComponent } from './materials/table-paginator/table-paginator.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, MenuComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    MenuComponent,
+    TypeTimekeepingComponent,
+    HolidayComponent,
+    EmployeeStatusComponent,
+    SearchBoardComponent,
+    AddUpdateTypeTimekeepingComponent,
+    TablePaginatorComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +55,11 @@ import { MenuComponent } from './layout/menu/menu.component';
     MatMenuModule,
     MatDialogModule,
     MatInputModule,
+    MatAutocompleteModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule,
+    NgxSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
