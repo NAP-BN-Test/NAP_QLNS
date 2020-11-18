@@ -22,6 +22,7 @@ export class AppModuleService {
   mUser: any;
   token: string = '';
   serverInfo: string = '';
+  indexMenu: number = 0;
 
   constructor(
     public mAngularHttp: Http,
@@ -70,6 +71,20 @@ export class AppModuleService {
   public setToken(token: string) {
     localStorage.setItem(LOCAL_STORAGE_KEY.TOKEN, token);
     this.token = token;
+  }
+
+  public getIndexMenu(): number {
+    if (localStorage.getItem(LOCAL_STORAGE_KEY.INDEX_MENU)) {
+      this.indexMenu = JSON.parse(
+        localStorage.getItem(LOCAL_STORAGE_KEY.INDEX_MENU)
+      );
+    }
+    return this.indexMenu;
+  }
+
+  public setIndexMenu(indexMenu: string) {
+    localStorage.setItem(LOCAL_STORAGE_KEY.INDEX_MENU, indexMenu);
+    this.indexMenu = Number(indexMenu);
   }
 
   //----------------------------------------------------//

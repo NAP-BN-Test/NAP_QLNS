@@ -1,0 +1,119 @@
+<div class="basic-container">
+  <div class="logo">
+    <img
+      src="https://ageless.com.vn/wp-content/uploads/2016/07/AGELESS-logo-TIENG-VIET-e1468290499166.png"
+    />
+  </div>
+  <div class="d-flex justify-content-center header-center" width-80>
+    <ng-container *ngFor="let menuItem of modulesList" tappable>
+      <!-- <ng-container *ngIf="!menuItem.children">
+          <span class="nav-link">
+            <span class="icon fa" [ngClass]="menuItem.icon"></span>
+            <span class="text-holder">{{ menuItem.label }}</span>
+          </span>
+        </ng-container> -->
+      <ng-container *ngIf="menuItem.children.length > 0">
+        <button
+          #button
+          mat-button
+          [matMenuTriggerFor]="levelOne"
+          #levelOneTrigger="matMenuTrigger"
+          (mouseenter)="buttonEnter(levelOneTrigger)"
+          (mouseleave)="buttonLeave(levelOneTrigger, button)"
+          class="button-menu"
+          [class.selected]="menuItem.indexMenu == indexMenu"
+          [routerLink]="menuItem.link"
+          (click)="onclickChildMenu(menuItem.indexMenu)"
+        >
+          <span class="icon fa"></span>
+          <span>
+            {{ menuItem.label }}
+            <i class="fa fa-chevron-down"></i>
+          </span>
+        </button>
+
+        <mat-menu #levelOne="matMenu" direction="down" yPosition="below">
+          <span
+            (mouseenter)="menuenter()"
+            (mouseleave)="menuLeave(levelOneTrigger, button)"
+            width-20
+          >
+            <ng-container *ngFor="let childL1 of menuItem.children">
+              <li
+                class="p-0"
+                *ngIf="!childL1.children"
+                mat-menu-item
+                [routerLink]="childL1.link"
+                (click)="onclickChildMenu(childL1.indexMenu)"
+              >
+                <span class="nav-link">
+                  {{ childL1.label }}
+                  <i *ngIf="childL1.icon"></i>
+                </span>
+              </li>
+              <ng-container
+                *ngIf="childL1.children && childL1.children.length > 0"
+              >
+                <li
+                  mat-menu-item
+                  #levelTwoTrigger="matMenuTrigger"
+                  [matMenuTriggerFor]="levelTwo"
+                >
+                  <span class="icon fa"></span>
+                  <span>{{ childL1.label }}</span>
+                </li>
+
+                <mat-menu #levelTwo="matMenu">
+                  <span
+                    (mouseenter)="menu2enter()"
+                    (mouseleave)="
+                      menu2Leave(levelOneTrigger, levelTwoTrigger, button)
+                    "
+                  >
+                    <ng-container *ngFor="let childL2 of childL1.children">
+                      <li
+                        class="p-0"
+                        mat-menu-item
+                        [routerLink]="childL2.link"
+                        (click)="onclickChildMenu(childL2.indexMenu)"
+                      >
+                        <span class="nav-link">
+                          {{ childL2.label }}
+                          <i *ngIf="childL2.icon"></i>
+                        </span>
+                      </li>
+                    </ng-container>
+                  </span>
+                </mat-menu>
+              </ng-container>
+            </ng-container>
+          </span>
+        </mat-menu>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div width-10 class="header-back d-flex flex-row">
+    <div width-60 class="d-flex flex-row user">
+      <button mat-icon-button [matMenuTriggerFor]="userDetail">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+    <div width-40 class="translate">
+      <img src="../../../assets/img/icon-Vietnam.png" />
+      <img src="../../../assets/img/icon- English.png" />
+    </div>
+  </div>
+</div>
+
+<mat-menu background-primary #userDetail="matMenu">
+  <button mat-menu-item><mat-icon>account_circle</mat-icon>Ngô Gia Hưng</button>
+  <button mat-menu-item><mat-icon>qr_code</mat-icon>NV00001</button>
+  <button mat-menu-item (click)="onClickLogout()">
+    <mat-icon>published_with_changes</mat-icon>Đổi mật khẩu
+  </button>
+  <button mat-menu-item (click)="onClickLogout()">
+    <mat-icon>exit_to_app</mat-icon>Đăng xuất
+  </button>
+</mat-menu>
+
+<router-outlet></router-outlet>

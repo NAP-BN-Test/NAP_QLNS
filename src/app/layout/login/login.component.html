@@ -1,0 +1,58 @@
+<div class="login-page">
+  <div class="login-header">
+    <img
+      src="https://ageless.com.vn/wp-content/uploads/2016/07/AGELESS-logo-TIENG-VIET-e1468290499166.png"
+    />
+  </div>
+  <div class="login-content">
+    <div class="title-login">
+      <span>Welcome to Truong Xuan Ageless</span>
+      <br />
+      <br />
+    </div>
+    <div class="form-login">
+      <div class="form-content">
+        <mat-form-field appearance="outline">
+          <mat-label>Tên đăng nhập</mat-label>
+          <input matInput [(ngModel)]="username" type="text" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Mật khẩu</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            [(ngModel)]="password"
+            (keyup.enter)="onClickLogin()"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" (click)="onClickLogin()">
+          Đăng nhập
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="login-footer">
+    <p>
+      11th Floor, Tower C, Ho Guom Plaza, 102 Tran Phu Rd, Ha Dong Dis, Hanoi,
+      Vietnam
+    </p>
+
+    <p>Tel. (84-24) 3557 5599</p>
+
+    <p>Fax: (84-24) 3943 4479</p>
+
+    <p>Email: info@ageless.vn</p>
+  </div>
+</div>
