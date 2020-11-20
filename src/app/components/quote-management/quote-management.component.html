@@ -2,6 +2,8 @@
   <div class="search-board">
     <app-search-board
       title="DANH SÁCH NHÂN VIÊN"
+      [hasAdd]="true"
+      (clickAdd)="onClickAdd()"
       (search)="onClickSort($event)"
       [listFields]="listFields"
     >

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AddUpdateStaffComponent } from 'src/app/dialogs/add-update-staff/add-update-staff.component';
 import { AppModuleService } from 'src/app/services/app-module.service';
 import {
   BUTTON_TYPE,
@@ -100,7 +102,8 @@ export class QuoteManagementComponent implements OnInit {
 
   constructor(
     public mService: AppModuleService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -143,5 +146,35 @@ export class QuoteManagementComponent implements OnInit {
   onClickPagination(event) {
     this.page = event;
     this.onLoadData(event, this.dataSearch);
+  }
+
+  onClickAdd() {
+    const dialogRef = this.dialog.open(AddUpdateStaffComponent, {
+      width: '900px',
+      height: '700px',
+
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        let obj = {
+          decisionCode: res.decisionCode,
+          decisionDate: res.decisionDate,
+          salaryIncrease: res.salaryIncrease,
+          status: res.status,
+          stopDate: res.stopDate,
+          stopReason: res.stopReason,
+        };
+        // this.mService
+        //   .getApiService()
+        //   .sendRequestADD_LABOR_MANAGEMENT_BOOK(obj)
+        //   .then((data) => {
+        //     this.mService.showSnackBar(data.message);
+        //     if (data.status == STATUS.SUCCESS) {
+        //       this.onLoadData(this.page, this.dataSearch);
+        //     }
+        //   });
+      }
+    });
   }
 }
