@@ -28,6 +28,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AddUpdateHolidayComponent } from './dialogs/add-update-holiday/add-update-holiday.component';
+import { AddUpdateEmployeeStatusComponent } from './dialogs/add-update-employee-status/add-update-employee-status.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AddUpdateHolidayComponent } from './dialogs/add-update-holiday/add-upda
     AddUpdateTypeTimekeepingComponent,
     TablePaginatorComponent,
     AddUpdateHolidayComponent,
+    AddUpdateEmployeeStatusComponent,
   ],
   imports: [
     BrowserModule,

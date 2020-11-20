@@ -14,6 +14,11 @@ export const ModulesList = [
         label: 'Danh mục nghỉ lễ',
         link: 'holiday',
       },
+      {
+        indexMenu: 0,
+        label: 'Danh mục tình trạng nhân viên',
+        link: 'employee-status',
+      },
     ],
   },
   {

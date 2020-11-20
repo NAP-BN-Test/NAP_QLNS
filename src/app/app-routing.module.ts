@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { EmployeeStatusComponent } from './components/category-management/employee-status/employee-status.component';
 import { HolidayComponent } from './components/category-management/holiday/holiday.component';
 import { TypeTimekeepingComponent } from './components/category-management/type-timekeeping/type-timekeeping.component';
 import { LoginComponent } from './layout/login/login.component';
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'holiday',
         component: HolidayComponent,
+      },
+      {
+        path: 'employee-status',
+        component: EmployeeStatusComponent,
       },
     ],
   },
