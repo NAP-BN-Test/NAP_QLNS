@@ -4,22 +4,22 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppModuleService } from 'src/app/services/app-module.service';
 
 @Component({
-  selector: 'app-add-update-type-timekeeping',
-  templateUrl: './add-update-type-timekeeping.component.html',
-  styleUrls: ['./add-update-type-timekeeping.component.less'],
+  selector: 'app-add-update-holiday',
+  templateUrl: './add-update-holiday.component.html',
+  styleUrls: ['./add-update-holiday.component.less'],
 })
-export class AddUpdateTypeTimekeepingComponent implements OnInit {
+export class AddUpdateHolidayComponent implements OnInit {
   myForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
     public mService: AppModuleService,
     @Inject(MAT_DIALOG_DATA) public mData: any,
-    public dialogRef: MatDialogRef<AddUpdateTypeTimekeepingComponent>
+    public dialogRef: MatDialogRef<AddUpdateHolidayComponent>
   ) {
     this.myForm = this.formBuilder.group({
-      nameType: [mData ? mData.nameType : ''],
+      nameHoliday: [mData ? mData.nameHoliday : ''],
       description: [mData ? mData.description : ''],
-      typeCode: [mData ? mData.typeCode : ''],
+      codeHoliday: [mData ? mData.codeHoliday : ''],
     });
   }
 
@@ -27,9 +27,9 @@ export class AddUpdateTypeTimekeepingComponent implements OnInit {
 
   onClickOk(event) {
     this.dialogRef.close({
-      nameType: this.myForm.value.nameType,
+      nameHoliday: this.myForm.value.nameHoliday,
       description: this.myForm.value.description,
-      typeCode: this.myForm.value.typeCode,
+      codeHoliday: this.myForm.value.codeHoliday,
     });
   }
 }

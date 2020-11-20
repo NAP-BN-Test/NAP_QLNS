@@ -27,6 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AddUpdateHolidayComponent } from './dialogs/add-update-holiday/add-update-holiday.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     SearchBoardComponent,
     AddUpdateTypeTimekeepingComponent,
     TablePaginatorComponent,
+    AddUpdateHolidayComponent,
   ],
   imports: [
     BrowserModule,

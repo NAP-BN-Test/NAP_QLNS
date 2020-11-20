@@ -16,11 +16,9 @@ export class TypeTimekeepingComponent implements OnInit {
   listTbData = {
     listColum: [
       { name: 'SỐ THỨ TỰ', cell: 'stt' },
-      { name: 'TÊN ĐẦY ĐỦ', cell: 'staffName' },
-      { name: 'TÊN ĐĂNG NHẬP', cell: 'userName' },
-      { name: 'MÃ NHÂN VIÊN', cell: 'staffCode' },
-      { name: 'TRẠNG THÁI', cell: 'active' },
-      { name: 'QUYỀN THỰC HIỆN', cell: 'permissionName' },
+      { name: 'MÃ LOẠI', cell: 'typeCode' },
+      { name: 'TÊN LOẠI', cell: 'nameType' },
+      { name: 'MÔ TẢ', cell: 'description' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
     listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
@@ -29,13 +27,7 @@ export class TypeTimekeepingComponent implements OnInit {
   collectionSize;
   page: number = 1;
 
-  listFields = [
-    { name: 'TÊN ĐẦY ĐỦ' },
-    { name: 'TÊN ĐĂNG NHẬP' },
-    { name: 'MÃ NHÂN VIÊN' },
-    { name: 'TRẠNG THÁI' },
-    { name: 'QUYỀN THỰC HIỆN' },
-  ];
+  listFields = [{ name: 'TÊN LOẠI' }, { name: 'MÔ TẢ' }];
 
   dataSearch: any = {
     search: '',
@@ -45,35 +37,28 @@ export class TypeTimekeepingComponent implements OnInit {
   dataExample = [
     {
       stt: 0,
-      staffName: 'Nguyễn Văn A',
-      userName: 'user01',
-      staffCode: 'NV0001',
-      active: true,
-      permissionName: 'Nhân viên',
+      nameType: 'Làm việc',
+      description: 'Đủ 8 tiếng',
+      typeCode: 'LV',
     },
     {
       stt: 1,
-      staffName: 'Nguyễn Văn B',
-      userName: 'user02',
-      staffCode: 'NV0002',
-      active: true,
-      permissionName: 'Nhân viên',
+      nameType: 'Nghỉ luân phiên',
+      description: 't7,cn',
+      typeCode: 'LP',
     },
     {
       stt: 2,
-      staffName: 'Nguyễn Văn C',
-      userName: 'user03',
-      staffCode: 'NV0003',
-      active: true,
-      permissionName: 'Quản lý',
+      nameType: 'Nghỉ phép',
+      description: 'nghỉ ngày LV',
+      typeCode: 'F',
     },
   ];
 
   constructor(
     public mService: AppModuleService,
-    public dialog: MatDialog
-  ) // private spinner: NgxSpinnerService
-  {}
+    public dialog: MatDialog // private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
     // this.mService.LoadAppConfig();
@@ -132,24 +117,18 @@ export class TypeTimekeepingComponent implements OnInit {
     const dialogRef = this.dialog.open(AddUpdateTypeTimekeepingComponent, {
       width: '900px',
       data: {
-        username: event.data.username,
-        password: event.data.password,
-        staffCode: event.data.staffCode,
-        staffName: event.data.staffName,
-        active: event.data.active,
-        permission: event.data.permissionName,
+        nameType: event.data.nameType,
+        description: event.data.description,
+        typeCode: event.data.typeCode,
       },
     });
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         let obj = {
-          username: res.username,
-          password: res.password,
-          staffCode: res.staffCode,
-          staffName: res.staffName,
-          active: res.active,
-          idPermission: res.idPermission,
+          nameType: res.nameType,
+          description: res.description,
+          typeCode: res.typeCode,
         };
         // this.mService
         //   .getApiService()
@@ -172,12 +151,9 @@ export class TypeTimekeepingComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         let obj = {
-          username: res.username,
-          password: res.password,
-          staffCode: res.staffCode,
-          staffName: res.staffName,
-          active: res.active,
-          idPermission: res.idPermission,
+          nameType: res.nameType,
+          description: res.description,
+          typeCode: res.typeCode,
         };
         // this.mService
         //   .getApiService()

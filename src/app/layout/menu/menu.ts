@@ -9,6 +9,11 @@ export const ModulesList = [
         label: 'Danh mục loại chấm công',
         link: 'type-timekeeping',
       },
+      {
+        indexMenu: 0,
+        label: 'Danh mục nghỉ lễ',
+        link: 'holiday',
+      },
     ],
   },
   {

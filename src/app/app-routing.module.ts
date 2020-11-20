@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HolidayComponent } from './components/category-management/holiday/holiday.component';
 import { TypeTimekeepingComponent } from './components/category-management/type-timekeeping/type-timekeeping.component';
 import { LoginComponent } from './layout/login/login.component';
 import { MenuComponent } from './layout/menu/menu.component';
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'type-timekeeping',
         component: TypeTimekeepingComponent,
+      },
+      {
+        path: 'holiday',
+        component: HolidayComponent,
       },
     ],
   },
