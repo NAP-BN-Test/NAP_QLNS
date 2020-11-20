@@ -1,8 +1,11 @@
+import { Quote } from '@angular/compiler';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmployeeStatusComponent } from './components/category-management/employee-status/employee-status.component';
 import { HolidayComponent } from './components/category-management/holiday/holiday.component';
 import { TypeTimekeepingComponent } from './components/category-management/type-timekeeping/type-timekeeping.component';
+import { DecidedToIncreaseTheSalariesComponent } from './components/decided-to-increase-the-salaries/decided-to-increase-the-salaries.component';
+import { QuoteManagementComponent } from './components/quote-management/quote-management.component';
 import { LoginComponent } from './layout/login/login.component';
 import { MenuComponent } from './layout/menu/menu.component';
 
@@ -27,6 +30,14 @@ const routes: Routes = [
       {
         path: 'employee-status',
         component: EmployeeStatusComponent,
+      },
+      {
+        path: 'decided-increase-salaries',
+        component: DecidedToIncreaseTheSalariesComponent,
+      },
+      {
+        path: 'quote',
+        component: QuoteManagementComponent,
       },
     ],
   },

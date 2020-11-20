@@ -29,6 +29,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AddUpdateHolidayComponent } from './dialogs/add-update-holiday/add-update-holiday.component';
 import { AddUpdateEmployeeStatusComponent } from './dialogs/add-update-employee-status/add-update-employee-status.component';
+import { DecidedToIncreaseTheSalariesComponent } from './components/decided-to-increase-the-salaries/decided-to-increase-the-salaries.component';
+import { AddUpdateDecidedIncreaseSalariesComponent } from './dialogs/add-update-decided-increase-salaries/add-update-decided-increase-salaries.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { QuoteManagementComponent } from './components/quote-management/quote-management.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +49,9 @@ import { AddUpdateEmployeeStatusComponent } from './dialogs/add-update-employee-
     TablePaginatorComponent,
     AddUpdateHolidayComponent,
     AddUpdateEmployeeStatusComponent,
+    DecidedToIncreaseTheSalariesComponent,
+    AddUpdateDecidedIncreaseSalariesComponent,
+    QuoteManagementComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +73,9 @@ import { AddUpdateEmployeeStatusComponent } from './dialogs/add-update-employee-
     MatTableModule,
     MatPaginatorModule,
     NgxSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

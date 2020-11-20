@@ -24,72 +24,14 @@ export const ModulesList = [
   {
     indexMenu: 1,
     label: 'TRÍCH NGANG',
-    link: 'assets-management',
-    children: [
-      {
-        indexMenu: 1,
-        label: 'Báo cáo tài sản mua mới',
-        link: 'new-purchase-property-warehouse',
-      },
-    ],
+    link: 'quote',
+    children: [],
   },
   {
     indexMenu: 2,
     label: 'QĐ TĂNG LƯƠNG',
-    link: 'assets-management',
-    children: [
-      {
-        indexMenu: 1,
-        label: 'Quản lý văn phòng phẩm',
-        link: 'stationery-management',
-      },
-      {
-        indexMenu: 1,
-        label: 'Quản lý điều chuyển thiết bị',
-        link: 'transfer-equiment-management',
-      },
-      {
-        indexMenu: 1,
-        label: 'Quản lý yêu cầu mua sắm',
-        link: 'purchase-request-management',
-      },
-      {
-        indexMenu: 1,
-        label: 'Quản lý lịch sử sử dụng của nhân viên',
-        link: 'employee-usage-history-management',
-      },
-      {
-        indexMenu: 1,
-        label: 'Quản lý lịch sử sử dụng của tài sản',
-        link: 'equipment-usage-history-management',
-      },
-      {
-        indexMenu: 1,
-        label: 'Quản lý thanh lý tài sản',
-        link: 'assets-liquidation-management',
-      },
-      {
-        indexMenu: 1,
-        label: 'Quản lý kho và báo cáo',
-        children: [
-          {
-            indexMenu: 1,
-            label: 'Quản lý kho',
-            link: 'warehouse-report-and-management',
-          },
-          {
-            indexMenu: 1,
-            label: 'Báo cáo số lượng',
-            link: 'report-amount-warehouse',
-          },
-          {
-            indexMenu: 1,
-            label: 'Báo cáo tài sản mua mới',
-            link: 'new-purchase-property-warehouse',
-          },
-        ],
-      },
-    ],
+    link: 'decided-increase-salaries',
+    children: [],
   },
   {
     indexMenu: 3,
