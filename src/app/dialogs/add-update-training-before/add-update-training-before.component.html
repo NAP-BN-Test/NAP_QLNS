@@ -1,0 +1,65 @@
+<div class="container-anl">
+  <h2 mat-dialog-title *ngIf="!mData">
+    THÊM MỚI ĐÀO TẠO TRƯỚC KHI ĐẾN CÔNG TY
+  </h2>
+  <h2 mat-dialog-title *ngIf="mData">
+    SỬA THÔNG TIN ĐÀO TẠO TRƯỚC KHI ĐẾN CÔNG TY
+  </h2>
+  <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
+  <form [formGroup]="myForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Ngày bắt đầu</mat-label>
+      <input
+        matInput
+        [matDatepicker]="dateStartpicker"
+        formControlName="dateStart"
+      />
+      <mat-datepicker-toggle matSuffix [for]="dateStartpicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #dateStartpicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ngày kết thúc</mat-label>
+      <input
+        matInput
+        [matDatepicker]="dateEndpicker"
+        formControlName="dateEnd"
+      />
+      <mat-datepicker-toggle matSuffix [for]="dateEndpicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #dateEndpicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nơi đào tạo</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="trainingPlace" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Chuyên ngành</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="major" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Bằng cấp</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="degree" />
+    </mat-form-field>
+    <div width-100 align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="onClickOk($event)"
+        [disabled]="!myForm.valid"
+        cdkFocusInitial
+      >
+        <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="margin-left1"
+        mat-dialog-close
+      >
+        <mat-icon>close</mat-icon> Hủy
+      </button>
+    </div>
+  </form>
+</div>

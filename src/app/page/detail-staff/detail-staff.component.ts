@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { AddUpdateTrainingAfterComponent } from 'src/app/dialogs/add-update-training-after/add-update-training-after.component';
+import { AddUpdateTrainingBeforeComponent } from 'src/app/dialogs/add-update-training-before/add-update-training-before.component';
 import { AppModuleService } from 'src/app/services/app-module.service';
 import {
   BUTTON_TYPE,
@@ -32,7 +33,7 @@ export class DetailStaffComponent implements OnInit {
     if (tabChangeEvent.index === 1) {
       this.onLoadDataTrainingAfter();
     } else if (tabChangeEvent.index === 2) {
-      // this.onLoadDataEmailCampaign(this.addressBookID);
+      this.onLoadDataTrainingBefore();
     } else if (tabChangeEvent.index === 3) {
       // this.onLoadDataMailmerge(this.addressBookID);
     } else if (tabChangeEvent.index === 4) {
@@ -113,7 +114,7 @@ export class DetailStaffComponent implements OnInit {
     listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
   };
 
-  dataExample = [
+  dataExampleTrainingAfter = [
     {
       stt: 0,
       trainingCourse: 'Khóa đào tạo nghiệp vụ',
@@ -128,7 +129,7 @@ export class DetailStaffComponent implements OnInit {
 
   onLoadDataTrainingAfter() {
     this.mService.publishEvent(EVENT_PUSH.TABLE, {
-      listData: this.dataExample,
+      listData: this.dataExampleTrainingAfter,
       listTbData: this.listTbDataTrainingAfter,
     });
   }
@@ -148,6 +149,56 @@ export class DetailStaffComponent implements OnInit {
         companyCost: event.data.companyCost,
         personCost: event.data.personCost,
         soCC: event.data.soCC,
+      },
+    });
+  }
+
+  // Quản lý đào tạo trước khi đến công ty ===========================================
+
+  listTbDataTrainingBefore = {
+    listColum: [
+      { name: 'SỐ THỨ TỰ', cell: 'stt' },
+      { name: 'NGÀY BẮT ĐẦU', cell: 'dateStart' },
+      { name: 'NGÀY KẾT THÚC', cell: 'dateEnd' },
+      { name: 'NƠI ĐÀO TẠO', cell: 'trainingPlace' },
+      { name: 'CHUYÊN NGÀNH', cell: 'major' },
+      { name: 'BẰNG CẤP', cell: 'degree' },
+      { name: 'THAO TÁC', cell: 'undefined' },
+    ],
+    listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
+  };
+
+  dataExampleTrainingBefore = [
+    {
+      stt: 0,
+      degree: 'Hoàn thành khóa đào tạo nghiệp vụ',
+      major: 'Công nghệ thông tin',
+      trainingPlace: 'Bắc Ninh',
+      dateStart: '11-11-2020',
+      dateEnd: '11-11-2022',
+    },
+  ];
+
+  onLoadDataTrainingBefore() {
+    this.mService.publishEvent(EVENT_PUSH.TABLE, {
+      listData: this.dataExampleTrainingBefore,
+      listTbData: this.listTbDataTrainingBefore,
+    });
+  }
+
+  onClickAddTrainingBefore() {
+    const dialogRef = this.dialog.open(AddUpdateTrainingBeforeComponent, {
+      width: '900px',
+    });
+  }
+
+  onClickEditTrainingBefore(event) {
+    const dialogRef = this.dialog.open(AddUpdateTrainingBeforeComponent, {
+      width: '900px',
+      data: {
+        degree: event.data.degree,
+        major: event.data.major,
+        trainingPlace: event.data.trainingPlace,
       },
     });
   }
