@@ -54,6 +54,7 @@
   </table>
 </div>
 <mat-paginator
+  *ngIf="hasPagination"
   [length]="collectionSize"
   [pageSize]="itemPerPage"
   [pageSizeOptions]="pageSizeOptions"

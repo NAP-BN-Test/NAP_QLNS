@@ -1,0 +1,191 @@
+<div class="container-amc">
+  <div class="title">
+    <span>CHI TIẾT NHÂN VIÊN</span>
+    <button mat-raised-button color="primary">
+      <mat-icon>save</mat-icon>Hoàn thành
+    </button>
+  </div>
+  <form [formGroup]="myForm">
+    <mat-tab-group
+      mat-align-tabs="start"
+      #tabGroup
+      (selectedTabChange)="tabChanged($event)"
+    >
+      <mat-tab label="Thông tin chung">
+        <div class="tab">
+          <div class="double-input">
+            <mat-form-field appearance="outline">
+              <mat-label>Mã số nhân sự</mat-label>
+              <input
+                matInput
+                placeholder="Nhập Text"
+                formControlName="codeStaff"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>ID máy chấm công</mat-label>
+              <input
+                matInput
+                placeholder="Nhập Text"
+                formControlName="timekeeperCode"
+              />
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Mã số thuế cá nhân</mat-label>
+            <input
+              matInput
+              placeholder="Nhập Text"
+              formControlName="personalTaxCode"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Họ và tên</mat-label>
+            <input
+              matInput
+              placeholder="Nhập Text"
+              formControlName="staffName"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Điện thoại</mat-label>
+            <input matInput placeholder="Nhập Text" formControlName="phone" />
+          </mat-form-field>
+          <div class="double-input">
+            <mat-form-field appearance="outline">
+              <mat-label>Ngày tháng năm sinh</mat-label>
+              <input
+                matInput
+                [matDatepicker]="birthdayPicker"
+                formControlName="birthday"
+              />
+              <mat-datepicker-toggle matSuffix [for]="birthdayPicker">
+              </mat-datepicker-toggle>
+              <mat-datepicker #birthdayPicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Tuổi</mat-label>
+              <input matInput placeholder="Nhập Text" formControlName="age" />
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Nhập Text" formControlName="email" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Giới tính</mat-label>
+            <mat-select placeholder="Chọn giới tính" formControlName="gender">
+              <mat-option value="Nam">Nam</mat-option>
+              <mat-option value="Nữ">Nữ</mat-option>
+              <mat-option value="Khác">Khác</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Số tài khoản ngân hàng</mat-label>
+            <input matInput placeholder="Nhập Text" formControlName="stkNH" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Phòng ban</mat-label>
+            <mat-select
+              placeholder="Nhập Text"
+              formControlName="departmentName"
+            >
+              <mat-option value="Phòng ban A">Phòng ban A</mat-option>
+              <mat-option value="Phòng ban B">Phòng ban B</mat-option>
+              <mat-option value="Phòng ban C">Phòng ban C</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Ngân hàng</mat-label>
+            <mat-select placeholder="Nhập Text" formControlName="bank">
+              <mat-option value="Ngân hàng A">Ngân hàng A</mat-option>
+              <mat-option value="Ngân hàng B">Ngân hàng B</mat-option>
+              <mat-option value="Ngân hàng C">Phòng ban C</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Chức vụ</mat-label>
+            <mat-select placeholder="Nhập Text" formControlName="position">
+              <mat-option value="Giám đốc">Giám đốc</mat-option>
+              <mat-option value="Nhân viên">Nhân viên</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" width-100>
+            <mat-label>Quê quán</mat-label>
+            <input
+              matInput
+              placeholder="Nhập Text"
+              formControlName="homeTown"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" width-100>
+            <mat-label>Nơi ở hiện đại</mat-label>
+            <input
+              matInput
+              placeholder="Nhập Text"
+              formControlName="currentResidence"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" width-100>
+            <mat-label>Hộ khẩu thường trú</mat-label>
+            <input
+              matInput
+              placeholder="Nhập Text"
+              formControlName="permanentResidence"
+            />
+          </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button mat-raised-button color="accent" style="margin-right: 1%">
+            <mat-icon>edit</mat-icon>Chỉnh sửa
+          </button>
+          <button mat-raised-button color="warn" (click)="onClickClear()">
+            <mat-icon>save</mat-icon>Lưu
+          </button>
+        </div>
+      </mat-tab>
+      <mat-tab label="Quản lý đào tạo sau khi đến công ty">
+        <div class="tab1">
+          <div align="end" style="padding-bottom: 1%">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="onClickAddTrainingAfter()"
+            >
+              <mat-icon>add</mat-icon>Thêm mới
+            </button>
+          </div>
+          <app-table-paginator
+            [hasPagination]="false"
+            (clickEdit)="onClickEditTrainingAfter($event)"
+          ></app-table-paginator>
+        </div>
+      </mat-tab>
+      <mat-tab label="Quản lý đào tạo sau khi đến công ty">
+        <div class="tab"></div>
+      </mat-tab>
+      <mat-tab label="Quản lý đào tạo sau khi đến công ty">
+        <div class="tab"></div>
+      </mat-tab>
+      <mat-tab label="Quản lý đào tạo sau khi đến công ty">
+        <div class="tab"></div>
+      </mat-tab>
+      <mat-tab label="Quản lý đào tạo sau khi đến công ty">
+        <div class="tab"></div>
+      </mat-tab>
+      <mat-tab label="Quản lý đào tạo sau khi đến công ty">
+        <div class="tab"></div>
+      </mat-tab>
+    </mat-tab-group>
+  </form>
+</div>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="large"
+  color="#325b8c"
+  type="ball-atom"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p></ngx-spinner
+>

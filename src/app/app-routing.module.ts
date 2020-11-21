@@ -8,6 +8,7 @@ import { DecidedToIncreaseTheSalariesComponent } from './components/decided-to-i
 import { QuoteManagementComponent } from './components/quote-management/quote-management.component';
 import { LoginComponent } from './layout/login/login.component';
 import { MenuComponent } from './layout/menu/menu.component';
+import { DetailStaffComponent } from './page/detail-staff/detail-staff.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'quote',
         component: QuoteManagementComponent,
+      },
+      {
+        path: 'detail-staff',
+        component: DetailStaffComponent,
       },
     ],
   },

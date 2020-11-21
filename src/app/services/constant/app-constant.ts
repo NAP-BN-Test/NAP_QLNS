@@ -36,6 +36,7 @@ export const BUTTON_TYPE = {
 
 export const CLICK_DETAIL = {
   ACCOUNT_MANAGER: 1,
+  STAFF: 2,
 };
 
 export const STATUS = {

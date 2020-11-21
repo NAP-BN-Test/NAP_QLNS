@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AddUpdateStaffComponent } from 'src/app/dialogs/add-update-staff/add-update-staff.component';
 import { AppModuleService } from 'src/app/services/app-module.service';
 import {
   BUTTON_TYPE,
+  CLICK_DETAIL,
   EVENT_PUSH,
 } from 'src/app/services/constant/app-constant';
 
@@ -15,6 +17,7 @@ import {
 })
 export class QuoteManagementComponent implements OnInit {
   listTbData = {
+    clickDetail: CLICK_DETAIL.STAFF,
     listColum: [
       { name: 'SỐ THỨ TỰ', cell: 'stt' },
       { name: 'MÃ NHÂN VIÊN', cell: 'staffCode' },
@@ -103,7 +106,8 @@ export class QuoteManagementComponent implements OnInit {
   constructor(
     public mService: AppModuleService,
     private spinner: NgxSpinnerService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -117,7 +121,7 @@ export class QuoteManagementComponent implements OnInit {
     // }
   }
 
-  async onLoadData(page, dataSearch) {
+  onLoadData(page, dataSearch) {
     // this.spinner.show();
     // await this.mService
     //   .getApiService()
@@ -152,7 +156,6 @@ export class QuoteManagementComponent implements OnInit {
     const dialogRef = this.dialog.open(AddUpdateStaffComponent, {
       width: '900px',
       height: '700px',
-
     });
 
     dialogRef.afterClosed().subscribe((res) => {
@@ -175,6 +178,12 @@ export class QuoteManagementComponent implements OnInit {
         //     }
         //   });
       }
+    });
+  }
+
+  onClickCell(event) {
+    this.router.navigate(['menu/detail-staff'], {
+      queryParams: event.data.id,
     });
   }
 }

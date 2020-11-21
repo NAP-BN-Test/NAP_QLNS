@@ -36,6 +36,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { QuoteManagementComponent } from './components/quote-management/quote-management.component';
 import { AddUpdateStaffComponent } from './dialogs/add-update-staff/add-update-staff.component';
+import { DetailStaffComponent } from './page/detail-staff/detail-staff.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { AddUpdateTrainingAfterComponent } from './dialogs/add-update-training-after/add-update-training-after.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,8 @@ import { AddUpdateStaffComponent } from './dialogs/add-update-staff/add-update-s
     AddUpdateDecidedIncreaseSalariesComponent,
     QuoteManagementComponent,
     AddUpdateStaffComponent,
+    DetailStaffComponent,
+    AddUpdateTrainingAfterComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +83,7 @@ import { AddUpdateStaffComponent } from './dialogs/add-update-staff/add-update-s
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

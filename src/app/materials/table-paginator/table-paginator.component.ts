@@ -2,6 +2,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import {
   Component,
   EventEmitter,
+  Input,
   OnInit,
   Output,
   ViewChild,
@@ -24,6 +25,7 @@ import {
 export class TablePaginatorComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @Input('hasPagination') hasPagination = true;
 
   @Output('clickPagination') clickPagination = new EventEmitter();
   @Output('clickBtn') clickBtn = new EventEmitter();
@@ -160,27 +162,28 @@ export class TablePaginatorComponent implements OnInit {
   /** Click vào ô và bắt event */
   // Gihug viết thêm click cell
   onClickCell(row, cell) {
-    // if (this.listTbData.clickDetail == CLICK_DETAIL.ASSETS_MANAGEMENT) {
-    //   this.clickCell.emit({
-    //     clickDetail: CLICK_DETAIL.ASSETS_MANAGEMENT,
-    //     data: row,
-    //   });
-    // } else if (this.listTbData.clickDetail == CLICK_DETAIL.PURCHASE_REQUEST) {
-    //   this.clickCell.emit({
-    //     clickDetail: CLICK_DETAIL.PURCHASE_REQUEST,
-    //     data: row,
-    //   });
-    // } else if (
-    //   this.listTbData.clickDetail == CLICK_DETAIL.MAILMERGE_TEMPLATE_LIST
-    // ) {
-    //   this.clickCell.emit({
-    //     clickDetail: CLICK_DETAIL.MAILMERGE_TEMPLATE_LIST,
-    //     data: row,
-    //   });
-    // } else if (this.listTbData.clickDetail == CLICK_DETAIL.ADDRESS_BOOK) {
-    //   this.clickCell.emit({
-    //     clickDetail: CLICK_DETAIL.ADDRESS_BOOK,
-    //     data: row,
-    //   });
+    if (this.listTbData.clickDetail == CLICK_DETAIL.STAFF) {
+      this.clickCell.emit({
+        clickDetail: CLICK_DETAIL.STAFF,
+        data: row,
+      });
+      // } else if (this.listTbData.clickDetail == CLICK_DETAIL.PURCHASE_REQUEST) {
+      //   this.clickCell.emit({
+      //     clickDetail: CLICK_DETAIL.PURCHASE_REQUEST,
+      //     data: row,
+      //   });
+      // } else if (
+      //   this.listTbData.clickDetail == CLICK_DETAIL.MAILMERGE_TEMPLATE_LIST
+      // ) {
+      //   this.clickCell.emit({
+      //     clickDetail: CLICK_DETAIL.MAILMERGE_TEMPLATE_LIST,
+      //     data: row,
+      //   });
+      // } else if (this.listTbData.clickDetail == CLICK_DETAIL.ADDRESS_BOOK) {
+      //   this.clickCell.emit({
+      //     clickDetail: CLICK_DETAIL.ADDRESS_BOOK,
+      //     data: row,
+      //   });
+    }
   }
 }
