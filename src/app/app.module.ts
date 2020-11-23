@@ -40,6 +40,8 @@ import { DetailStaffComponent } from './page/detail-staff/detail-staff.component
 import { MatTabsModule } from '@angular/material/tabs';
 import { AddUpdateTrainingAfterComponent } from './dialogs/add-update-training-after/add-update-training-after.component';
 import { AddUpdateTrainingBeforeComponent } from './dialogs/add-update-training-before/add-update-training-before.component';
+import { AddUpdateStaffStatusComponent } from './dialogs/add-update-staff-status/add-update-staff-status.component';
+import { TableReadonlyComponent } from './materials/table-readonly/table-readonly.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { AddUpdateTrainingBeforeComponent } from './dialogs/add-update-training-
     DetailStaffComponent,
     AddUpdateTrainingAfterComponent,
     AddUpdateTrainingBeforeComponent,
+    AddUpdateStaffStatusComponent,
+    TableReadonlyComponent,
   ],
   imports: [
     BrowserModule,

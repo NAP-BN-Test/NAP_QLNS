@@ -1,0 +1,28 @@
+<div class="m-container mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Name Column -->
+    <ng-container
+      *ngFor="let item of displayedColumnsAll; let i = index"
+      [matColumnDef]="item.cell"
+    >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ item.name }}</th>
+      <td tappable mat-cell *matCellDef="let row">
+        <!-- Gihug thêm phần click cell cho table -->
+        <div *ngIf="item.cell">
+          {{ row[item.cell] }}
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+<mat-paginator
+  *ngIf="hasPagination"
+  [length]="collectionSize"
+  [pageSize]="itemPerPage"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onClickPagination($event)"
+  [pageIndex]="page - 1"
+></mat-paginator>

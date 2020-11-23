@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { AddUpdateDecidedIncreaseSalariesComponent } from 'src/app/dialogs/add-update-decided-increase-salaries/add-update-decided-increase-salaries.component';
+import { AddUpdateStaffStatusComponent } from 'src/app/dialogs/add-update-staff-status/add-update-staff-status.component';
 import { AddUpdateTrainingAfterComponent } from 'src/app/dialogs/add-update-training-after/add-update-training-after.component';
 import { AddUpdateTrainingBeforeComponent } from 'src/app/dialogs/add-update-training-before/add-update-training-before.component';
 import { AppModuleService } from 'src/app/services/app-module.service';
@@ -35,9 +37,11 @@ export class DetailStaffComponent implements OnInit {
     } else if (tabChangeEvent.index === 2) {
       this.onLoadDataTrainingBefore();
     } else if (tabChangeEvent.index === 3) {
-      // this.onLoadDataMailmerge(this.addressBookID);
+      this.onLoadDataStaffStatus();
     } else if (tabChangeEvent.index === 4) {
-      // this.onLoadDataHistory(1, this.addressBookID);
+      this.onLoadDataContract();
+    } else if (tabChangeEvent.index === 5) {
+      this.onLoadDataSalaryIncrease();
     }
   };
 
@@ -201,5 +205,137 @@ export class DetailStaffComponent implements OnInit {
         trainingPlace: event.data.trainingPlace,
       },
     });
+  }
+
+  // Quản lý tình trạng nhân viên ===========================================
+
+  listTbDataStaffStatus = {
+    listColum: [
+      { name: 'SỐ THỨ TỰ', cell: 'stt' },
+      { name: 'TỪ NGÀY', cell: 'dateStart' },
+      { name: 'ĐẾN NGÀY', cell: 'dateEnd' },
+      { name: 'TÌNH TRẠNG', cell: 'employeeStatus' },
+      { name: 'MÔ TẢ', cell: 'description' },
+      { name: 'THAO TÁC', cell: 'undefined' },
+    ],
+    listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
+  };
+
+  dataExampleStaffStatus = [
+    {
+      stt: 0,
+      description: 'Mô tả tình trạng A',
+      employeeStatus: 'Tình trạng 1',
+      dateStart: '11-11-2020',
+      dateEnd: '11-11-2022',
+    },
+  ];
+
+  onLoadDataStaffStatus() {
+    this.mService.publishEvent(EVENT_PUSH.TABLE, {
+      listData: this.dataExampleStaffStatus,
+      listTbData: this.listTbDataStaffStatus,
+    });
+  }
+
+  onClickAddStaffStatus() {
+    const dialogRef = this.dialog.open(AddUpdateStaffStatusComponent, {
+      width: '900px',
+    });
+  }
+
+  onClickEditStaffStatus(event) {
+    const dialogRef = this.dialog.open(AddUpdateStaffStatusComponent, {
+      width: '900px',
+      data: {
+        employeeStatus: event.data.employeeStatus,
+        description: event.data.description,
+      },
+    });
+  }
+
+  // Quản lý hợp đồng =======================================================
+
+  listTbDataContract = {
+    listColum: [
+      { name: 'SỐ THỨ TỰ', cell: 'stt' },
+      { name: 'SỐ HỢP ĐỒNG', cell: 'contractCode' },
+      { name: 'NGÀY KÝ', cell: 'dateStart' },
+      { name: 'LOẠI HỢP ĐỒNG', cell: 'contactType' },
+      { name: 'MỨC LƯƠNG', cell: 'salary' },
+      { name: 'TÌNH TRẠNG HỢP ĐỒNG', cell: 'contractStatus' },
+      { name: 'NGÀY CHẤM DỨT', cell: 'dateEnd' },
+      { name: 'LÝ DO', cell: 'description' },
+    ],
+  };
+
+  dataExampleContract = [
+    {
+      stt: 0,
+      description: 'Mô tả tình trạng A',
+      employeeStatus: 'Tình trạng 1',
+      dateStart: '11-11-2020',
+      dateEnd: '11-11-2022',
+      contractCode: 'SA8724823',
+      contactType: 'Hợp đồng lao động',
+      salary: '9000000',
+      contractStatus: 'Còn hiệu lực',
+    },
+  ];
+
+  onLoadDataContract() {
+    this.mService.publishEvent(EVENT_PUSH.TABLE, {
+      listData: this.dataExampleContract,
+      listTbData: this.listTbDataContract,
+    });
+  }
+
+  // Quyết định tăng lương =======================================================
+
+  listTbDataSalaryIncrease = {
+    listColum: [
+      { name: 'SỐ THỨ TỰ', cell: 'stt' },
+      { name: 'SỐ QUYẾT ĐỊNH', cell: 'decisionCode' },
+      { name: 'NGÀY KÝ', cell: 'decisionDate' },
+      { name: 'MỨC LƯƠNG', cell: 'salaryIncrease' },
+      { name: 'TÌNH TRẠNG QUYẾT ĐỊNH', cell: 'decisionStatus' },
+      { name: 'NGÀY DỪNG', cell: 'stopEnd' },
+      { name: 'LÝ DO', cell: 'description' },
+      { name: 'THAO TÁC', cell: 'undefined' },
+    ],
+  };
+
+  dataExampleSalaryIncrease = [
+    {
+      stt: 0,
+      description: 'Mô tả tình trạng A',
+      decisionStatus: 'Có hiệu lực',
+      decisionDate: '11-11-2020',
+      stopEnd: '11-11-2022',
+      decisionCode: 'SA8724823',
+      salaryIncrease: '9000000',
+      contractStatus: 'Còn hiệu lực',
+    },
+  ];
+
+  onLoadDataSalaryIncrease() {
+    this.mService.publishEvent(EVENT_PUSH.TABLE, {
+      listData: this.dataExampleSalaryIncrease,
+      listTbData: this.listTbDataSalaryIncrease,
+    });
+  }
+
+  onClickEditSalaryIncrease(event) {
+    const dialogRef = this.dialog.open(
+      AddUpdateDecidedIncreaseSalariesComponent,
+      {
+        width: '900px',
+        data: {
+          decisionCode: event.data.decisionCode,
+          salaryIncrease: event.data.salaryIncrease,
+          status: event.data.status,
+        },
+      }
+    );
   }
 }
