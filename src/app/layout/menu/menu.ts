@@ -48,14 +48,8 @@ export const ModulesList = [
   {
     indexMenu: 4,
     label: 'QL MỨC ĐÓNG BH',
-    link: 'assets-management',
-    children: [
-      {
-        indexMenu: 1,
-        label: 'Báo cáo tài sản mua mới',
-        link: 'new-purchase-property-warehouse',
-      },
-    ],
+    link: 'insurance',
+    children: [],
   },
   {
     indexMenu: 5,
@@ -84,13 +78,7 @@ export const ModulesList = [
   {
     indexMenu: 7,
     label: 'QL HỢP ĐỒNG',
-    link: 'assets-management',
-    children: [
-      {
-        indexMenu: 1,
-        label: 'Báo cáo tài sản mua mới',
-        link: 'new-purchase-property-warehouse',
-      },
-    ],
+    link: 'contract',
+    children: [],
   },
 ];

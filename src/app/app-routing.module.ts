@@ -4,7 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { EmployeeStatusComponent } from './components/category-management/employee-status/employee-status.component';
 import { HolidayComponent } from './components/category-management/holiday/holiday.component';
 import { TypeTimekeepingComponent } from './components/category-management/type-timekeeping/type-timekeeping.component';
+import { ContractManagementComponent } from './components/contract-management/contract-management.component';
 import { DecidedToIncreaseTheSalariesComponent } from './components/decided-to-increase-the-salaries/decided-to-increase-the-salaries.component';
+import { InsuranceManagementComponent } from './components/insurance-management/insurance-management.component';
 import { QuoteManagementComponent } from './components/quote-management/quote-management.component';
 import { LoginComponent } from './layout/login/login.component';
 import { MenuComponent } from './layout/menu/menu.component';
@@ -43,6 +45,14 @@ const routes: Routes = [
       {
         path: 'detail-staff',
         component: DetailStaffComponent,
+      },
+      {
+        path: 'contract',
+        component: ContractManagementComponent,
+      },
+      {
+        path: 'insurance',
+        component: InsuranceManagementComponent,
       },
     ],
   },

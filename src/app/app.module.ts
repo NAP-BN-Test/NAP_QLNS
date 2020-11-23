@@ -42,6 +42,10 @@ import { AddUpdateTrainingAfterComponent } from './dialogs/add-update-training-a
 import { AddUpdateTrainingBeforeComponent } from './dialogs/add-update-training-before/add-update-training-before.component';
 import { AddUpdateStaffStatusComponent } from './dialogs/add-update-staff-status/add-update-staff-status.component';
 import { TableReadonlyComponent } from './materials/table-readonly/table-readonly.component';
+import { ContractManagementComponent } from './components/contract-management/contract-management.component';
+import { AddUpdateContractComponent } from './dialogs/add-update-contract/add-update-contract.component';
+import { InsuranceManagementComponent } from './components/insurance-management/insurance-management.component';
+import { AddUpdateInsuranceComponent } from './dialogs/add-update-insurance/add-update-insurance.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +69,10 @@ import { TableReadonlyComponent } from './materials/table-readonly/table-readonl
     AddUpdateTrainingBeforeComponent,
     AddUpdateStaffStatusComponent,
     TableReadonlyComponent,
+    ContractManagementComponent,
+    AddUpdateContractComponent,
+    InsuranceManagementComponent,
+    AddUpdateInsuranceComponent,
   ],
   imports: [
     BrowserModule,

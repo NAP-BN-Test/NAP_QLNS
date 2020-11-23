@@ -1,0 +1,73 @@
+<div class="container-anl">
+  <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI MỨC ĐÓNG BẢO HIỂM</h2>
+  <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN MỨC ĐÓNG BẢO HIỂM</h2>
+  <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
+  <form [formGroup]="myForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Mức đóng BHXH của công ty</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="companyBHXH" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Mức đóng BHYT của công ty</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="companyBHYT" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Mức đóng BHTN của công ty</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="companyBHTN" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Mức đóng BHTN của nhân viên</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="staffBHXH" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Mức đóng BHYT của nhân viên</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="staffBHYT" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Mức đóng BHTN của nhân viên</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="staffBHTN" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Từ ngày</mat-label>
+      <input
+        matInput
+        [matDatepicker]="dateStartPicker"
+        formControlName="dateStart"
+      />
+      <mat-datepicker-toggle matSuffix [for]="dateStartPicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #dateStartPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Đến ngày</mat-label>
+      <input
+        matInput
+        [matDatepicker]="dateEndPicker"
+        formControlName="dateEnd"
+      />
+      <mat-datepicker-toggle matSuffix [for]="dateEndPicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #dateEndPicker></mat-datepicker>
+    </mat-form-field>
+    <div width-100 align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="onClickOk($event)"
+        [disabled]="!myForm.valid"
+        cdkFocusInitial
+      >
+        <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="margin-left1"
+        mat-dialog-close
+      >
+        <mat-icon>close</mat-icon> Hủy
+      </button>
+    </div>
+  </form>
+</div>
