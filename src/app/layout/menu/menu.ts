@@ -54,26 +54,14 @@ export const ModulesList = [
   {
     indexMenu: 5,
     label: 'QL CHẤM CÔNG',
-    link: 'assets-management',
-    children: [
-      {
-        indexMenu: 1,
-        label: 'Báo cáo tài sản mua mới',
-        link: 'new-purchase-property-warehouse',
-      },
-    ],
+    link: 'time-attendance',
+    children: [],
   },
   {
     indexMenu: 6,
     label: 'QL NGHỈ LỄ TẾT',
-    link: 'assets-management',
-    children: [
-      {
-        indexMenu: 1,
-        label: 'Báo cáo tài sản mua mới',
-        link: 'new-purchase-property-warehouse',
-      },
-    ],
+    link: 'holidays-management',
+    children: [],
   },
   {
     indexMenu: 7,

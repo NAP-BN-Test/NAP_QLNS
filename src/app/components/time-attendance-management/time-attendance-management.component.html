@@ -1,0 +1,32 @@
+<div class="container-amc">
+  <div class="title">
+    <span>QUẢN LÝ CHẤM CÔNG</span>
+  </div>
+  <form>
+    <mat-form-field appearance="outline">
+      <mat-label>Chọn tháng/năm</mat-label>
+      <input matInput [matDatepicker]="dp" [formControl]="monthYear" />
+      <mat-datepicker-toggle matSuffix [for]="dp"> </mat-datepicker-toggle>
+      <mat-datepicker
+        #dp
+        startView="multi-year"
+        (yearSelected)="chosenYearHandler($event)"
+        (monthSelected)="chosenMonthHandler($event, dp)"
+      ></mat-datepicker>
+    </mat-form-field>
+    <div class="button-search">
+      <button mat-raised-button color="warn" class="margin-left1">
+        <mat-icon>close</mat-icon> Hủy
+      </button>
+    </div>
+  </form>
+</div>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="large"
+  color="#325b8c"
+  type="ball-atom"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p>
+</ngx-spinner>

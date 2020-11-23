@@ -1,0 +1,59 @@
+<div class="container-anl">
+  <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI QUẢN LÝ NGHỈ LỄ TẾT</h2>
+  <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN QUẢN LÝ NGHỈ LỄ TẾT</h2>
+  <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
+  <form [formGroup]="myForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Từ ngày</mat-label>
+      <input
+        matInput
+        [matDatepicker]="dateStartPicker"
+        formControlName="dateStart"
+      />
+      <mat-datepicker-toggle matSuffix [for]="dateStartPicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #dateStartPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Đến ngày</mat-label>
+      <input
+        matInput
+        [matDatepicker]="dateEndPicker"
+        formControlName="dateEnd"
+      />
+      <mat-datepicker-toggle matSuffix [for]="dateEndPicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #dateEndPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Loại ngày lễ</mat-label>
+      <mat-select placeholder="Nhập Text" formControlName="holidayType">
+        <mat-option value="Nghỉ lễ">Nghỉ lễ</mat-option>
+        <mat-option value="Nghỉ tết">Nghỉ tết</mat-option>
+        <mat-option value="Nghỉ kỉ nhiệm công ty">
+          Nghỉ kỉ nhiệm công ty
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div width-100 align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="onClickOk($event)"
+        [disabled]="!myForm.valid"
+        cdkFocusInitial
+      >
+        <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="margin-left1"
+        mat-dialog-close
+      >
+        <mat-icon>close</mat-icon> Hủy
+      </button>
+    </div>
+  </form>
+</div>

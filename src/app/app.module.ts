@@ -46,6 +46,9 @@ import { ContractManagementComponent } from './components/contract-management/co
 import { AddUpdateContractComponent } from './dialogs/add-update-contract/add-update-contract.component';
 import { InsuranceManagementComponent } from './components/insurance-management/insurance-management.component';
 import { AddUpdateInsuranceComponent } from './dialogs/add-update-insurance/add-update-insurance.component';
+import { HolidaysManagementComponent } from './components/holidays-management/holidays-management.component';
+import { AddUpdateHolidaysComponent } from './dialogs/add-update-holidays/add-update-holidays.component';
+import { TimeAttendanceManagementComponent } from './components/time-attendance-management/time-attendance-management.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +76,9 @@ import { AddUpdateInsuranceComponent } from './dialogs/add-update-insurance/add-
     AddUpdateContractComponent,
     InsuranceManagementComponent,
     AddUpdateInsuranceComponent,
+    HolidaysManagementComponent,
+    AddUpdateHolidaysComponent,
+    TimeAttendanceManagementComponent,
   ],
   imports: [
     BrowserModule,
