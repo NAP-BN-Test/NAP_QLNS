@@ -15,11 +15,74 @@
       ></mat-datepicker>
     </mat-form-field>
     <div class="button-search">
-      <button mat-raised-button color="warn" class="margin-left1">
-        <mat-icon>close</mat-icon> Hủy
+      <button mat-raised-button color="primary" class="margin-left1">
+        <mat-icon>search</mat-icon> Tìm kiếm
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        class="margin-left1"
+        (click)="isEdit = !isEdit"
+      >
+        <mat-icon>edit</mat-icon> Chỉnh sửa
       </button>
     </div>
   </form>
+  <div class="container-table mat-elevation-z8">
+    <table mat-table [dataSource]="dataExample">
+      <ng-container matColumnDef="nameStaff" sticky width-20>
+        <th mat-header-cell *matHeaderCellDef>Tên nhân viên</th>
+        <td mat-cell *matCellDef="let element">{{ element.nameStaff }}</td>
+      </ng-container>
+
+      <ng-container
+        *ngFor="let item of displayedColumnsAll; let i = index"
+        [matColumnDef]="item.cell"
+      >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ item.name }}
+        </th>
+        <td
+          tappable
+          mat-cell
+          *matCellDef="let row"
+          spellcheck="false"
+          [contentEditable]="isEdit"
+          (blur)="updateList($event, i, row, item)"
+        >
+          {{ row[item.cell] }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ngayLV" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>Ngày làm việc</th>
+        <td mat-cell *matCellDef="let element">{{ element.ngayLV }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ngayN" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>Ngày nghỉ</th>
+        <td mat-cell *matCellDef="let element">{{ element.ngayN }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nghiPhep" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>Nghỉ phép</th>
+        <td mat-cell *matCellDef="let element">{{ element.nghiPhep }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nghiLe" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>Nghỉ lễ</th>
+        <td mat-cell *matCellDef="let element">{{ element.nghiLe }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nghiTuDo" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>Nghỉ tự do</th>
+        <td mat-cell *matCellDef="let element">{{ element.nghiTuDo }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
 </div>
 <ngx-spinner
   bdColor="rgba(0, 0, 0, 0.8)"
