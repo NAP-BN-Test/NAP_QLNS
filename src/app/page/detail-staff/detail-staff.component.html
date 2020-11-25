@@ -142,6 +142,23 @@
           </button>
         </div>
       </mat-tab>
+      <mat-tab label="Quan hệ gia đình">
+        <div class="tab1">
+          <div align="end" style="padding-bottom: 1%">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="onClickAddTrainingAfter()"
+            >
+              <mat-icon>add</mat-icon>Thêm mới
+            </button>
+          </div>
+          <app-table-paginator
+            [hasPagination]="false"
+            (clickEdit)="onClickEditTrainingAfter($event)"
+          ></app-table-paginator>
+        </div>
+      </mat-tab>
       <mat-tab label="Quản lý đào tạo sau khi đến công ty">
         <div class="tab1">
           <div align="end" style="padding-bottom: 1%">

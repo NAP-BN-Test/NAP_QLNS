@@ -8,6 +8,7 @@ import { ContractManagementComponent } from './components/contract-management/co
 import { DecidedToIncreaseTheSalariesComponent } from './components/decided-to-increase-the-salaries/decided-to-increase-the-salaries.component';
 import { HolidaysManagementComponent } from './components/holidays-management/holidays-management.component';
 import { InsuranceManagementComponent } from './components/insurance-management/insurance-management.component';
+import { PayrollTemplateComponent } from './components/payroll-template/payroll-template.component';
 import { QuoteManagementComponent } from './components/quote-management/quote-management.component';
 import { TimeAttendanceManagementComponent } from './components/time-attendance-management/time-attendance-management.component';
 import { LoginComponent } from './layout/login/login.component';
@@ -63,6 +64,10 @@ const routes: Routes = [
       {
         path: 'time-attendance',
         component: TimeAttendanceManagementComponent,
+      },
+      {
+        path: 'payroll-template',
+        component: PayrollTemplateComponent,
       },
     ],
   },

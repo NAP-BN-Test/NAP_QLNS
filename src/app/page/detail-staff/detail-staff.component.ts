@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { AddUpdateDecidedIncreaseSalariesComponent } from 'src/app/dialogs/add-update-decided-increase-salaries/add-update-decided-increase-salaries.component';
+import { AddUpdateFamilyRelationshipComponent } from 'src/app/dialogs/add-update-family-relationship/add-update-family-relationship.component';
 import { AddUpdateStaffStatusComponent } from 'src/app/dialogs/add-update-staff-status/add-update-staff-status.component';
 import { AddUpdateTrainingAfterComponent } from 'src/app/dialogs/add-update-training-after/add-update-training-after.component';
 import { AddUpdateTrainingBeforeComponent } from 'src/app/dialogs/add-update-training-before/add-update-training-before.component';
@@ -35,12 +36,14 @@ export class DetailStaffComponent implements OnInit {
     if (tabChangeEvent.index === 1) {
       this.onLoadDataTrainingAfter();
     } else if (tabChangeEvent.index === 2) {
-      this.onLoadDataTrainingBefore();
+      this.onLoadDataFamilyRelationship();
     } else if (tabChangeEvent.index === 3) {
-      this.onLoadDataStaffStatus();
+      this.onLoadDataTrainingBefore();
     } else if (tabChangeEvent.index === 4) {
-      this.onLoadDataContract();
+      this.onLoadDataStaffStatus();
     } else if (tabChangeEvent.index === 5) {
+      this.onLoadDataContract();
+    } else if (tabChangeEvent.index === 6) {
       this.onLoadDataSalaryIncrease();
     }
   };
@@ -100,6 +103,62 @@ export class DetailStaffComponent implements OnInit {
     //   condition: this.myForm.value.condition,
     // });
     // this.onLoadData(this.dataCreate);
+  }
+
+  // Quan hệ gia đình ========================================================
+  listTbDataFamilyRelationship = {
+    listColum: [
+      { name: 'SỐ THỨ TỰ', cell: 'stt' },
+      { name: 'HỌ TÊN', cell: 'trainingCourse' },
+      { name: 'NGÀY SINH', cell: 'chuyenNganh' },
+      { name: 'GIỚI TÍNH', cell: 'companyCost' },
+      { name: 'SỐ CMT', cell: 'personCost' },
+      { name: 'NƠI Ở', cell: 'soCC' },
+      { name: 'NƠI LÀM VIỆC', cell: 'dateStart' },
+      { name: 'QUAN HỆ', cell: 'dateEnd' },
+      { name: 'GIẢM TRỪ', cell: 'dateEnd' },
+      { name: 'THAO TÁC', cell: 'undefined' },
+    ],
+    listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
+  };
+
+  dataExampleFamilyRelationship = [
+    {
+      stt: 0,
+      trainingCourse: 'Khóa đào tạo nghiệp vụ',
+      chuyenNganh: 'Công nghệ thông tin',
+      companyCost: '6000000',
+      personCost: '9000000',
+      soCC: 'CT38293',
+      dateStart: '11-11-2020',
+      dateEnd: '11-11-2022',
+    },
+  ];
+
+  onLoadDataFamilyRelationship() {
+    this.mService.publishEvent(EVENT_PUSH.TABLE, {
+      listData: this.dataExampleFamilyRelationship,
+      listTbData: this.listTbDataFamilyRelationship,
+    });
+  }
+
+  onClickAddFamilyRelationship() {
+    const dialogRef = this.dialog.open(AddUpdateFamilyRelationshipComponent, {
+      width: '900px',
+    });
+  }
+
+  onClickEditFamilyRelationship(event) {
+    const dialogRef = this.dialog.open(AddUpdateFamilyRelationshipComponent, {
+      width: '900px',
+      data: {
+        trainingCourse: event.data.trainingCourse,
+        chuyenNganh: event.data.chuyenNganh,
+        companyCost: event.data.companyCost,
+        personCost: event.data.personCost,
+        soCC: event.data.soCC,
+      },
+    });
   }
 
   // Quản lý đào tạo sau khi đến công ty ================================

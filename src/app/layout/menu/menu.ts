@@ -36,9 +36,8 @@ export const ModulesList = [
   {
     indexMenu: 3,
     label: 'MẪU BẢNG LƯƠNG',
-    link: 'quote',
-    children: [
-    ],
+    link: 'payroll-template',
+    children: [],
   },
   {
     indexMenu: 4,

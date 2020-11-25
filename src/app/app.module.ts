@@ -49,6 +49,8 @@ import { AddUpdateInsuranceComponent } from './dialogs/add-update-insurance/add-
 import { HolidaysManagementComponent } from './components/holidays-management/holidays-management.component';
 import { AddUpdateHolidaysComponent } from './dialogs/add-update-holidays/add-update-holidays.component';
 import { TimeAttendanceManagementComponent } from './components/time-attendance-management/time-attendance-management.component';
+import { PayrollTemplateComponent } from './components/payroll-template/payroll-template.component';
+import { AddUpdateFamilyRelationshipComponent } from './dialogs/add-update-family-relationship/add-update-family-relationship.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,8 @@ import { TimeAttendanceManagementComponent } from './components/time-attendance-
     HolidaysManagementComponent,
     AddUpdateHolidaysComponent,
     TimeAttendanceManagementComponent,
+    PayrollTemplateComponent,
+    AddUpdateFamilyRelationshipComponent,
   ],
   imports: [
     BrowserModule,
