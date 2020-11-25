@@ -1,1 +1,134 @@
-<p>add-update-family-relationship works!</p>
+<div class="container-anl">
+  <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI QUAN HỆ GIA ĐÌNH</h2>
+  <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN QUAN HỆ GIA ĐÌNH</h2>
+  <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
+  <form [formGroup]="myForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Họ tên</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Mối quan hệ</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="relationship" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ngày sinh</mat-label>
+      <input
+        matInput
+        [matDatepicker]="birthdayPicker"
+        formControlName="birthday"
+      />
+      <mat-datepicker-toggle matSuffix [for]="birthdayPicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #birthdayPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nghề nghiệp</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="job" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Số CMT</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="cmt" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Số hộ chiếu</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="soHoChieu" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nơi cấp</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="noiCap" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ngày cấp hộ chiếu</mat-label>
+      <input
+        matInput
+        [matDatepicker]="ngayCHCpicker"
+        formControlName="ngayCHC"
+      />
+      <mat-datepicker-toggle matSuffix [for]="ngayCHCpicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #ngayCHCpicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ngày cấp</mat-label>
+      <input
+        matInput
+        [matDatepicker]="ngayCappicker"
+        formControlName="ngayCap"
+      />
+      <mat-datepicker-toggle matSuffix [for]="ngayCappicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #ngayCappicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nơi cấp hộ chiếu</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="noiCapHC" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Địa chỉ thường trú</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="address" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ngày bắt đầu quan hệ</mat-label>
+      <input
+        matInput
+        [matDatepicker]="ngayBDQHpicker"
+        formControlName="ngayBDQH"
+      />
+      <mat-datepicker-toggle matSuffix [for]="ngayBDQHpicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #ngayBDQHpicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nơi ở hiện tại</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="noiOHT" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ngày kết thúc mối quan hệ</mat-label>
+      <input
+        matInput
+        [matDatepicker]="ngayKTMQHpicker"
+        formControlName="ngayKTMQH"
+      />
+      <mat-datepicker-toggle matSuffix [for]="ngayKTMQHpicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #ngayKTMQHpicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nơi làm việc</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="work" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Tiền giảm trừ</mat-label>
+      <input matInput placeholder="Nhập Text" formControlName="reduce" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Mã số thuế</mat-label>
+        <input matInput placeholder="Nhập Text" formControlName="maSoThue" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Tình trạng tồn tại</mat-label>
+        <input matInput placeholder="Nhập Text" formControlName="tinhTTT" />
+      </mat-form-field>
+    <div width-100 align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="onClickOk($event)"
+        [disabled]="!myForm.valid"
+        cdkFocusInitial
+      >
+        <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="margin-left1"
+        mat-dialog-close
+      >
+        <mat-icon>close</mat-icon> Hủy
+      </button>
+    </div>
+  </form>
+</div>

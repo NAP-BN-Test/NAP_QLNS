@@ -19,6 +19,16 @@ export const ModulesList = [
         label: 'Danh mục tình trạng nhân viên',
         link: 'employee-status',
       },
+      {
+        indexMenu: 0,
+        label: 'Danh mục bộ phận',
+        link: 'department',
+      },
+      {
+        indexMenu: 0,
+        label: 'Danh mục chi nhánh',
+        link: 'branch',
+      },
     ],
   },
   {

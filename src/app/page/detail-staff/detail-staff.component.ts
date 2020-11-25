@@ -34,9 +34,9 @@ export class DetailStaffComponent implements OnInit {
   // Bắt sự kiện khi đổi tabs
   tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
     if (tabChangeEvent.index === 1) {
-      this.onLoadDataTrainingAfter();
-    } else if (tabChangeEvent.index === 2) {
       this.onLoadDataFamilyRelationship();
+    } else if (tabChangeEvent.index === 2) {
+      this.onLoadDataTrainingAfter();
     } else if (tabChangeEvent.index === 3) {
       this.onLoadDataTrainingBefore();
     } else if (tabChangeEvent.index === 4) {
@@ -109,14 +109,14 @@ export class DetailStaffComponent implements OnInit {
   listTbDataFamilyRelationship = {
     listColum: [
       { name: 'SỐ THỨ TỰ', cell: 'stt' },
-      { name: 'HỌ TÊN', cell: 'trainingCourse' },
-      { name: 'NGÀY SINH', cell: 'chuyenNganh' },
-      { name: 'GIỚI TÍNH', cell: 'companyCost' },
-      { name: 'SỐ CMT', cell: 'personCost' },
-      { name: 'NƠI Ở', cell: 'soCC' },
-      { name: 'NƠI LÀM VIỆC', cell: 'dateStart' },
-      { name: 'QUAN HỆ', cell: 'dateEnd' },
-      { name: 'GIẢM TRỪ', cell: 'dateEnd' },
+      { name: 'HỌ TÊN', cell: 'name' },
+      { name: 'NGÀY SINH', cell: 'birthday' },
+      { name: 'GIỚI TÍNH', cell: 'gender' },
+      { name: 'SỐ CMT', cell: 'cmt' },
+      { name: 'NƠI Ở', cell: 'address' },
+      { name: 'NƠI LÀM VIỆC', cell: 'work' },
+      { name: 'QUAN HỆ', cell: 'relationship' },
+      { name: 'GIẢM TRỪ', cell: 'reduce' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
     listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
@@ -125,13 +125,36 @@ export class DetailStaffComponent implements OnInit {
   dataExampleFamilyRelationship = [
     {
       stt: 0,
-      trainingCourse: 'Khóa đào tạo nghiệp vụ',
-      chuyenNganh: 'Công nghệ thông tin',
-      companyCost: '6000000',
-      personCost: '9000000',
-      soCC: 'CT38293',
-      dateStart: '11-11-2020',
-      dateEnd: '11-11-2022',
+      name: 'Nguyễn Văn A',
+      birthday: '06/09/1969',
+      gender: 'nam',
+      cmt: '124132453',
+      address: 'Bắc Ninh',
+      work: 'Hà Nội',
+      relationship: 'Bố',
+      reduce: '',
+    },
+    {
+      stt: 0,
+      name: 'Đinh Thị B',
+      birthday: '09/06/1971',
+      gender: 'nữ',
+      cmt: '122345433',
+      address: 'Hà Nội',
+      work: 'Hà Nội',
+      relationship: 'Mẹ',
+      reduce: '',
+    },
+    {
+      stt: 0,
+      name: 'Nguyễn Văn C',
+      birthday: '06/09/1996',
+      gender: 'nam',
+      cmt: '124132422',
+      address: 'Bắc Ninh',
+      work: 'Bắc Ninh',
+      relationship: 'Em trai',
+      reduce: '',
     },
   ];
 
@@ -145,18 +168,23 @@ export class DetailStaffComponent implements OnInit {
   onClickAddFamilyRelationship() {
     const dialogRef = this.dialog.open(AddUpdateFamilyRelationshipComponent, {
       width: '900px',
+      height: '700px',
     });
   }
 
   onClickEditFamilyRelationship(event) {
     const dialogRef = this.dialog.open(AddUpdateFamilyRelationshipComponent, {
       width: '900px',
+      height: '700px',
       data: {
-        trainingCourse: event.data.trainingCourse,
-        chuyenNganh: event.data.chuyenNganh,
-        companyCost: event.data.companyCost,
-        personCost: event.data.personCost,
-        soCC: event.data.soCC,
+        name: event.data.name,
+        // birthday: event.data.birthday,
+        gender: event.data.gender,
+        cmt: event.data.cmt,
+        address: event.data.address,
+        work: event.data.work,
+        relationship: event.data.relationship,
+        reduce: event.data.reduce,
       },
     });
   }

@@ -1,6 +1,8 @@
 import { Quote } from '@angular/compiler';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BranchComponent } from './components/category-management/branch/branch.component';
+import { DepartmentComponent } from './components/category-management/department/department.component';
 import { EmployeeStatusComponent } from './components/category-management/employee-status/employee-status.component';
 import { HolidayComponent } from './components/category-management/holiday/holiday.component';
 import { TypeTimekeepingComponent } from './components/category-management/type-timekeeping/type-timekeeping.component';
@@ -68,6 +70,14 @@ const routes: Routes = [
       {
         path: 'payroll-template',
         component: PayrollTemplateComponent,
+      },
+      {
+        path: 'department',
+        component: DepartmentComponent,
+      },
+      {
+        path: 'branch',
+        component: BranchComponent,
       },
     ],
   },

@@ -4,38 +4,25 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppModuleService } from 'src/app/services/app-module.service';
 
 @Component({
-  selector: 'app-add-update-family-relationship',
-  templateUrl: './add-update-family-relationship.component.html',
-  styleUrls: ['./add-update-family-relationship.component.less'],
+  selector: 'app-add-update-branch',
+  templateUrl: './add-update-branch.component.html',
+  styleUrls: ['./add-update-branch.component.less'],
 })
-export class AddUpdateFamilyRelationshipComponent implements OnInit {
+export class AddUpdateBranchComponent implements OnInit {
   myForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
     public mService: AppModuleService,
     @Inject(MAT_DIALOG_DATA) public mData: any,
-    public dialogRef: MatDialogRef<AddUpdateFamilyRelationshipComponent>
+    public dialogRef: MatDialogRef<AddUpdateBranchComponent>
   ) {
     this.myForm = this.formBuilder.group({
-      name: [mData ? mData.name : ''],
-      birthday: [mData ? mData.birthday : ''],
-      gender: [mData ? mData.gender : ''],
-      cmt: [mData ? mData.cmt : ''],
+      branchName: [mData ? mData.branchName : ''],
+      branchCode: [mData ? mData.branchCode : ''],
       address: [mData ? mData.address : ''],
-      work: [mData ? mData.work : ''],
-      relationship: [mData ? mData.relationship : ''],
-      reduce: [mData ? mData.reduce : ''],
-      job: [''],
-      soHoChieu: [''],
-      noiCap: [''],
-      ngayCHC: [''],
-      ngayCap: [''],
-      noiCapHC: [''],
-      ngayBDQH: [''],
-      noiOHT: [''],
-      ngayKTMQH: [''],
-      maSoThue: [''],
-      tinhTTT: [''],
+      phoneNumber: [mData ? mData.phoneNumber : ''],
+      faxNumber: [mData ? mData.faxNumber : ''],
+      email: [mData ? mData.email : ''],
     });
   }
 

@@ -1,0 +1,26 @@
+<div class="container-bm">
+  <div class="search-board">
+    <app-search-board
+      [hasAdd]="true"
+      (clickAdd)="onClickAdd()"
+      title="QUẢN LÝ CHI NHÁNH"
+      (search)="onClickSort($event)"
+      [listFields]="listFields"
+    >
+    </app-search-board>
+  </div>
+
+  <app-table-paginator
+    (clickPagination)="onClickPagination($event)"
+    (clickEdit)="onClickEdit($event)"
+  ></app-table-paginator>
+</div>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="large"
+  color="#325b8c"
+  type="ball-atom"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p>
+</ngx-spinner>

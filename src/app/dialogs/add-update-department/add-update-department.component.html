@@ -1,0 +1,51 @@
+<div class="container-anl">
+  <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI PHÒNG BAN/BỘ PHẬN</h2>
+  <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN PHÒNG BAN/BỘ PHẬN</h2>
+  <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
+  <form [formGroup]="myForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Mã phòng ban/bộ phận</mat-label>
+      <input
+        matInput
+        placeholder="Nhập Text"
+        formControlName="departmentCode"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Tên phòng ban/bộ phận</mat-label>
+      <input
+        matInput
+        placeholder="Nhập Text"
+        formControlName="departmentName"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Chi nhánh</mat-label>
+      <mat-select placeholder="Nhập Text" formControlName="branchName">
+        <mat-option value="Chi nhánh A">Chi nhánh A</mat-option>
+        <mat-option value="Chi nhánh B">Chi nhánh B</mat-option>
+        <mat-option value="Chi nhánh C">Chi nhánh C</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div width-100 align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="onClickOk($event)"
+        [disabled]="!myForm.valid"
+        cdkFocusInitial
+      >
+        <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="margin-left1"
+        mat-dialog-close
+      >
+        <mat-icon>close</mat-icon> Hủy
+      </button>
+    </div>
+  </form>
+</div>
