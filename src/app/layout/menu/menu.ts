@@ -36,13 +36,8 @@ export const ModulesList = [
   {
     indexMenu: 3,
     label: 'MẪU BẢNG LƯƠNG',
-    link: 'assets-management',
+    link: 'quote',
     children: [
-      {
-        indexMenu: 1,
-        label: 'Báo cáo tài sản mua mới',
-        link: 'new-purchase-property-warehouse',
-      },
     ],
   },
   {
