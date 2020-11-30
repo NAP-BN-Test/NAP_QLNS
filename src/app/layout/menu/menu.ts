@@ -57,18 +57,24 @@ export const ModulesList = [
   },
   {
     indexMenu: 5,
+    label: 'THEO DÕI ĐÓNG BH',
+    link: 'keep-track-of-premiums',
+    children: [],
+  },
+  {
+    indexMenu: 6,
     label: 'QL CHẤM CÔNG',
     link: 'time-attendance',
     children: [],
   },
   {
-    indexMenu: 6,
+    indexMenu: 7,
     label: 'QL NGHỈ LỄ TẾT',
     link: 'holidays-management',
     children: [],
   },
   {
-    indexMenu: 7,
+    indexMenu: 8,
     label: 'QL HỢP ĐỒNG',
     link: 'contract',
     children: [],

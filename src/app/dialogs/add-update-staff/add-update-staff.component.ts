@@ -33,6 +33,13 @@ export class AddUpdateStaffComponent implements OnInit {
       age: [mData ? mData.age : ''],
       bank: [mData ? mData.bank : ''],
       position: [mData ? mData.position : ''],
+      bangCap: [''],
+      soHD: [''],
+      ngayKi: [''],
+      loaiHD: [''],
+      mucLuong: [''],
+      ngayHH: [''],
+      ttHD: [''],
     });
   }
 

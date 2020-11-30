@@ -178,6 +178,16 @@ export class AppModuleService {
           key: 'mailMergeCampaignID',
           value: params.mailMergeCampaignID,
         });
+      if (params.quoteID)
+        array.push({
+          key: 'quoteID',
+          value: params.quoteID,
+        });
+      if (params.staffName)
+        array.push({
+          key: 'staffName',
+          value: params.staffName,
+        });
     });
     let paramsObj = {};
     for (let field of array) {

@@ -1,6 +1,6 @@
 <div class="container-amc">
   <div class="title">
-    <span>CHI TIẾT NHÂN VIÊN</span>
+    <span>{{ nameStaff }}</span>
   </div>
   <form [formGroup]="myForm">
     <mat-tab-group
@@ -108,6 +108,10 @@
               <mat-option value="Nhân viên">Nhân viên</mat-option>
             </mat-select>
           </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Bằng cấp</mat-label>
+            <input matInput placeholder="Nhập Text" formControlName="bangCap" />
+          </mat-form-field>
           <mat-form-field appearance="outline" width-100>
             <mat-label>Quê quán</mat-label>
             <input
@@ -193,7 +197,7 @@
           ></app-table-paginator>
         </div>
       </mat-tab>
-      <mat-tab label="Quản lý tình trạng nhân viên">
+      <mat-tab label="Lịch sử công tác">
         <div class="tab1">
           <div align="end" style="padding-bottom: 1%">
             <button
@@ -212,10 +216,20 @@
       </mat-tab>
       <mat-tab label="Quản lý hợp đồng">
         <div class="tab1">
-          <app-table-readonly
+          <div align="end" style="padding-bottom: 1%">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="onClickAddContract()"
+            >
+              <mat-icon>add</mat-icon>Thêm mới
+            </button>
+          </div>
+          <app-table-paginator
             [hasPagination]="false"
-            (clickEdit)="onClickEditStaffStatus($event)"
-          ></app-table-readonly>
+            (clickEdit)="onClickEditContract($event)"
+            (clickBtn)="onClickBtnContract($event)"
+          ></app-table-paginator>
         </div>
       </mat-tab>
       <mat-tab label="Quyết định tăng lương">

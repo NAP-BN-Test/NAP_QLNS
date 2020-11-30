@@ -1,0 +1,235 @@
+<div class="container-amc">
+  <div class="title">
+    <span>THEO DÕI ĐÓNG BẢO HIỂM</span>
+  </div>
+  <form>
+    <mat-form-field appearance="outline">
+      <mat-label>Chọn tháng/năm</mat-label>
+      <input matInput [matDatepicker]="dp" [formControl]="monthYear" />
+      <mat-datepicker-toggle matSuffix [for]="dp"> </mat-datepicker-toggle>
+      <mat-datepicker
+        #dp
+        startView="multi-year"
+        (yearSelected)="chosenYearHandler($event)"
+        (monthSelected)="chosenMonthHandler($event, dp)"
+      ></mat-datepicker>
+    </mat-form-field>
+    <div class="button-search">
+      <button mat-raised-button color="primary" class="margin-left1">
+        <mat-icon>search</mat-icon> Tìm kiếm
+      </button>
+    </div>
+  </form>
+  <div class="container-table mat-elevation-z8">
+    <table mat-table [dataSource]="dataExample">
+      <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- STT Column display none-->
+      <ng-container matColumnDef="stt">
+        <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
+          STT
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.stt }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="STT">
+        <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">STT</th>
+      </ng-container>
+
+      <!-- Họ và tên Column display none-->
+      <ng-container matColumnDef="staffName">
+        <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
+          HỌ VÀ TÊN
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.staffName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="StaffName">
+        <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">HỌ VÀ TÊN</th>
+      </ng-container>
+
+      <!-- LƯƠNG BHXH Column display none-->
+      <ng-container matColumnDef="luongBHXH">
+        <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
+          LƯƠNG BHXH
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.luongBHXH }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="LuongBHXH">
+        <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">LƯƠNG BHXH</th>
+      </ng-container>
+
+      <!-- BHXH CTY Column display none-->
+      <ng-container matColumnDef="bhxhCT">
+        <th mat-header-cell *matHeaderCellDef>CT</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.bhxhCT }}
+        </td>
+      </ng-container>
+
+      <!-- BHXH NV Column display none-->
+      <ng-container matColumnDef="bhxhNV">
+        <th mat-header-cell *matHeaderCellDef>NV</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.bhxhNV }}
+        </td>
+      </ng-container>
+
+      <!-- BHYT CTY Column display none-->
+      <ng-container matColumnDef="bhytCT">
+        <th mat-header-cell *matHeaderCellDef>CT</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.bhytCT }}
+        </td>
+      </ng-container>
+
+      <!-- BHYT NV Column display none-->
+      <ng-container matColumnDef="bhytNV">
+        <th mat-header-cell *matHeaderCellDef>NV</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.bhytNV }}
+        </td>
+      </ng-container>
+
+      <!-- BHTN CTY Column display none-->
+      <ng-container matColumnDef="bhtnCT">
+        <th mat-header-cell *matHeaderCellDef>CT</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.bhtnCT }}
+        </td>
+      </ng-container>
+
+      <!-- BHTN NV Column display none-->
+      <ng-container matColumnDef="bhtnNV">
+        <th mat-header-cell *matHeaderCellDef>NV</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.bhtnNV }}
+        </td>
+      </ng-container>
+
+      <!-- CÔNG ĐOÀN CTY Column display none-->
+      <ng-container matColumnDef="congdoanCT">
+        <th mat-header-cell *matHeaderCellDef>CT</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.congdoanCT }}
+        </td>
+      </ng-container>
+
+      <!-- CÔNG ĐOÀN NV Column display none-->
+      <ng-container matColumnDef="congdoanNV">
+        <th mat-header-cell *matHeaderCellDef>NV</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.congdoanNV }}
+        </td>
+      </ng-container>
+
+      <!-- GT GIA CẢNH Column display none-->
+      <ng-container matColumnDef="gtGiaCanh">
+        <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
+          GIẢM TRỪ GIA CẢNH
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.gtGiaCanh }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="GTGiaCanh">
+        <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">
+          GIẢM TRỪ GIA CẢNH
+        </th>
+      </ng-container>
+
+      <!-- LƯƠNG TÍNH THUẾ TNCN Column display none-->
+      <ng-container matColumnDef="luongTinhThueTNCN">
+        <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
+          LƯƠNG TÍNH THUẾ TNCN
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.luongTinhThueTNCN }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="LuongTinhThueTNCN">
+        <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">
+          LƯƠNG TÍNH THUẾ TNCN
+        </th>
+      </ng-container>
+
+      <!-- THUẾ TNCN Column display none-->
+      <ng-container matColumnDef="thueTNCN">
+        <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
+          THUẾ TNCN
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.thueTNCN }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ThueTNCN">
+        <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">THUẾ TNCN</th>
+      </ng-container>
+
+      <!-- TỔNG CÁC KHOẢN TRỪ Column display none-->
+      <ng-container matColumnDef="tongKhoanTru">
+        <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
+          TỔNG CÁC KHOẢN TRỪ
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.tongKhoanTru }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="TongKhoanTru">
+        <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">
+          TỔNG CÁC KHOẢN TRỪ
+        </th>
+      </ng-container>
+
+      <!-- BHXH -->
+      <ng-container matColumnDef="bhxh">
+        <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">BHXH</th>
+      </ng-container>
+
+      <!-- BHYT -->
+      <ng-container matColumnDef="bhyt">
+        <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">BHYT</th>
+      </ng-container>
+
+      <!-- BHTN -->
+      <ng-container matColumnDef="bhtn">
+        <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">BHTN</th>
+      </ng-container>
+
+      <!-- CÔNG ĐOÀN -->
+      <ng-container matColumnDef="congdoan">
+        <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">CÔNG ĐOÀN</th>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="[
+          'STT',
+          'StaffName',
+          'LuongBHXH',
+          'bhxh',
+          'bhyt',
+          'bhtn',
+          'congdoan',
+          'GTGiaCanh',
+          'LuongTinhThueTNCN',
+          'ThueTNCN',
+          'TongKhoanTru'
+        ]"
+      ></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="large"
+  color="#325b8c"
+  type="ball-atom"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p>
+</ngx-spinner>

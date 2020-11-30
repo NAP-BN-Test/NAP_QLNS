@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { AddUpdateContractComponent } from 'src/app/dialogs/add-update-contract/add-update-contract.component';
 import { AddUpdateDecidedIncreaseSalariesComponent } from 'src/app/dialogs/add-update-decided-increase-salaries/add-update-decided-increase-salaries.component';
 import { AddUpdateFamilyRelationshipComponent } from 'src/app/dialogs/add-update-family-relationship/add-update-family-relationship.component';
 import { AddUpdateStaffStatusComponent } from 'src/app/dialogs/add-update-staff-status/add-update-staff-status.component';
@@ -20,6 +21,7 @@ import {
 })
 export class DetailStaffComponent implements OnInit {
   myForm: FormGroup;
+  nameStaff;
 
   constructor(
     private fb: FormBuilder,
@@ -29,7 +31,15 @@ export class DetailStaffComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let params: any = this.mService.handleActivatedRoute();
+    console.log(params);
+    if (params.quoteID) {
+      console.log(params.staffName);
+
+      this.nameStaff = params.staffName ? params.staffName : '';
+    }
+  }
 
   // Bắt sự kiện khi đổi tabs
   tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
@@ -68,6 +78,7 @@ export class DetailStaffComponent implements OnInit {
       age: [''],
       bank: [''],
       position: [''],
+      bangCap: [''],
     });
   }
 
@@ -294,7 +305,7 @@ export class DetailStaffComponent implements OnInit {
     });
   }
 
-  // Quản lý tình trạng nhân viên ===========================================
+  // Lịch sử công tác =================================================================
 
   listTbDataStaffStatus = {
     listColum: [
@@ -353,7 +364,9 @@ export class DetailStaffComponent implements OnInit {
       { name: 'TÌNH TRẠNG HỢP ĐỒNG', cell: 'contractStatus' },
       { name: 'NGÀY CHẤM DỨT', cell: 'dateEnd' },
       { name: 'LÝ DO', cell: 'description' },
+      { name: 'THAO TÁC', cell: 'undefined' },
     ],
+    listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
   };
 
   dataExampleContract = [
@@ -376,6 +389,21 @@ export class DetailStaffComponent implements OnInit {
       listTbData: this.listTbDataContract,
     });
   }
+
+  onClickAddContract() {
+    const dialogRef = this.dialog.open(AddUpdateContractComponent, {
+      width: '900px',
+    });
+  }
+
+  onClickEditContract(event) {
+    const dialogRef = this.dialog.open(AddUpdateContractComponent, {
+      width: '900px',
+      data: event.data,
+    });
+  }
+
+  onClickBtnContract(event) {}
 
   // Quyết định tăng lương =======================================================
 

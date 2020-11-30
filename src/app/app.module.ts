@@ -55,6 +55,7 @@ import { DepartmentComponent } from './components/category-management/department
 import { BranchComponent } from './components/category-management/branch/branch.component';
 import { AddUpdateDepartmentComponent } from './dialogs/add-update-department/add-update-department.component';
 import { AddUpdateBranchComponent } from './dialogs/add-update-branch/add-update-branch.component';
+import { KeepTrackOfPremiumsComponent } from './components/keep-track-of-premiums/keep-track-of-premiums.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { AddUpdateBranchComponent } from './dialogs/add-update-branch/add-update
     BranchComponent,
     AddUpdateDepartmentComponent,
     AddUpdateBranchComponent,
+    KeepTrackOfPremiumsComponent,
   ],
   imports: [
     BrowserModule,

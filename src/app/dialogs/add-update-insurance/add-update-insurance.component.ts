@@ -25,6 +25,7 @@ export class AddUpdateInsuranceComponent implements OnInit {
       staffBHTN: [mData ? mData.staffBHTN : ''],
       dateStart: [mData ? mData.dateStart : ''],
       dateEnd: [mData ? mData.dateEnd : ''],
+      staffCD: [mData ? mData.staffCD : ''],
     });
   }
 

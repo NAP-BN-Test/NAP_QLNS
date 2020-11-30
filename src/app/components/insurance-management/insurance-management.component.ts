@@ -23,6 +23,7 @@ export class InsuranceManagementComponent implements OnInit {
       { name: 'MỨC ĐÓNG BHXH NV', cell: 'staffBHXH' },
       { name: 'MỨC ĐÓNG BHYT NV', cell: 'staffBHYT' },
       { name: 'MỨC ĐÓNG BHTN NV', cell: 'staffBHTN' },
+      { name: 'MỨC ĐÓNG CÔNG ĐOÀN', cell: 'staffCD' },
       { name: 'TỪ NGÀY', cell: 'dateStart' },
       { name: 'ĐẾN NGÀY', cell: 'dateEnd' },
       { name: 'THAO TÁC', cell: 'undefined' },
@@ -51,6 +52,7 @@ export class InsuranceManagementComponent implements OnInit {
       staffBHTN: '1%',
       dateStart: '01-11-2020',
       dateEnd: '01-11-2021',
+      staffCD: '1%',
     },
     {
       stt: 1,
@@ -62,6 +64,7 @@ export class InsuranceManagementComponent implements OnInit {
       staffBHTN: '1%',
       dateStart: '01-11-2020',
       dateEnd: '01-11-2021',
+      staffCD: '1%',
     },
     {
       stt: 2,
@@ -73,6 +76,7 @@ export class InsuranceManagementComponent implements OnInit {
       staffBHTN: '1%',
       dateStart: '01-11-2020',
       dateEnd: '01-11-2021',
+      staffCD: '1%',
     },
   ];
 
@@ -145,6 +149,7 @@ export class InsuranceManagementComponent implements OnInit {
         staffBHXH: event.data.staffBHXH,
         staffBHYT: event.data.staffBHYT,
         staffBHTN: event.data.staffBHTN,
+        staffCD: event.data.staffCD,
         // dateStart: event.data.dateStart,
         // dateEnd: event.data.dateEnd,
       },
@@ -161,6 +166,7 @@ export class InsuranceManagementComponent implements OnInit {
           staffBHTN: res.staffBHTN,
           dateStart: res.dateStart,
           dateEnd: res.dateEnd,
+          staffCD: res.staffCD,
         };
         // this.mService
         //   .getApiService()
@@ -191,6 +197,7 @@ export class InsuranceManagementComponent implements OnInit {
           staffBHTN: res.staffBHTN,
           dateStart: res.dateStart,
           dateEnd: res.dateEnd,
+          staffCD: res.staffCD,
         };
         // this.mService
         //   .getApiService()

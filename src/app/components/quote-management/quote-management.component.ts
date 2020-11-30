@@ -182,8 +182,10 @@ export class QuoteManagementComponent implements OnInit {
   }
 
   onClickCell(event) {
+    console.log(event);
+    
     this.router.navigate(['menu/detail-staff'], {
-      queryParams: event.data.id,
+      queryParams: { quoteID: 1, staffName: event.data.staffName },
     });
   }
 }
