@@ -22,7 +22,7 @@ export class DecidedToIncreaseTheSalariesComponent implements OnInit {
       { name: 'MỨC LƯƠNG', cell: 'salaryIncrease' },
       { name: 'TÌNH TRẠNG QUYẾT ĐỊNH', cell: 'status' },
       { name: 'NGÀY DỪNG', cell: 'stopDate' },
-      { name: 'LÝ DO', cell: 'stopReason' },
+      // { name: 'LÝ DO', cell: 'stopReason' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
     listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],

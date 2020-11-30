@@ -23,7 +23,7 @@ export class ContractManagementComponent implements OnInit {
       { name: 'MỨC LƯƠNG', cell: 'salaryNumber' },
       { name: 'TÌNH TRẠNG HỢP ĐỒNG', cell: 'status' },
       { name: 'NGÀY CHẤM DỨT', cell: 'contractDateEnd' },
-      { name: 'LÝ DO', cell: 'reason' },
+      // { name: 'LÝ DO', cell: 'reason' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
     listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],

@@ -430,7 +430,7 @@ export class DetailStaffComponent implements OnInit {
       { name: 'MỨC LƯƠNG', cell: 'salaryIncrease' },
       { name: 'TÌNH TRẠNG QUYẾT ĐỊNH', cell: 'decisionStatus' },
       { name: 'NGÀY DỪNG', cell: 'stopEnd' },
-      { name: 'LÝ DO', cell: 'description' },
+      // { name: 'LÝ DO', cell: 'description' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
   };
