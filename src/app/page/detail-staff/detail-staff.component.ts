@@ -79,6 +79,12 @@ export class DetailStaffComponent implements OnInit {
       bank: [''],
       position: [''],
       bangCap: [''],
+      soHD: [''],
+      ngayKi: [''],
+      loaiHD: [''],
+      mucLuong: [''],
+      ngayHH: [''],
+      ttHD: [''],
     });
   }
 
@@ -363,7 +369,7 @@ export class DetailStaffComponent implements OnInit {
       { name: 'MỨC LƯƠNG', cell: 'salary' },
       { name: 'TÌNH TRẠNG HỢP ĐỒNG', cell: 'contractStatus' },
       { name: 'NGÀY CHẤM DỨT', cell: 'dateEnd' },
-      { name: 'LÝ DO', cell: 'description' },
+      // { name: 'LÝ DO', cell: 'description' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
     listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],

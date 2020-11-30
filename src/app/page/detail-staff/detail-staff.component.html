@@ -137,7 +137,52 @@
             />
           </mat-form-field>
         </div>
-        <div class="d-flex justify-content-center">
+        <span>Thông tin hợp đồng</span>
+        <div class="tab">
+          <mat-form-field appearance="outline">
+            <mat-label>Số HĐ</mat-label>
+            <input matInput placeholder="Nhập Text" formControlName="soHD" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Ngày kí</mat-label>
+            <input
+              matInput
+              [matDatepicker]="ngayKiPicker"
+              formControlName="ngayKi"
+            />
+            <mat-datepicker-toggle matSuffix [for]="ngayKiPicker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #ngayKiPicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Loại hợp đồng</mat-label>
+            <input matInput placeholder="Nhập Text" formControlName="loaiHD" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Mức lương</mat-label>
+            <input
+              matInput
+              placeholder="Nhập Text"
+              formControlName="mucLuong"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Ngày hết hạn</mat-label>
+            <input
+              matInput
+              [matDatepicker]="ngayHHPicker"
+              formControlName="ngayHH"
+            />
+            <mat-datepicker-toggle matSuffix [for]="ngayHHPicker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #ngayHHPicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Tình trạng HĐ</mat-label>
+            <input matInput placeholder="Nhập Text" formControlName="ttHD" />
+          </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-center" style="padding-bottom: 2%">
           <button mat-raised-button color="accent" style="margin-right: 1%">
             <mat-icon>edit</mat-icon>Chỉnh sửa
           </button>
