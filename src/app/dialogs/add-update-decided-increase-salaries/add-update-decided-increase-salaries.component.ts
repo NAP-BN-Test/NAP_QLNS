@@ -17,8 +17,8 @@ export class AddUpdateDecidedIncreaseSalariesComponent implements OnInit {
     public dialogRef: MatDialogRef<AddUpdateDecidedIncreaseSalariesComponent>
   ) {
     this.myForm = this.formBuilder.group({
-      staffName: [''],
-      staffCode: [''],
+      staffName: [mData ? mData.staffName : ''],
+      staffCode: [mData ? mData.staffCode : ''],
       decisionCode: [mData ? mData.decisionCode : ''],
       decisionDate: [mData ? mData.decisionDate : ''],
       salaryIncrease: [mData ? mData.salaryIncrease : ''],

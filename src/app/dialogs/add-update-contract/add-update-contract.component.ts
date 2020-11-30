@@ -25,7 +25,7 @@ export class AddUpdateContractComponent implements OnInit {
       reason: [mData ? mData.reason : ''],
       status: [mData ? mData.status : ''],
       staffCode: [''],
-      staffName: [''],
+      staffName: [mData ? mData.staffName : ''],
     });
   }
 

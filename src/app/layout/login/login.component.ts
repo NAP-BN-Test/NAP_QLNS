@@ -41,9 +41,9 @@ export class LoginComponent implements OnInit {
     //     if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
     //       this.mService.setUser(data.obj);
     //       this.mService.setToken(data.token);
-    this.mService.setIndexMenu('0');
+    this.mService.setIndexMenu('1');
     //       this.mService.getApiService().setUserInfo(data.obj);
-    this.router.navigate(['menu/type-timekeeping'], {
+    this.router.navigate(['menu/quote'], {
       queryParams: { page: 1 },
     });
     //       } else {

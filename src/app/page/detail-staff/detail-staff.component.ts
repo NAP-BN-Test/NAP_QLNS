@@ -405,7 +405,16 @@ export class DetailStaffComponent implements OnInit {
   onClickEditContract(event) {
     const dialogRef = this.dialog.open(AddUpdateContractComponent, {
       width: '900px',
-      data: event.data,
+      data: {
+        contractCode: event.data.contractCode,
+        salaryNumber: event.data.salary,
+        status: event.data.status,
+        stt: 0,
+        description: 'Mô tả tình trạng A',
+        decisionStatus: 'Có hiệu lực',
+        contractStatus: 'Còn hiệu lực',
+        staffName: this.nameStaff,
+      },
     });
   }
 
@@ -446,6 +455,15 @@ export class DetailStaffComponent implements OnInit {
     });
   }
 
+  onClickAddSalaryIncrease() {
+    const dialogRef = this.dialog.open(
+      AddUpdateDecidedIncreaseSalariesComponent,
+      {
+        width: '900px',
+      }
+    );
+  }
+
   onClickEditSalaryIncrease(event) {
     const dialogRef = this.dialog.open(
       AddUpdateDecidedIncreaseSalariesComponent,
@@ -455,6 +473,11 @@ export class DetailStaffComponent implements OnInit {
           decisionCode: event.data.decisionCode,
           salaryIncrease: event.data.salaryIncrease,
           status: event.data.status,
+          stt: 0,
+          description: 'Mô tả tình trạng A',
+          decisionStatus: 'Có hiệu lực',
+          contractStatus: 'Còn hiệu lực',
+          staffName: this.nameStaff,
         },
       }
     );

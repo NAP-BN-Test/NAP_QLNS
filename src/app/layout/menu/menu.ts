@@ -39,38 +39,38 @@ export const ModulesList = [
   },
   {
     indexMenu: 2,
-    label: 'QĐ TĂNG LƯƠNG',
-    link: 'decided-increase-salaries',
-    children: [],
-  },
-  {
-    indexMenu: 3,
     label: 'MẪU BẢNG LƯƠNG',
     link: 'payroll-template',
     children: [],
   },
   {
-    indexMenu: 4,
+    indexMenu: 3,
     label: 'QL MỨC ĐÓNG BH',
     link: 'insurance',
     children: [],
   },
   {
-    indexMenu: 5,
+    indexMenu: 4,
     label: 'THEO DÕI ĐÓNG BH',
     link: 'keep-track-of-premiums',
     children: [],
   },
   {
-    indexMenu: 6,
+    indexMenu: 5,
     label: 'QL CHẤM CÔNG',
     link: 'time-attendance',
     children: [],
   },
   {
-    indexMenu: 7,
+    indexMenu: 6,
     label: 'QL NGHỈ LỄ TẾT',
     link: 'holidays-management',
+    children: [],
+  },
+  {
+    indexMenu: 7,
+    label: 'QĐ TĂNG LƯƠNG',
+    link: 'decided-increase-salaries',
     children: [],
   },
   {

@@ -279,6 +279,15 @@
       </mat-tab>
       <mat-tab label="Quyết định tăng lương">
         <div class="tab1">
+          <div align="end" style="padding-bottom: 1%">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="onClickAddSalaryIncrease()"
+            >
+              <mat-icon>add</mat-icon>Thêm mới
+            </button>
+          </div>
           <app-table-paginator
             [hasPagination]="false"
             (clickEdit)="onClickEditSalaryIncrease($event)"
