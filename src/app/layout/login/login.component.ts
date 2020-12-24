@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AppModuleService } from 'src/app/services/app-module.service';
+import { ParamsKey } from 'src/app/services/constant/paramskey';
 import {
   LOCAL_STORAGE_KEY,
+  STATUS,
 } from 'src/app/services/constant/app-constant';
 
 @Component({
@@ -34,22 +36,22 @@ export class LoginComponent implements OnInit {
   }
 
   onClickLogin() {
-    // this.mService
-    //   .getApiService()
-    //   .sendRequestLOGIN(this.username, this.password)
-    //   .then((data) => {
-    //     if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
-    //       this.mService.setUser(data.obj);
-    //       this.mService.setToken(data.token);
-    this.mService.setIndexMenu('1');
-    //       this.mService.getApiService().setUserInfo(data.obj);
-    this.router.navigate(['menu/quote'], {
-      queryParams: { page: 1 },
-    });
-    //       } else {
-    //         this.dialog.open(DialogErrorLogin);
-    //       }
-    //     });
+    this.mService
+      .getApiService()
+      .sendRequestLOGIN(this.username, this.password)
+      .then((data) => {
+        if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+          this.mService.setUser(data.obj);
+          this.mService.setToken(data.token);
+          this.mService.setIndexMenu('1');
+          this.mService.getApiService().setUserInfo(data.obj);
+          this.router.navigate(['menu/quote'], {
+            queryParams: { page: 1 },
+          });
+        } else {
+          this.dialog.open(DialogErrorLogin);
+        }
+      });
   }
 }
 

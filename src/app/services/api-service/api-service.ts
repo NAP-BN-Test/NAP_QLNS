@@ -4,11 +4,11 @@ import { LOCAL_STORAGE_KEY } from '../constant/app-constant';
 import { ParamBuilder } from '../core/http/param-builder';
 
 export class ApiService extends HttpClient {
-  mUrl: string = 'http://192.168.1.101:1598/';
-  // mUrl: string = 'http://118.27.192.106:3400/';
+  mUrl: string = 'http://192.168.1.101:3100/';
+  // mUrl: string = 'http://118.27.192.106:3100/';
 
   headers = new Headers({
-    Authorization: localStorage.getItem('token-hnc'),
+    Authorization: localStorage.getItem('token'),
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', // thêm phần này vào header thì mới gửi body cho backend được
   });
 
