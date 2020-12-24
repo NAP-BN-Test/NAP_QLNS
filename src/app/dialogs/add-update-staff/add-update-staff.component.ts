@@ -17,29 +17,30 @@ export class AddUpdateStaffComponent implements OnInit {
     public dialogRef: MatDialogRef<AddUpdateStaffComponent>
   ) {
     this.myForm = this.formBuilder.group({
-      codeStaff: [mData ? mData.codeStaff : ''],
-      timekeeperCode: [mData ? mData.timekeeperCode : ''],
-      personalTaxCode: [mData ? mData.personalTaxCode : ''],
+      staffCode: [mData ? mData.staffCode : ''],
       staffName: [mData ? mData.staffName : ''],
-      phone: [mData ? mData.phone : ''],
-      birthday: [mData ? mData.birthday : ''],
-      email: [mData ? mData.email : ''],
+      cmndNumber: [mData ? mData.cmndNumber : ''],
+      address: [mData ? mData.address : ''],
+      idNation: [mData ? mData.idNation : ''],
+      phoneNumber: [mData ? mData.phoneNumber : ''],
       gender: [mData ? mData.gender : ''],
-      stkNH: [mData ? mData.stkNH : ''],
-      departmentName: [mData ? mData.departmentName : ''],
-      homeTown: [mData ? mData.homeTown : ''],
-      currentResidence: [mData ? mData.currentResidence : ''],
+      idBoPhan: [mData ? mData.idBoPhan : ''],
+      idChucVu: [mData ? mData.idChucVu : ''],
+      taxCode: [mData ? mData.taxCode : ''],
+      bankNumber: [mData ? mData.bankNumber : ''],
+      bankName: [mData ? mData.bankName : ''],
+      birthday: [mData ? mData.birthday : ''],
+      degree: [mData ? mData.degree : ''],
       permanentResidence: [mData ? mData.permanentResidence : ''],
+      probationaryDate: [mData ? mData.probationaryDate : ''],
+      probationarySalary: [mData ? mData.probationarySalary : ''],
+      workingDate: [mData ? mData.workingDate : ''],
+      workingSalary: [mData ? mData.workingSalary : ''],
+      bhxhSalary: [mData ? mData.bhxhSalary : ''],
+      contactUrgent: [mData ? mData.contactUrgent : ''],
+      idMayChamCong: [mData ? mData.idMayChamCong : ''],
+      email: [mData ? mData.email : ''],
       age: [mData ? mData.age : ''],
-      bank: [mData ? mData.bank : ''],
-      position: [mData ? mData.position : ''],
-      bangCap: [''],
-      soHD: [''],
-      ngayKi: [''],
-      loaiHD: [''],
-      mucLuong: [''],
-      ngayHH: [''],
-      ttHD: [''],
     });
   }
 
@@ -47,7 +48,7 @@ export class AddUpdateStaffComponent implements OnInit {
 
   onClickOk(event) {
     this.dialogRef.close({
-      codeStaff: this.myForm.value.codeStaff,
+      staffCode: this.myForm.value.staffCode,
       timekeeperCode: this.myForm.value.timekeeperCode,
       personalTaxCode: this.myForm.value.personalTaxCode,
       staffName: this.myForm.value.staffName,

@@ -40,4 +40,9 @@ export class ApiCmd {
   public static ADD_TBL_DM_BOPHAN: string = 'qlnb/add_tbl_dm_bophan';
 
   public static DELETE_TBL_DM_BOPHAN: string = 'qlnb/delete_tbl_dm_bophan';
+
+  public static GET_LIST_TBL_DMNHANVIEN: string =
+    'qlnb/get_list_tbl_dmnhanvien';
+
+  public static ADD_TBL_DMNHANVIEN: string = 'qlnb/add_tbl_dmnhanvien';
 }

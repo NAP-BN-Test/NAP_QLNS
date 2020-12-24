@@ -6,25 +6,21 @@
     <div width-50 style="padding-right: 1%">
       <mat-form-field appearance="outline">
         <mat-label>Mã số nhân sự</mat-label>
-        <input matInput placeholder="Nhập Text" formControlName="codeStaff" />
+        <input matInput placeholder="Nhập Text" formControlName="staffCode" />
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>ID máy chấm công</mat-label>
         <input
           matInput
           placeholder="Nhập Text"
-          formControlName="timekeeperCode"
+          formControlName="idMayChamCong"
         />
       </mat-form-field>
     </div>
 
     <mat-form-field appearance="outline">
       <mat-label>Mã số thuế cá nhân</mat-label>
-      <input
-        matInput
-        placeholder="Nhập Text"
-        formControlName="personalTaxCode"
-      />
+      <input matInput placeholder="Nhập Text" formControlName="taxCode" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Họ và tên</mat-label>
@@ -32,7 +28,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Điện thoại</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="phone" />
+      <input matInput placeholder="Nhập Text" formControlName="phoneNumber" />
     </mat-form-field>
     <div width-50 style="padding-right: 1%">
       <mat-form-field appearance="outline">
@@ -65,11 +61,11 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Số tài khoản ngân hàng</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="stkNH" />
+      <input matInput placeholder="Nhập Text" formControlName="bankNumber" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Phòng ban</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="departmentName">
+      <mat-select placeholder="Nhập Text" formControlName="idBoPhan">
         <mat-option value="Phòng ban A">Phòng ban A</mat-option>
         <mat-option value="Phòng ban B">Phòng ban B</mat-option>
         <mat-option value="Phòng ban C">Phòng ban C</mat-option>
@@ -77,7 +73,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Ngân hàng</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="bank">
+      <mat-select placeholder="Nhập Text" formControlName="bankName">
         <mat-option value="Ngân hàng A">Ngân hàng A</mat-option>
         <mat-option value="Ngân hàng B">Ngân hàng B</mat-option>
         <mat-option value="Ngân hàng C">Phòng ban C</mat-option>
@@ -85,27 +81,27 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Chức vụ</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="position">
+      <mat-select placeholder="Nhập Text" formControlName="idChucVu">
         <mat-option value="Giám đốc">Giám đốc</mat-option>
         <mat-option value="Nhân viên">Nhân viên</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Bằng cấp</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="bangCap" />
+      <input matInput placeholder="Nhập Text" formControlName="degree" />
     </mat-form-field>
     <mat-form-field appearance="outline" width-100>
       <mat-label>Quê quán</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="homeTown" />
+      <input matInput placeholder="Nhập Text" formControlName="address" />
     </mat-form-field>
-    <mat-form-field appearance="outline" width-100>
+    <!-- <mat-form-field appearance="outline" width-100>
       <mat-label>Nơi ở hiện đại</mat-label>
       <input
         matInput
         placeholder="Nhập Text"
-        formControlName="currentResidence"
+        formControlName="permanentResidence"
       />
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-form-field appearance="outline" width-100>
       <mat-label>Hộ khẩu thường trú</mat-label>
       <input

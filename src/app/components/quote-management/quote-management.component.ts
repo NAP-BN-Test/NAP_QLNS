@@ -8,7 +8,9 @@ import {
   BUTTON_TYPE,
   CLICK_DETAIL,
   EVENT_PUSH,
+  STATUS,
 } from 'src/app/services/constant/app-constant';
+import { ParamsKey } from 'src/app/services/constant/paramskey';
 
 @Component({
   selector: 'app-quote-management',
@@ -55,54 +57,6 @@ export class QuoteManagementComponent implements OnInit {
     items: [{ conditionFields: '', fields: '', searchFields: '' }],
   };
 
-  dataExample = [
-    {
-      stt: 0,
-      staffName: 'Nhân viên A',
-      staffCode: 'NV90924',
-      taxCode: '12198274',
-      describe: 'Nhân viên tốt',
-      address: 'Bắc Ninh',
-      gender: 'Nam',
-      phoneNumber: '0912349999',
-      cmndNumber: '12379828748',
-      birthday: '12-07-1995',
-      email: 'nhanviena@gmai.com',
-      departmentName: 'Bộ phận A',
-      branchName: 'Chi nhánh A',
-    },
-    {
-      stt: 1,
-      staffName: 'Nhân viên B',
-      staffCode: 'NV90925',
-      taxCode: '12198275',
-      describe: 'Nhân viên tốt',
-      address: 'Bắc Ninh',
-      gender: 'Nam',
-      phoneNumber: '0912349998',
-      cmndNumber: '12379832546',
-      birthday: '15-06-1996',
-      email: 'nhanvienb@gmai.com',
-      departmentName: 'Bộ phận B',
-      branchName: 'Chi nhánh B',
-    },
-    {
-      stt: 2,
-      staffName: 'Nhân viên C',
-      staffCode: 'NV90926',
-      taxCode: '12198276',
-      describe: 'Nhân viên tốt',
-      address: 'Bắc Ninh',
-      gender: 'Nữ',
-      phoneNumber: '0912349997',
-      cmndNumber: '12379828435',
-      birthday: '19-06-1985',
-      email: 'nhanvienc@gmai.com',
-      departmentName: 'Bộ phận C',
-      branchName: 'Chi nhánh C',
-    },
-  ];
-
   constructor(
     public mService: AppModuleService,
     private spinner: NgxSpinnerService,
@@ -111,36 +65,35 @@ export class QuoteManagementComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.mService.LoadAppConfig();
-    // if (this.mService.getUser()) {
-    //   let params: any = this.mService.handleActivatedRoute();
-    //   this.page = params.page ? params.page : 1;
-    this.onLoadData(this.page, this.dataSearch);
-    // } else {
-    //   this.mService.publishPageRoute('login');
-    // }
+    this.mService.LoadAppConfig();
+    if (this.mService.getUser()) {
+      let params: any = this.mService.handleActivatedRoute();
+      this.page = params.page ? params.page : 1;
+      this.onLoadData(this.page, this.dataSearch);
+    } else {
+      this.mService.publishPageRoute('login');
+    }
   }
 
-  onLoadData(page, dataSearch) {
-    // this.spinner.show();
-    // await this.mService
-    //   .getApiService()
-    //   .sendRequestGET_LIST_LABOR_MANAGEMENT_BOOK(
-    //     page,
-    //     JSON.stringify(dataSearch)
-    //   )
-    //   .then((data) => {
-    //     if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
-    this.collectionSize = 3;
-    this.mService.publishEvent(EVENT_PUSH.TABLE, {
-      page: this.page,
-      collectionSize: this.collectionSize,
-      listData: this.dataExample,
-      listTbData: this.listTbData,
-    });
-    //     }
-    //   });
-    // this.spinner.hide();
+  async onLoadData(page, dataSearch) {
+    this.spinner.show();
+    await this.mService
+      .getApiService()
+      .sendRequestGET_LIST_TBL_DMNHANVIEN(page, JSON.stringify(dataSearch))
+      .then((data) => {
+        console.log(data);
+
+        if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+          this.collectionSize = data.all;
+          this.mService.publishEvent(EVENT_PUSH.TABLE, {
+            page: this.page,
+            collectionSize: this.collectionSize,
+            listData: data.array,
+            listTbData: this.listTbData,
+          });
+        }
+      });
+    this.spinner.hide();
   }
 
   onClickSort(event) {
@@ -183,7 +136,7 @@ export class QuoteManagementComponent implements OnInit {
 
   onClickCell(event) {
     console.log(event);
-    
+
     this.router.navigate(['menu/detail-staff'], {
       queryParams: { quoteID: 1, staffName: event.data.staffName },
     });

@@ -128,6 +128,18 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestGET_LIST_TBL_DMNHANVIEN(page, dataSearch): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_DMNHANVIEN,
+      ParamBuilder.builder()
+        .add('itemPerPage', this.itemPerPage)
+        .add('dataSearch', dataSearch)
+        .add('page', page),
+      this.headers
+    );
+  }
+
+  //===================================================================================
   public sendRequestADD_TBL_LOAICHAMCONG(obj): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.ADD_TBL_LOAICHAMCONG,
@@ -179,6 +191,38 @@ export class ApiService extends HttpClient {
         .add('statusCode', obj.statusCode)
         .add('statusName', obj.statusName)
         .add('description', obj.description),
+      this.headers
+    );
+  }
+
+  //===================================================================================
+  public sendRequestADD_TBL_DMNHANVIEN(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_DMNHANVIEN,
+      ParamBuilder.builder()
+        .add('staffCode', obj.staffCode)
+        .add('staffName', obj.staffName)
+        .add('cmndNumber', obj.cmndNumber)
+        .add('address', obj.address)
+        .add('idNation', obj.idNation)
+        .add('phoneNumber', obj.phoneNumber)
+        .add('gender', obj.gender)
+        .add('idBoPhan', obj.idBoPhan)
+        .add('idChucVu', obj.idChucVu)
+        .add('taxCode', obj.taxCode)
+        .add('bankNumber', obj.bankNumber)
+        .add('bankName', obj.bankName)
+        .add('birthday', obj.birthday)
+        .add('degree', obj.degree)
+        .add('permanentResidence', obj.permanentResidence)
+        .add('probationaryDate', obj.probationaryDate)
+        .add('probationarySalary', obj.probationarySalary)
+        .add('workingDate', obj.workingDate)
+        .add('workingSalary', obj.workingSalary)
+        .add('bhxhSalary', obj.bhxhSalary)
+        .add('contactUrgent', obj.contactUrgent)
+        .add('idMayChamCong', obj.idMayChamCong)
+        .add('email', obj.email),
       this.headers
     );
   }
