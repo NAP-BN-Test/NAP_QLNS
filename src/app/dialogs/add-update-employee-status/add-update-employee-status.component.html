@@ -2,14 +2,24 @@
   <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI TÌNH TRẠNG NHÂN VIÊN</h2>
   <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN TÌNH TRẠNG NHÂN VIÊN</h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-form-field appearance="outline" width-100>
       <mat-label>Mã tình trạng</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="codeStatus" />
+      <input
+        required
+        matInput
+        placeholder="Nhập Text"
+        formControlName="statusCode"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline" width-100>
       <mat-label>Tên tình trạng</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="nameStatus" />
+      <input
+        required
+        matInput
+        placeholder="Nhập Text"
+        formControlName="statusName"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline" width-100>
       <mat-label>Mô tả</mat-label>
@@ -24,9 +34,7 @@
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="onClickOk($event)"
         [disabled]="!myForm.valid"
-        cdkFocusInitial
       >
         <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
       </button>

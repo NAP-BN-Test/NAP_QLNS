@@ -2,14 +2,24 @@
   <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI CHI NHÁNH</h2>
   <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN CHI NHÁNH</h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-form-field appearance="outline">
       <mat-label>Mã chi nhánh</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="branchCode" />
+      <input
+        required
+        matInput
+        placeholder="Nhập Text"
+        formControlName="branchCode"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Tên chi nhánh</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="branchName" />
+      <input
+        required
+        matInput
+        placeholder="Nhập Text"
+        formControlName="branchName"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Địa chỉ</mat-label>
@@ -32,7 +42,6 @@
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="onClickOk($event)"
         [disabled]="!myForm.valid"
         cdkFocusInitial
       >

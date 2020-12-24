@@ -11,4 +11,26 @@ export class ApiCmd {
 
   public static DELETE_TBL_LOAICHAMCONG: string =
     'qlnb/delete_tbl_loaichamcong';
+
+  public static GET_LIST_TBL_DM_TINHTRANGNV: string =
+    'qlnb/get_list_tbl_dm_tinhtrangnv';
+
+  public static ADD_TBL_DM_TINHTRANGNV: string = 'qlnb/add_tbl_dm_tinhtrangnv';
+
+  public static UPDATE_TBL_DM_TINHTRANGNV: string =
+    'qlnb/update_tbl_dm_tinhtrangnv';
+
+  public static DELETE_TBL_DM_TINHTRANGNV: string =
+    'qlnb/delete_tbl_dm_tinhtrangnv';
+
+  public static GET_LIST_TBL_DM_BOPHAN: string = 'qlnb/get_list_tbl_dm_bophan';
+
+  public static GET_LIST_TBL_DM_CHINHANH: string =
+    'qlnb/get_list_tbl_dm_chinhanh';
+
+  public static ADD_TBL_DM_CHINHANH: string = 'qlnb/add_tbl_dm_chinhanh';
+
+  public static UPDATE_TBL_DM_CHINHANH: string = 'qlnb/update_tbl_dm_chinhanh';
+
+  public static DELETE_TBL_DM_CHINHANH: string = 'qlnb/delete_tbl_dm_chinhanh';
 }

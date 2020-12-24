@@ -89,6 +89,45 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestGET_LIST_TBL_DM_TINHTRANGNV(
+    page,
+    dataSearch
+  ): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_DM_TINHTRANGNV,
+      ParamBuilder.builder()
+        .add('itemPerPage', this.itemPerPage)
+        .add('dataSearch', dataSearch)
+        .add('page', page),
+      this.headers
+    );
+  }
+
+  //===================================================================================
+  public sendRequestGET_LIST_TBL_DM_BOPHAN(page, dataSearch): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_DM_BOPHAN,
+      ParamBuilder.builder()
+        .add('itemPerPage', this.itemPerPage)
+        .add('dataSearch', dataSearch)
+        .add('page', page),
+      this.headers
+    );
+  }
+
+  //===================================================================================
+  public sendRequestGET_LIST_TBL_DM_CHINHANH(page, dataSearch): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_DM_CHINHANH,
+      ParamBuilder.builder()
+        .add('itemPerPage', this.itemPerPage)
+        .add('dataSearch', dataSearch)
+        .add('page', page),
+      this.headers
+    );
+  }
+
+  //===================================================================================
   public sendRequestADD_TBL_LOAICHAMCONG(obj): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.ADD_TBL_LOAICHAMCONG,
@@ -97,6 +136,62 @@ export class ApiService extends HttpClient {
         .add('name', obj.name)
         .add('description', obj.description)
         .add('type', obj.type),
+      this.headers
+    );
+  }
+
+  //===================================================================================
+  public sendRequestADD_TBL_DM_CHINHANH(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_DM_CHINHANH,
+      ParamBuilder.builder()
+        .add('branchName', obj.branchName)
+        .add('branchCode', obj.branchCode)
+        .add('address', obj.address)
+        .add('phoneNumber', obj.phoneNumber)
+        .add('faxNumber', obj.faxNumber)
+        .add('email', obj.email),
+      this.headers
+    );
+  }
+
+  //===================================================================================
+  public sendRequestUPDATE_TBL_DM_CHINHANH(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TBL_DM_CHINHANH,
+      ParamBuilder.builder()
+        .add('branchName', obj.branchName)
+        .add('id', obj.id)
+        .add('branchCode', obj.branchCode)
+        .add('address', obj.address)
+        .add('phoneNumber', obj.phoneNumber)
+        .add('faxNumber', obj.faxNumber)
+        .add('email', obj.email),
+      this.headers
+    );
+  }
+
+  //===================================================================================
+  public sendRequestADD_TBL_DM_TINHTRANGNV(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_DM_TINHTRANGNV,
+      ParamBuilder.builder()
+        .add('statusCode', obj.statusCode)
+        .add('statusName', obj.statusName)
+        .add('description', obj.description),
+      this.headers
+    );
+  }
+
+  //===================================================================================
+  public sendRequestUPDATE_TBL_DM_TINHTRANGNV(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TBL_DM_TINHTRANGNV,
+      ParamBuilder.builder()
+        .add('statusCode', obj.statusCode)
+        .add('statusName', obj.statusName)
+        .add('id', obj.id)
+        .add('description', obj.description),
       this.headers
     );
   }
@@ -119,6 +214,24 @@ export class ApiService extends HttpClient {
   public sendRequestDELETE_TBL_LOAICHAMCONG(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_LOAICHAMCONG,
+      ParamBuilder.builder().add('listID', listID),
+      this.headers
+    );
+  }
+
+  //===================================================================================
+  public sendRequestDELETE_TBL_DM_TINHTRANGNV(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_DM_TINHTRANGNV,
+      ParamBuilder.builder().add('listID', listID),
+      this.headers
+    );
+  }
+
+  //===================================================================================
+  public sendRequestDELETE_TBL_DM_CHINHANH(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_DM_CHINHANH,
       ParamBuilder.builder().add('listID', listID),
       this.headers
     );

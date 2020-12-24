@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppModuleService } from 'src/app/services/app-module.service';
 
 @Component({
-  selector: 'app-add-update-employee-status',
+  selector: 'app-add-update-employee-',
   templateUrl: './add-update-employee-status.component.html',
   styleUrls: ['./add-update-employee-status.component.less'],
 })
@@ -17,19 +17,21 @@ export class AddUpdateEmployeeStatusComponent implements OnInit {
     public dialogRef: MatDialogRef<AddUpdateEmployeeStatusComponent>
   ) {
     this.myForm = this.formBuilder.group({
-      nameStatus: [mData ? mData.nameStatus : ''],
+      statusName: [mData ? mData.statusName : ''],
       description: [mData ? mData.description : ''],
-      codeStatus: [mData ? mData.codeStatus : ''],
+      statusCode: [mData ? mData.statusCode : ''],
     });
   }
 
   ngOnInit() {}
 
-  onClickOk(event) {
+  onSubmit(value) {
+    console.log(value);
+
     this.dialogRef.close({
-      nameStatus: this.myForm.value.nameStatus,
-      description: this.myForm.value.description,
-      codeStatus: this.myForm.value.codeStatus,
+      statusName: value.statusName,
+      description: value.description,
+      statusCode: value.statusCode,
     });
   }
 }

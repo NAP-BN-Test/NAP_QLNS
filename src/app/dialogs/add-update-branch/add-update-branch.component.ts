@@ -28,24 +28,16 @@ export class AddUpdateBranchComponent implements OnInit {
 
   ngOnInit() {}
 
-  onClickOk(event) {
+  onSubmit(value) {
+    console.log(value);
+
     this.dialogRef.close({
-      // codeStaff: this.myForm.value.codeStaff,
-      // timekeeperCode: this.myForm.value.timekeeperCode,
-      // personalTaxCode: this.myForm.value.personalTaxCode,
-      // staffName: this.myForm.value.staffName,
-      // phone: this.myForm.value.phone,
-      // birthday: this.myForm.value.birthday,
-      // email: this.myForm.value.email,
-      // gender: this.myForm.value.gender,
-      // stkNH: this.myForm.value.stkNH,
-      // departmentName: this.myForm.value.departmentName,
-      // homeTown: this.myForm.value.homeTown,
-      // currentResidence: this.myForm.value.currentResidence,
-      // permanentResidence: this.myForm.value.permanentResidence,
-      // age: this.myForm.value.age,
-      // bank: this.myForm.value.bank,
-      // position: this.myForm.value.position,
+      branchName: value.branchName,
+      branchCode: value.branchCode,
+      address: value.address,
+      phoneNumber: value.phoneNumber,
+      faxNumber: value.faxNumber,
+      email: value.email,
     });
   }
 }
