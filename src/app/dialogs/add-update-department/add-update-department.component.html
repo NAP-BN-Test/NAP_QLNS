@@ -2,10 +2,11 @@
   <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI PHÒNG BAN/BỘ PHẬN</h2>
   <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN PHÒNG BAN/BỘ PHẬN</h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-form-field appearance="outline">
       <mat-label>Mã phòng ban/bộ phận</mat-label>
       <input
+        required
         matInput
         placeholder="Nhập Text"
         formControlName="departmentCode"
@@ -14,6 +15,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Tên phòng ban/bộ phận</mat-label>
       <input
+        required
         matInput
         placeholder="Nhập Text"
         formControlName="departmentName"
@@ -21,18 +23,27 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Chi nhánh</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="branchName">
-        <mat-option value="Chi nhánh A">Chi nhánh A</mat-option>
-        <mat-option value="Chi nhánh B">Chi nhánh B</mat-option>
-        <mat-option value="Chi nhánh C">Chi nhánh C</mat-option>
-      </mat-select>
+      <input
+        matInput
+        type="text"
+        formControlName="idChiNhanh"
+        [matAutocomplete]="autoBranch"
+      />
+      <mat-autocomplete
+        autoActiveFirstOption
+        #autoBranch="matAutocomplete"
+        [displayWith]="branchDisplayFn"
+      >
+        <mat-option *ngFor="let item of filterBranch | async" [value]="item">
+          {{ item.branchName }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     <div width-100 align="end">
       <button
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="onClickOk($event)"
         [disabled]="!myForm.valid"
         cdkFocusInitial
       >

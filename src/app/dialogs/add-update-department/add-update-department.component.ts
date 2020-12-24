@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { AppModuleService } from 'src/app/services/app-module.service';
 
 @Component({
@@ -19,30 +21,53 @@ export class AddUpdateDepartmentComponent implements OnInit {
     this.myForm = this.formBuilder.group({
       departmentName: [mData ? mData.departmentName : ''],
       departmentCode: [mData ? mData.departmentCode : ''],
-      branchName: [mData ? mData.branchName : ''],
+      idChiNhanh: [mData ? mData.idChiNhanh : ''],
     });
   }
 
-  ngOnInit() {}
+  filterBranch: Observable<string[]>;
+  listBranch = [];
 
-  onClickOk(event) {
+  ngOnInit() {
+    this.mService.LoadAppConfig();
+    this.mService
+      .getApiService()
+      .sendRequestGET_LIST_NAME_TBL_DM_CHINHANH()
+      .then((data) => {
+        this.listBranch = data.array;
+        this.filterBranch = this.myForm.controls.idChiNhanh.valueChanges.pipe(
+          startWith(''),
+          map((value) =>
+            typeof value === 'string' || value === null
+              ? value
+              : value.idChiNhanh
+          ),
+          map((name: string | null) =>
+            name ? this._filterBranch(name) : this.listBranch.slice()
+          )
+        );
+        if (this.mData) {
+          this.myForm.controls.idChiNhanh.setValue(this.mData.idChiNhanh);
+        }
+      });
+  }
+
+  _filterBranch(value): string[] {
+    const filterValue = value.toLowerCase();
+    return this.listBranch.filter((option: any) =>
+      option.branchName.toLowerCase().includes(filterValue)
+    );
+  }
+
+  branchDisplayFn = (value) =>
+    Object.values(this.listBranch).find((branch) => branch.id === value.id)
+      ?.branchName;
+
+  onSubmit(value) {
     this.dialogRef.close({
-      // codeStaff: this.myForm.value.codeStaff,
-      // timekeeperCode: this.myForm.value.timekeeperCode,
-      // personalTaxCode: this.myForm.value.personalTaxCode,
-      // staffName: this.myForm.value.staffName,
-      // phone: this.myForm.value.phone,
-      // birthday: this.myForm.value.birthday,
-      // email: this.myForm.value.email,
-      // gender: this.myForm.value.gender,
-      // stkNH: this.myForm.value.stkNH,
-      // departmentName: this.myForm.value.departmentName,
-      // homeTown: this.myForm.value.homeTown,
-      // currentResidence: this.myForm.value.currentResidence,
-      // permanentResidence: this.myForm.value.permanentResidence,
-      // age: this.myForm.value.age,
-      // bank: this.myForm.value.bank,
-      // position: this.myForm.value.position,
+      departmentName: value.departmentName,
+      departmentCode: value.departmentCode,
+      idChiNhanh: value.idChiNhanh.id,
     });
   }
 }

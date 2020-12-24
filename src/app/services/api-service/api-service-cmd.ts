@@ -33,4 +33,11 @@ export class ApiCmd {
   public static UPDATE_TBL_DM_CHINHANH: string = 'qlnb/update_tbl_dm_chinhanh';
 
   public static DELETE_TBL_DM_CHINHANH: string = 'qlnb/delete_tbl_dm_chinhanh';
+
+  public static GET_LIST_NAME_TBL_DM_CHINHANH: string =
+    'qlnb/get_list_name_tbl_dm_chinhanh';
+
+  public static ADD_TBL_DM_BOPHAN: string = 'qlnb/add_tbl_dm_bophan';
+
+  public static DELETE_TBL_DM_BOPHAN: string = 'qlnb/delete_tbl_dm_bophan';
 }
