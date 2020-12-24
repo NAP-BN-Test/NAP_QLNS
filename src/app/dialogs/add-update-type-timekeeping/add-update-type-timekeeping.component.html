@@ -1,15 +1,25 @@
 <div class="container-anl">
-  <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI LOẠI CHẤM CÔNG</h2>
-  <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN LOẠI CHẤM CÔNG</h2>
+  <h2 mat-dialog-title *ngIf="!mData.id && mData.type == 'timekeeping'">
+    THÊM MỚI LOẠI CHẤM CÔNG
+  </h2>
+  <h2 mat-dialog-title *ngIf="!mData.id && mData.type == 'holiday'">
+    THÊM MỚI LOẠI NGHỈ LỄ
+  </h2>
+  <h2 mat-dialog-title *ngIf="mData.id && mData.type == 'holiday'">
+    SỬA THÔNG TIN LOẠI NGHỈ LỄ
+  </h2>
+  <h2 mat-dialog-title *ngIf="mData.id && mData.type == 'timekeeping'">
+    SỬA THÔNG TIN LOẠI CHẤM CÔNG
+  </h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-form-field appearance="outline" width-100>
       <mat-label>Mã loại</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="typeCode" />
+      <input required matInput placeholder="Nhập Text" formControlName="code" />
     </mat-form-field>
     <mat-form-field appearance="outline" width-100>
       <mat-label>Tên loại</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="nameType" />
+      <input required matInput placeholder="Nhập Text" formControlName="name" />
     </mat-form-field>
     <mat-form-field appearance="outline" width-100>
       <mat-label>Mô tả</mat-label>
@@ -24,15 +34,14 @@
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="onClickOk($event)"
         [disabled]="!myForm.valid"
-        cdkFocusInitial
       >
         <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
       </button>
       <button
         mat-raised-button
         color="warn"
+        type="button"
         class="margin-left1"
         mat-dialog-close
       >

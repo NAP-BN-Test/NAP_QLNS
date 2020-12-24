@@ -27,7 +27,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { AddUpdateHolidayComponent } from './dialogs/add-update-holiday/add-update-holiday.component';
 import { AddUpdateEmployeeStatusComponent } from './dialogs/add-update-employee-status/add-update-employee-status.component';
 import { DecidedToIncreaseTheSalariesComponent } from './components/decided-to-increase-the-salaries/decided-to-increase-the-salaries.component';
 import { AddUpdateDecidedIncreaseSalariesComponent } from './dialogs/add-update-decided-increase-salaries/add-update-decided-increase-salaries.component';
@@ -56,6 +55,7 @@ import { BranchComponent } from './components/category-management/branch/branch.
 import { AddUpdateDepartmentComponent } from './dialogs/add-update-department/add-update-department.component';
 import { AddUpdateBranchComponent } from './dialogs/add-update-branch/add-update-branch.component';
 import { KeepTrackOfPremiumsComponent } from './components/keep-track-of-premiums/keep-track-of-premiums.component';
+import { RemoveComponent } from './dialogs/remove/remove.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +68,6 @@ import { KeepTrackOfPremiumsComponent } from './components/keep-track-of-premium
     SearchBoardComponent,
     AddUpdateTypeTimekeepingComponent,
     TablePaginatorComponent,
-    AddUpdateHolidayComponent,
     AddUpdateEmployeeStatusComponent,
     DecidedToIncreaseTheSalariesComponent,
     AddUpdateDecidedIncreaseSalariesComponent,
@@ -93,6 +92,7 @@ import { KeepTrackOfPremiumsComponent } from './components/keep-track-of-premium
     AddUpdateDepartmentComponent,
     AddUpdateBranchComponent,
     KeepTrackOfPremiumsComponent,
+    RemoveComponent,
   ],
   imports: [
     BrowserModule,

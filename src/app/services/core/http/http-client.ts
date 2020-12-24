@@ -42,7 +42,7 @@ export class HttpClient extends Config {
         'Content-Type',
         'application/x-www-form-urlencoded;charset=utf-8'
       );
-    }    
+    }
     return this.mAngularHeader;
   }
 

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddUpdateHolidayComponent } from './add-update-holiday.component';
+import { RemoveComponent } from './remove.component';
 
-describe('AddUpdateHolidayComponent', () => {
-  let component: AddUpdateHolidayComponent;
-  let fixture: ComponentFixture<AddUpdateHolidayComponent>;
+describe('RemoveComponent', () => {
+  let component: RemoveComponent;
+  let fixture: ComponentFixture<RemoveComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddUpdateHolidayComponent ]
+      declarations: [ RemoveComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddUpdateHolidayComponent);
+    fixture = TestBed.createComponent(RemoveComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

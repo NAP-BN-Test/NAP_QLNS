@@ -2,6 +2,7 @@ import { ApiCmd } from './api-service-cmd';
 import { HttpClient } from '../core/http/http-client';
 import { LOCAL_STORAGE_KEY } from '../constant/app-constant';
 import { ParamBuilder } from '../core/http/param-builder';
+import { Headers } from '@angular/http';
 
 export class ApiService extends HttpClient {
   mUrl: string = 'http://192.168.1.101:3100/';
@@ -67,6 +68,59 @@ export class ApiService extends HttpClient {
     return this.requestPost(
       this.mUrl + ApiCmd.LOGIN,
       ParamBuilder.builder().add('userName', username).add('password', password)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestGET_LIST_TBL_LOAICHAMCONG(
+    page,
+    dataSearch,
+    type
+  ): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_LOAICHAMCONG,
+      ParamBuilder.builder()
+        .add('itemPerPage', this.itemPerPage)
+        .add('dataSearch', dataSearch)
+        .add('type', type)
+        .add('page', page),
+      this.headers
+    );
+  }
+
+  //===================================================================================
+  public sendRequestADD_TBL_LOAICHAMCONG(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_LOAICHAMCONG,
+      ParamBuilder.builder()
+        .add('code', obj.code)
+        .add('name', obj.name)
+        .add('description', obj.description)
+        .add('type', obj.type),
+      this.headers
+    );
+  }
+
+  //===================================================================================
+  public sendRequestUPDATE_TBL_LOAICHAMCONG(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TBL_LOAICHAMCONG,
+      ParamBuilder.builder()
+        .add('code', obj.code)
+        .add('name', obj.name)
+        .add('description', obj.description)
+        .add('id', obj.id)
+        .add('type', obj.type),
+      this.headers
+    );
+  }
+
+  //===================================================================================
+  public sendRequestDELETE_TBL_LOAICHAMCONG(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_LOAICHAMCONG,
+      ParamBuilder.builder().add('listID', listID),
+      this.headers
     );
   }
 }

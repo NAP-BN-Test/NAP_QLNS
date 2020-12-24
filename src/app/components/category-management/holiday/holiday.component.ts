@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AddUpdateHolidayComponent } from 'src/app/dialogs/add-update-holiday/add-update-holiday.component';
+import { AddUpdateTypeTimekeepingComponent } from 'src/app/dialogs/add-update-type-timekeeping/add-update-type-timekeeping.component';
+import { RemoveComponent } from 'src/app/dialogs/remove/remove.component';
 import { AppModuleService } from 'src/app/services/app-module.service';
 import {
   BUTTON_TYPE,
   EVENT_PUSH,
+  STATUS,
 } from 'src/app/services/constant/app-constant';
+import { ParamsKey } from 'src/app/services/constant/paramskey';
 
 @Component({
   selector: 'app-holiday',
@@ -17,8 +20,8 @@ export class HolidayComponent implements OnInit {
   listTbData = {
     listColum: [
       { name: 'SỐ THỨ TỰ', cell: 'stt' },
-      { name: 'MÃ LOẠI NGHỈ LỄ', cell: 'codeHoliday' },
-      { name: 'TÊN LOẠI LỄ', cell: 'nameHoliday' },
+      { name: 'MÃ LOẠI NGHỈ LỄ', cell: 'code' },
+      { name: 'TÊN LOẠI LỄ', cell: 'name' },
       { name: 'MÔ TẢ', cell: 'description' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
@@ -35,26 +38,7 @@ export class HolidayComponent implements OnInit {
     items: [{ conditionFields: '', fields: '', searchFields: '' }],
   };
 
-  dataExample = [
-    {
-      stt: 0,
-      nameHoliday: 'Nghỉ lễ',
-      description: '',
-      codeHoliday: 'HT',
-    },
-    {
-      stt: 1,
-      nameHoliday: 'Nghỉ kỷ niệm công ty',
-      description: '',
-      codeHoliday: 'HD',
-    },
-    {
-      stt: 2,
-      nameHoliday: 'Nghỉ lễ',
-      description: '30/4, 1/5, 2/9',
-      codeHoliday: 'CT',
-    },
-  ];
+  type = 'holiday';
 
   constructor(
     public mService: AppModuleService,
@@ -63,109 +47,120 @@ export class HolidayComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.mService.LoadAppConfig();
-    // if (this.mService.getUser()) {
-    //   let params: any = this.mService.handleActivatedRoute();
-    //   this.page = params.page ? params.page : 1;
-    this.onLoadData(this.page, this.dataSearch);
-    // } else {
-    //   this.mService.publishPageRoute('login');
-    // }
+    this.mService.LoadAppConfig();
+    if (this.mService.getUser()) {
+      let params: any = this.mService.handleActivatedRoute();
+      this.page = params.page ? params.page : 1;
+      this.onLoadData(this.page, this.dataSearch);
+    } else {
+      this.mService.publishPageRoute('login');
+    }
   }
 
   async onLoadData(page, dataSearch) {
-    // this.spinner.show();
-    // await this.mService
-    //   .getApiService()
-    //   .sendRequestGET_LIST_LABOR_MANAGEMENT_BOOK(
-    //     page,
-    //     JSON.stringify(dataSearch)
-    //   )
-    //   .then((data) => {
-    //     if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
-    this.collectionSize = 3;
-    this.mService.publishEvent(EVENT_PUSH.TABLE, {
-      page: this.page,
-      collectionSize: this.collectionSize,
-      listData: this.dataExample,
-      listTbData: this.listTbData,
-    });
-    //     }
-    //   });
-    // this.spinner.hide();
+    this.spinner.show();
+    await this.mService
+      .getApiService()
+      .sendRequestGET_LIST_TBL_LOAICHAMCONG(
+        page,
+        JSON.stringify(dataSearch),
+        this.type
+      )
+      .then((data) => {
+        console.log(data);
+
+        if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+          this.collectionSize = data.all;
+          this.mService.publishEvent(EVENT_PUSH.TABLE, {
+            page: this.page,
+            collectionSize: this.collectionSize,
+            listData: data.array,
+            listTbData: this.listTbData,
+          });
+        }
+      });
+    this.spinner.hide();
   }
 
   onClickBtn(event) {
-    // if (event.btnType == BUTTON_TYPE.DELETE) {
-    //   const dialogRef = this.dialog.open(DialogRemoveComponent, {
-    //     width: '500px',
-    //   });
-    //   dialogRef.afterClosed().subscribe((res) => {
-    //     if (res) {
-    //       this.mService
-    //         .getApiService()
-    //         .sendRequestDELETE_LABOR_MANAGEMENT_BOOK(event.data)
-    //         .then((data) => {
-    //           if (data.status == STATUS.SUCCESS) {
-    //             this.onLoadData(1, this.dataSearch);
-    //           }
-    //         });
-    //     }
-    //   });
-    // }
+    if (event.btnType == BUTTON_TYPE.DELETE) {
+      const dialogRef = this.dialog.open(RemoveComponent, {
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe((res) => {
+        if (res) {
+          this.mService
+            .getApiService()
+            .sendRequestDELETE_TBL_LOAICHAMCONG(event.data)
+            .then((data) => {
+              this.mService.showSnackBar(data.message);
+              if (data.status == STATUS.SUCCESS) {
+                this.onLoadData(1, this.dataSearch);
+              }
+            });
+        }
+      });
+    }
   }
 
   onClickEdit(event) {
-    const dialogRef = this.dialog.open(AddUpdateHolidayComponent, {
+    const dialogRef = this.dialog.open(AddUpdateTypeTimekeepingComponent, {
       width: '900px',
       data: {
-        nameHoliday: event.data.nameHoliday,
+        name: event.data.name,
         description: event.data.description,
-        codeHoliday: event.data.codeHoliday,
+        type: this.type,
+        code: event.data.code,
       },
     });
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         let obj = {
-          nameHoliday: res.nameHoliday,
+          id: event.data.id,
+          name: res.name,
           description: res.description,
-          codeHoliday: res.codeHoliday,
+          type: this.type,
+          code: res.code,
         };
-        // this.mService
-        //   .getApiService()
-        //   .sendRequestADD_LABOR_MANAGEMENT_BOOK(obj)
-        //   .then((data) => {
-        //     this.mService.showSnackBar(data.message);
-        //     if (data.status == STATUS.SUCCESS) {
-        //       this.onLoadData(this.page, this.dataSearch);
-        //     }
-        //   });
+        this.mService
+          .getApiService()
+          .sendRequestUPDATE_TBL_LOAICHAMCONG(obj)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data.status == STATUS.SUCCESS) {
+              this.onLoadData(this.page, this.dataSearch);
+            }
+          });
       }
     });
   }
 
   onClickAdd() {
-    const dialogRef = this.dialog.open(AddUpdateHolidayComponent, {
+    const dialogRef = this.dialog.open(AddUpdateTypeTimekeepingComponent, {
       width: '900px',
+      data: {
+        type: this.type,
+      },
     });
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         let obj = {
-          nameHoliday: res.nameHoliday,
+          name: res.name,
           description: res.description,
-          codeHoliday: res.codeHoliday,
+          code: res.code,
+          type: this.type,
         };
-        // this.mService
-        //   .getApiService()
-        //   .sendRequestADD_LABOR_MANAGEMENT_BOOK(obj)
-        //   .then((data) => {
-        //     this.mService.showSnackBar(data.message);
-        //     if (data.status == STATUS.SUCCESS) {
-        //       this.onLoadData(this.page, this.dataSearch);
-        //     }
-        //   });
+        this.mService
+          .getApiService()
+          .sendRequestADD_TBL_LOAICHAMCONG(obj)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data.status == STATUS.SUCCESS) {
+              this.onLoadData(this.page, this.dataSearch);
+            }
+          });
       }
     });
   }
@@ -174,6 +169,7 @@ export class HolidayComponent implements OnInit {
     this.dataSearch = event;
     this.onLoadData(1, event);
   }
+
   onClickPagination(event) {
     this.page = event;
     this.onLoadData(event, this.dataSearch);

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AddUpdateHolidayComponent } from 'src/app/dialogs/add-update-holiday/add-update-holiday.component';
 import { AddUpdateHolidaysComponent } from 'src/app/dialogs/add-update-holidays/add-update-holidays.component';
 import { AppModuleService } from 'src/app/services/app-module.service';
 import {

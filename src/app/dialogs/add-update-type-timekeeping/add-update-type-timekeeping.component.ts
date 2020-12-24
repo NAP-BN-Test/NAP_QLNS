@@ -17,19 +17,22 @@ export class AddUpdateTypeTimekeepingComponent implements OnInit {
     public dialogRef: MatDialogRef<AddUpdateTypeTimekeepingComponent>
   ) {
     this.myForm = this.formBuilder.group({
-      nameType: [mData ? mData.nameType : ''],
+      name: [mData ? mData.name : ''],
       description: [mData ? mData.description : ''],
-      typeCode: [mData ? mData.typeCode : ''],
+      code: [mData ? mData.code : ''],
+      type: mData.type,
     });
   }
 
   ngOnInit() {}
 
-  onClickOk(event) {
+  onSubmit(value) {
+    console.log(value);
+
     this.dialogRef.close({
-      nameType: this.myForm.value.nameType,
-      description: this.myForm.value.description,
-      typeCode: this.myForm.value.typeCode,
+      name: value.name,
+      description: value.description,
+      code: value.code,
     });
   }
 }
