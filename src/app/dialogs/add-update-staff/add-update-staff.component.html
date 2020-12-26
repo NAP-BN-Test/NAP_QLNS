@@ -2,7 +2,7 @@
   <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI TÌNH TRẠNG NHÂN VIÊN</h2>
   <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN TÌNH TRẠNG NHÂN VIÊN</h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <div width-50 style="padding-right: 1%">
       <mat-form-field appearance="outline">
         <mat-label>Mã số nhân sự</mat-label>
@@ -28,7 +28,13 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Điện thoại</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="phoneNumber" />
+      <input
+        matInput
+        placeholder="Nhập Text"
+        formControlName="phoneNumber"
+        pattern="^[0-9\\+\\ \\]*$"
+      />
+      <mat-error>Số điện thoại không hợp lệ.</mat-error>
     </mat-form-field>
     <div width-50 style="padding-right: 1%">
       <mat-form-field appearance="outline">
@@ -61,30 +67,60 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Số tài khoản ngân hàng</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="bankNumber" />
+      <input
+        matInput
+        placeholder="Nhập số tài khoản"
+        formControlName="bankNumber"
+        type="number"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Phòng ban</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="idBoPhan">
-        <mat-option value="Phòng ban A">Phòng ban A</mat-option>
-        <mat-option value="Phòng ban B">Phòng ban B</mat-option>
-        <mat-option value="Phòng ban C">Phòng ban C</mat-option>
-      </mat-select>
+      <input
+        matInput
+        type="text"
+        formControlName="idBoPhan"
+        [matAutocomplete]="autoDepartment"
+      />
+      <mat-autocomplete
+        autoActiveFirstOption
+        #autoDepartment="matAutocomplete"
+        [displayWith]="departmentDisplayFn"
+      >
+        <mat-option
+          *ngFor="let item of filterDepartment | async"
+          [value]="item"
+        >
+          {{ item.departmentName }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Ngân hàng</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="bankName">
-        <mat-option value="Ngân hàng A">Ngân hàng A</mat-option>
-        <mat-option value="Ngân hàng B">Ngân hàng B</mat-option>
-        <mat-option value="Ngân hàng C">Phòng ban C</mat-option>
-      </mat-select>
+      <input
+        placeholder="Nhập Text"
+        matInput
+        type="text"
+        formControlName="bankName"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Chức vụ</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="idChucVu">
-        <mat-option value="Giám đốc">Giám đốc</mat-option>
-        <mat-option value="Nhân viên">Nhân viên</mat-option>
-      </mat-select>
+      <input
+        matInput
+        type="text"
+        formControlName="idChucVu"
+        [matAutocomplete]="autoRole"
+      />
+      <mat-autocomplete
+        autoActiveFirstOption
+        #autoRole="matAutocomplete"
+        [displayWith]="roleDisplayFn"
+      >
+        <mat-option *ngFor="let item of filterRole | async" [value]="item">
+          {{ item.positionName }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Bằng cấp</mat-label>
@@ -114,41 +150,57 @@
       <h2>Thông tin hợp đồng</h2>
       <mat-form-field appearance="outline">
         <mat-label>Số HĐ</mat-label>
-        <input matInput placeholder="Nhập Text" formControlName="soHD" />
+        <input
+          matInput
+          placeholder="Nhập Text"
+          formControlName="contractCode"
+        />
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Ngày kí</mat-label>
         <input
           matInput
-          [matDatepicker]="ngayKiPicker"
-          formControlName="ngayKi"
+          [matDatepicker]="signDatePicker"
+          formControlName="signDate"
         />
-        <mat-datepicker-toggle matSuffix [for]="ngayKiPicker">
+        <mat-datepicker-toggle matSuffix [for]="signDatePicker">
         </mat-datepicker-toggle>
-        <mat-datepicker #ngayKiPicker></mat-datepicker>
+        <mat-datepicker #signDatePicker></mat-datepicker>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Loại hợp đồng</mat-label>
-        <input matInput placeholder="Nhập Text" formControlName="loaiHD" />
+        <input
+          matInput
+          placeholder="Nhập Text"
+          formControlName="idLoaiHopDong"
+        />
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Mức lương</mat-label>
-        <input matInput placeholder="Nhập Text" formControlName="mucLuong" />
+        <input
+          matInput
+          placeholder="Nhập Text"
+          formControlName="workingSalary"
+        />
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Ngày hết hạn</mat-label>
         <input
           matInput
-          [matDatepicker]="ngayHHPicker"
-          formControlName="ngayHH"
+          [matDatepicker]="contractDateEndPicker"
+          formControlName="contractDateEnd"
         />
-        <mat-datepicker-toggle matSuffix [for]="ngayHHPicker">
+        <mat-datepicker-toggle matSuffix [for]="contractDateEndPicker">
         </mat-datepicker-toggle>
-        <mat-datepicker #ngayHHPicker></mat-datepicker>
+        <mat-datepicker #contractDateEndPicker></mat-datepicker>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Tình trạng HĐ</mat-label>
-        <input matInput placeholder="Nhập Text" formControlName="ttHD" />
+        <mat-select placeholder="Vui lòng chọn..." formControlName="status">
+          <mat-option value="Có hiệu lực">Có hiệu lực</mat-option>
+          <mat-option value="Hết hiệu lực">Hết hiệu lực</mat-option>
+          <mat-option value="Tạm dừng">Tạm dừng</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
     <div width-100 align="end">
@@ -156,9 +208,7 @@
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="onClickOk($event)"
         [disabled]="!myForm.valid"
-        cdkFocusInitial
       >
         <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
       </button>

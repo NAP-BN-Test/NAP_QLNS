@@ -31,7 +31,12 @@ import { AddUpdateEmployeeStatusComponent } from './dialogs/add-update-employee-
 import { DecidedToIncreaseTheSalariesComponent } from './components/decided-to-increase-the-salaries/decided-to-increase-the-salaries.component';
 import { AddUpdateDecidedIncreaseSalariesComponent } from './dialogs/add-update-decided-increase-salaries/add-update-decided-increase-salaries.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import {
+  DateAdapter,
+  MatNativeDateModule,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { QuoteManagementComponent } from './components/quote-management/quote-management.component';
 import { AddUpdateStaffComponent } from './dialogs/add-update-staff/add-update-staff.component';
@@ -56,6 +61,9 @@ import { AddUpdateDepartmentComponent } from './dialogs/add-update-department/ad
 import { AddUpdateBranchComponent } from './dialogs/add-update-branch/add-update-branch.component';
 import { KeepTrackOfPremiumsComponent } from './components/keep-track-of-premiums/keep-track-of-premiums.component';
 import { RemoveComponent } from './dialogs/remove/remove.component';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MY_FORMATS } from './services/constant/app-constant';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -119,7 +127,17 @@ import { RemoveComponent } from './dialogs/remove/remove.component';
     MatSelectModule,
     MatTabsModule,
   ],
-  providers: [],
+  providers: [
+    DatePipe,
+    // Đổi cách display datetimepicker
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
+
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

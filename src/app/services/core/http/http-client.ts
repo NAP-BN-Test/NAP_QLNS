@@ -3,6 +3,7 @@ import { Http, Headers } from '@angular/http';
 import { ParamBuilder } from './param-builder';
 
 import { Config } from '../app/config';
+import { Router } from '@angular/router';
 
 /** Install
  * $ ionic cordova plugin add cordova-plugin-advanced-http
@@ -66,17 +67,10 @@ export class HttpClient extends Config {
     );
   }
 
-  public requestPost(
-    url: string,
-    paramBuilder: ParamBuilder,
-    headers?: Headers
-  ) {
-    return this._AngularRequestPost(
-      url,
-      paramBuilder.build(),
-      headers ? headers : this.getCommonAngularHeader()
-    );
+  public requestPost(url: string, paramBuilder: ParamBuilder) {
+    return this._AngularRequestPost(url, paramBuilder.build());
   }
+
   public requestPut(
     url: string,
     paramBuilder: ParamBuilder,
@@ -106,15 +100,22 @@ export class HttpClient extends Config {
     });
   }
 
-  public _AngularRequestPost(url: string, params: string, headers: Headers) {
-    params = params.replace(/ /g, '%20');
+  public _AngularRequestPost(url: string, params: string) {
+    // params = params.replace(/ /g, '%20');
     return new Promise((success, fail) => {
+      let headers = new Headers({
+        Authorization: localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', // thêm phần này vào header thì mới gửi body cho backend được
+      });
       this.mAngularHttp
         .post(url, params, {
           headers: headers,
         })
         .subscribe(
           (data) => {
+            if (data.json().message == 'Auth token is not supplied') {
+              alert('Bạn đã đăng xuất, vui lòng đăng nhập lại!');
+            }
             success(data.json());
           },
           (error) => {
@@ -125,7 +126,7 @@ export class HttpClient extends Config {
   }
 
   public _AngularRequestPut(url: string, params: string, headers) {
-    params = params.replace(/ /g, '%20');
+    // params = params.replace(/ /g, '%20');
     return new Promise((success, fail) => {
       this.mAngularHttp
         .put(url, params, {

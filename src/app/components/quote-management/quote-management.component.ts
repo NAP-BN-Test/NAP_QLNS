@@ -113,32 +113,22 @@ export class QuoteManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        let obj = {
-          decisionCode: res.decisionCode,
-          decisionDate: res.decisionDate,
-          salaryIncrease: res.salaryIncrease,
-          status: res.status,
-          stopDate: res.stopDate,
-          stopReason: res.stopReason,
-        };
-        // this.mService
-        //   .getApiService()
-        //   .sendRequestADD_LABOR_MANAGEMENT_BOOK(obj)
-        //   .then((data) => {
-        //     this.mService.showSnackBar(data.message);
-        //     if (data.status == STATUS.SUCCESS) {
-        //       this.onLoadData(this.page, this.dataSearch);
-        //     }
-        //   });
+        this.mService
+          .getApiService()
+          .sendRequestADD_TBL_DMNHANVIEN(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data.status == STATUS.SUCCESS) {
+              this.onLoadData(this.page, this.dataSearch);
+            }
+          });
       }
     });
   }
 
   onClickCell(event) {
-    console.log(event);
-
     this.router.navigate(['menu/detail-staff'], {
-      queryParams: { quoteID: 1, staffName: event.data.staffName },
+      queryParams: { quoteID: event.data.id },
     });
   }
 }

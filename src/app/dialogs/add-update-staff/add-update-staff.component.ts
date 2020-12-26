@@ -1,6 +1,9 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { AppModuleService } from 'src/app/services/app-module.service';
 
 @Component({
@@ -12,6 +15,7 @@ export class AddUpdateStaffComponent implements OnInit {
   myForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
+    private datePipe: DatePipe,
     public mService: AppModuleService,
     @Inject(MAT_DIALOG_DATA) public mData: any,
     public dialogRef: MatDialogRef<AddUpdateStaffComponent>
@@ -29,41 +33,105 @@ export class AddUpdateStaffComponent implements OnInit {
       taxCode: [mData ? mData.taxCode : ''],
       bankNumber: [mData ? mData.bankNumber : ''],
       bankName: [mData ? mData.bankName : ''],
-      birthday: [mData ? mData.birthday : ''],
+      birthday: [mData ? mData.birthday : null],
       degree: [mData ? mData.degree : ''],
       permanentResidence: [mData ? mData.permanentResidence : ''],
-      probationaryDate: [mData ? mData.probationaryDate : ''],
+      probationaryDate: [mData ? mData.probationaryDate : null],
       probationarySalary: [mData ? mData.probationarySalary : ''],
-      workingDate: [mData ? mData.workingDate : ''],
+      workingDate: [mData ? mData.workingDate : null],
       workingSalary: [mData ? mData.workingSalary : ''],
       bhxhSalary: [mData ? mData.bhxhSalary : ''],
       contactUrgent: [mData ? mData.contactUrgent : ''],
       idMayChamCong: [mData ? mData.idMayChamCong : ''],
       email: [mData ? mData.email : ''],
       age: [mData ? mData.age : ''],
+      contractCode: [mData ? mData.contractCode : ''],
+      idLoaiHopDong: [mData ? mData.idLoaiHopDong : ''],
+      contractDateEnd: [mData ? mData.contractDateEnd : null],
+      status: [mData ? mData.status : ''],
+      signDate: [mData ? mData.signDate : ''],
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.mService
+      .getApiService()
+      .sendRequestGET_LIST_NAME_TBL_DM_BOPHAN()
+      .then((data) => {
+        this.listDepartment = data.array;
+        this.filterDepartment = this.myForm.controls.idBoPhan.valueChanges.pipe(
+          startWith(''),
+          map((value) =>
+            typeof value === 'string' || value === null ? value : value.idBoPhan
+          ),
+          map((name: string | null) =>
+            name ? this._filterDepartment(name) : this.listDepartment.slice()
+          )
+        );
+      });
 
-  onClickOk(event) {
+    this.mService
+      .getApiService()
+      .sendRequestGET_LIST_NAME_TBL_DMCHUCVU()
+      .then((data) => {
+        console.log(data);
+
+        this.listRole = data.array;
+        this.filterRole = this.myForm.controls.idChucVu.valueChanges.pipe(
+          startWith(''),
+          map((value) =>
+            typeof value === 'string' || value === null ? value : value.idChucVu
+          ),
+          map((name: string | null) =>
+            name ? this._filterRole(name) : this.listRole.slice()
+          )
+        );
+      });
+  }
+
+  onSubmit(value) {
+    value.birthday = this.datePipe.transform(value.birthday, 'yyyy-MM-dd');
+    value.contractDateEnd = this.datePipe.transform(
+      value.contractDateEnd,
+      'yyyy-MM-dd'
+    );
+    value.signDate = this.datePipe.transform(value.signDate, 'yyyy-MM-dd');
+    value.idBoPhan = value.idBoPhan.id;
+    value.idChucVu = value.idChucVu.id;
+
     this.dialogRef.close({
-      staffCode: this.myForm.value.staffCode,
-      timekeeperCode: this.myForm.value.timekeeperCode,
-      personalTaxCode: this.myForm.value.personalTaxCode,
-      staffName: this.myForm.value.staffName,
-      phone: this.myForm.value.phone,
-      birthday: this.myForm.value.birthday,
-      email: this.myForm.value.email,
-      gender: this.myForm.value.gender,
-      stkNH: this.myForm.value.stkNH,
-      departmentName: this.myForm.value.departmentName,
-      homeTown: this.myForm.value.homeTown,
-      currentResidence: this.myForm.value.currentResidence,
-      permanentResidence: this.myForm.value.permanentResidence,
-      age: this.myForm.value.age,
-      bank: this.myForm.value.bank,
-      position: this.myForm.value.position,
+      value: value,
     });
   }
+
+  //Autocomplete Bộ phận
+  filterDepartment: Observable<string[]>;
+  listDepartment = [];
+
+  _filterDepartment(value): string[] {
+    const filterValue = value.toLowerCase();
+    return this.listDepartment.filter((option: any) =>
+      option.idPhongBan.toLowerCase().includes(filterValue)
+    );
+  }
+
+  departmentDisplayFn = (value) =>
+    Object.values(this.listDepartment).find(
+      (department) => department.id === value.id
+    )?.departmentName;
+
+  //Autocomplete Chức vụ
+  filterRole: Observable<string[]>;
+  listRole = [];
+
+  _filterRole(value): string[] {
+    const filterValue = value.toLowerCase();
+    return this.listRole.filter((option: any) =>
+      option.positionName.toLowerCase().includes(filterValue)
+    );
+  }
+
+  roleDisplayFn = (value) =>
+    Object.values(this.listRole).find((role) => role.id === value.id)
+      ?.positionName;
 }

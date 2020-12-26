@@ -1,7 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { AddUpdateContractComponent } from 'src/app/dialogs/add-update-contract/add-update-contract.component';
 import { AddUpdateDecidedIncreaseSalariesComponent } from 'src/app/dialogs/add-update-decided-increase-salaries/add-update-decided-increase-salaries.component';
 import { AddUpdateFamilyRelationshipComponent } from 'src/app/dialogs/add-update-family-relationship/add-update-family-relationship.component';
@@ -12,6 +16,7 @@ import { AppModuleService } from 'src/app/services/app-module.service';
 import {
   BUTTON_TYPE,
   EVENT_PUSH,
+  STATUS,
 } from 'src/app/services/constant/app-constant';
 
 @Component({
@@ -21,24 +26,106 @@ import {
 })
 export class DetailStaffComponent implements OnInit {
   myForm: FormGroup;
-  nameStaff;
+  quoteID;
+  isEdit = false;
 
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
-    public mService: AppModuleService
+    public mService: AppModuleService,
+    private datePipe: DatePipe,
+    private spinner: NgxSpinnerService
   ) {
     this.createForm();
   }
 
   ngOnInit(): void {
+    this.spinner.show();
+    this.mService.LoadAppConfig();
     let params: any = this.mService.handleActivatedRoute();
-    console.log(params);
-    if (params.quoteID) {
-      console.log(params.staffName);
+    this.quoteID = params.quoteID ? params.quoteID : '';
 
-      this.nameStaff = params.staffName ? params.staffName : '';
-    }
+    this.mService
+      .getApiService()
+      .sendRequestGET_LIST_NAME_TBL_DM_BOPHAN()
+      .then((data) => {
+        this.listDepartment = data.array;
+        this.filterDepartment = this.myForm.controls.idBoPhan.valueChanges.pipe(
+          startWith(''),
+          map((value) =>
+            typeof value === 'string' || value === null ? value : value.idBoPhan
+          ),
+          map((name: string | null) =>
+            name ? this._filterDepartment(name) : this.listDepartment.slice()
+          )
+        );
+      });
+
+    this.mService
+      .getApiService()
+      .sendRequestGET_LIST_NAME_TBL_DMCHUCVU()
+      .then((data) => {
+        this.listRole = data.array;
+        this.filterRole = this.myForm.controls.idChucVu.valueChanges.pipe(
+          startWith(''),
+          map((value) =>
+            typeof value === 'string' || value === null ? value : value.idChucVu
+          ),
+          map((name: string | null) =>
+            name ? this._filterRole(name) : this.listRole.slice()
+          )
+        );
+      });
+
+    this.mService
+      .getApiService()
+      .sendRequestDETAIL_TBL_DMNHANVIEN(this.quoteID)
+      .then((data) => {
+        if (data.status == STATUS.SUCCESS) {
+          console.log(data);
+
+          this.myForm = this.fb.group({
+            address: data.obj.address,
+            age: data.obj.age,
+            bankName: data.obj.bankName,
+            bankNumber: data.obj.bankNumber,
+            bhxhSalary: data.obj.bhxhSalary,
+            birthday: data.obj.birthday,
+            cmndNumber: data.obj.cmndNumber,
+            contactUrgent: data.obj.contactUrgent,
+            contractCode: data.obj.contractCode,
+            contractDateEnd: data.obj.contractDateEnd,
+            degree: data.obj.degree,
+            gender: data.obj.gender,
+            idBoPhan: {
+              id: Number(data.obj.idBoPhan),
+              departmentName: data.obj.departmentName,
+            },
+            idChucVu: {
+              id: Number(data.obj.idChucVu),
+              positionName: data.obj.positionName,
+            },
+            idLoaiHopDong: data.obj.idLoaiHopDong,
+            idMayChamCong: data.obj.idMayChamCong,
+            idNation: data.obj.idNation,
+            permanentResidence: data.obj.permanentResidence,
+            phoneNumber: data.obj.phoneNumber,
+            probationaryDate: data.obj.probationaryDate,
+            probationarySalary: data.obj.probationarySalary,
+            signDate: data.obj.signDate,
+            staffCode: data.obj.staffCode,
+            staffName: data.obj.staffName,
+            status: data.obj.status,
+            taxCode: data.obj.taxCode,
+            workingDate: data.obj.workingDate,
+            workingSalary: data.obj.workingSalary,
+            email: data.obj.email,
+            idContract: data.obj.idContract,
+            id: this.quoteID,
+          });
+        }
+        this.spinner.hide();
+      });
   }
 
   // Bắt sự kiện khi đổi tabs
@@ -62,65 +149,90 @@ export class DetailStaffComponent implements OnInit {
 
   createForm() {
     this.myForm = this.fb.group({
-      codeStaff: [''],
-      timekeeperCode: [''],
-      personalTaxCode: [''],
-      staffName: [''],
-      phone: [''],
-      birthday: [''],
-      email: [''],
-      gender: [''],
-      stkNH: [''],
-      departmentName: [''],
-      homeTown: [''],
-      currentResidence: [''],
-      permanentResidence: [''],
+      address: [''],
       age: [''],
-      bank: [''],
-      position: [''],
-      bangCap: [''],
-      soHD: [''],
-      ngayKi: [''],
-      loaiHD: [''],
-      mucLuong: [''],
-      ngayHH: [''],
-      ttHD: [''],
+      bankName: [''],
+      bankNumber: [''],
+      bhxhSalary: [''],
+      birthday: [''],
+      cmndNumber: [''],
+      contactUrgent: [''],
+      contractCode: [''],
+      contractDateEnd: [''],
+      degree: [''],
+      gender: [''],
+      idBoPhan: [''],
+      idChucVu: [''],
+      idLoaiHopDong: [''],
+      idMayChamCong: [''],
+      idNation: [''],
+      permanentResidence: [''],
+      phoneNumber: [''],
+      probationaryDate: [''],
+      probationarySalary: [''],
+      signDate: [''],
+      staffCode: [''],
+      staffName: [''],
+      status: [''],
+      taxCode: [''],
+      workingDate: [''],
+      workingSalary: [''],
+      email: [''],
+      idContract: null,
     });
   }
 
-  onLoadDataDetail() {}
+  onSubmit(value) {
+    this.isEdit = false;
 
-  onClickClear() {
-    this.myForm.controls.tsName.setValue('');
-    this.myForm.controls.amount.setValue('');
-    this.myForm.controls.typeAssets.setValue('');
-    this.myForm.controls.cost.setValue('');
-    this.myForm.controls.producer.setValue('');
-    this.myForm.controls.producerYear.setValue('');
-    this.myForm.controls.nuocSanXuat.setValue('');
-    this.myForm.controls.bhThang.setValue('');
-    this.myForm.controls.condition.setValue('');
+    value.birthday = this.datePipe.transform(value.birthday, 'yyyy-MM-dd');
+    value.contractDateEnd = this.datePipe.transform(
+      value.contractDateEnd,
+      'yyyy-MM-dd'
+    );
+    value.signDate = this.datePipe.transform(value.signDate, 'yyyy-MM-dd');
+    value.idBoPhan = value.idBoPhan.id;
+    value.idChucVu = value.idChucVu.id;
+    console.log(value);
+
+    this.mService
+      .getApiService()
+      .sendRequestUPDATE_TBL_DMNHANVIEN(value)
+      .then((data) => {
+        this.mService.showSnackBar(data.message);
+      });
   }
 
-  onClickSave() {
-    // this.dataCreate.push({
-    //   stt: this.dataCreate.length + 1,
-    //   tsName: this.myForm.value.tsName,
-    //   typeAssetsName: this.myForm.value.typeAssetsName,
-    //   tsCode: this.myForm.value.tsCode,
-    //   producer: this.myForm.value.producer,
-    //   producerYear: this.myForm.value.producerYear,
-    //   specifications: this.myForm.value.specifications,
-    //   bhThang: this.myForm.value.bhThang,
-    //   supplierName: this.myForm.value.supplierName,
-    //   amount: this.myForm.value.amount,
-    //   cost: this.myForm.value.cost,
-    //   typeAssets: this.myForm.value.typeAssets,
-    //   nuocSanXuat: this.myForm.value.nuocSanXuat,
-    //   condition: this.myForm.value.condition,
-    // });
-    // this.onLoadData(this.dataCreate);
+  //Autocomplete Bộ phận
+  filterDepartment: Observable<string[]>;
+  listDepartment = [];
+
+  _filterDepartment(value): string[] {
+    const filterValue = value.toLowerCase();
+    return this.listDepartment.filter((option: any) =>
+      option.departmentName.toLowerCase().includes(filterValue)
+    );
   }
+
+  departmentDisplayFn = (value) =>
+    Object.values(this.listDepartment).find(
+      (department) => department.id === value.id
+    )?.departmentName;
+
+  //Autocomplete Chức vụ
+  filterRole: Observable<string[]>;
+  listRole = [];
+
+  _filterRole(value): string[] {
+    const filterValue = value.toLowerCase();
+    return this.listRole.filter((option: any) =>
+      option.positionName.toLowerCase().includes(filterValue)
+    );
+  }
+
+  roleDisplayFn = (value) =>
+    Object.values(this.listRole).find((role) => role.id === value.id)
+      ?.positionName;
 
   // Quan hệ gia đình ========================================================
   listTbDataFamilyRelationship = {
@@ -413,7 +525,7 @@ export class DetailStaffComponent implements OnInit {
         description: 'Mô tả tình trạng A',
         decisionStatus: 'Có hiệu lực',
         contractStatus: 'Còn hiệu lực',
-        staffName: this.nameStaff,
+        // staffName: this.nameStaff,
       },
     });
   }
@@ -477,7 +589,7 @@ export class DetailStaffComponent implements OnInit {
           description: 'Mô tả tình trạng A',
           decisionStatus: 'Có hiệu lực',
           contractStatus: 'Còn hiệu lực',
-          staffName: this.nameStaff,
+          // staffName: this.nameStaff,
         },
       }
     );

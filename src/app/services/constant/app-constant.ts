@@ -43,3 +43,16 @@ export const STATUS = {
   FAIL: 0,
   SUCCESS: 1,
 };
+
+// Cấu hình hiển thị Date của DatePicker
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'DD-MM-YYYY',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};

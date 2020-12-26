@@ -1,8 +1,8 @@
 <div class="container-amc">
   <div class="title">
-    <span>{{ nameStaff }}</span>
+    <span>{{ myForm.value.staffName }}</span>
   </div>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-tab-group
       mat-align-tabs="start"
       #tabGroup
@@ -14,17 +14,19 @@
             <mat-form-field appearance="outline">
               <mat-label>Mã số nhân sự</mat-label>
               <input
+                [readonly]="!isEdit"
                 matInput
                 placeholder="Nhập Text"
-                formControlName="codeStaff"
+                formControlName="staffCode"
               />
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>ID máy chấm công</mat-label>
               <input
+                [readonly]="!isEdit"
                 matInput
                 placeholder="Nhập Text"
-                formControlName="timekeeperCode"
+                formControlName="idMayChamCong"
               />
             </mat-form-field>
           </div>
@@ -32,14 +34,16 @@
           <mat-form-field appearance="outline">
             <mat-label>Mã số thuế cá nhân</mat-label>
             <input
+              [readonly]="!isEdit"
               matInput
               placeholder="Nhập Text"
-              formControlName="personalTaxCode"
+              formControlName="taxCode"
             />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Họ và tên</mat-label>
             <input
+              [readonly]="!isEdit"
               matInput
               placeholder="Nhập Text"
               formControlName="staffName"
@@ -47,32 +51,56 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Điện thoại</mat-label>
-            <input matInput placeholder="Nhập Text" formControlName="phone" />
+            <input
+              [readonly]="!isEdit"
+              matInput
+              placeholder="Nhập Text"
+              formControlName="phoneNumber"
+            />
           </mat-form-field>
           <div class="double-input">
             <mat-form-field appearance="outline">
               <mat-label>Ngày tháng năm sinh</mat-label>
               <input
+                [readonly]="!isEdit"
                 matInput
                 [matDatepicker]="birthdayPicker"
                 formControlName="birthday"
               />
-              <mat-datepicker-toggle matSuffix [for]="birthdayPicker">
+              <mat-datepicker-toggle
+                [disabled]="!isEdit"
+                matSuffix
+                [for]="birthdayPicker"
+              >
               </mat-datepicker-toggle>
               <mat-datepicker #birthdayPicker></mat-datepicker>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Tuổi</mat-label>
-              <input matInput placeholder="Nhập Text" formControlName="age" />
+              <input
+                readonly
+                matInput
+                placeholder="Nhập Text"
+                formControlName="age"
+              />
             </mat-form-field>
           </div>
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Nhập Text" formControlName="email" />
+            <input
+              [readonly]="!isEdit"
+              matInput
+              placeholder="Nhập Text"
+              formControlName="email"
+            />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Giới tính</mat-label>
-            <mat-select placeholder="Chọn giới tính" formControlName="gender">
+            <mat-select
+              placeholder="Chọn giới tính"
+              formControlName="gender"
+              [disabled]="!isEdit"
+            >
               <mat-option value="Nam">Nam</mat-option>
               <mat-option value="Nữ">Nữ</mat-option>
               <mat-option value="Khác">Khác</mat-option>
@@ -80,57 +108,98 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Số tài khoản ngân hàng</mat-label>
-            <input matInput placeholder="Nhập Text" formControlName="stkNH" />
+            <input
+              [readonly]="!isEdit"
+              matInput
+              placeholder="Nhập Text"
+              formControlName="bankNumber"
+            />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Phòng ban</mat-label>
-            <mat-select
-              placeholder="Nhập Text"
-              formControlName="departmentName"
+            <input
+              [readonly]="!isEdit"
+              matInput
+              type="text"
+              formControlName="idBoPhan"
+              [matAutocomplete]="autoDepartment"
+            />
+            <mat-autocomplete
+              autoActiveFirstOption
+              #autoDepartment="matAutocomplete"
+              [displayWith]="departmentDisplayFn"
             >
-              <mat-option value="Phòng ban A">Phòng ban A</mat-option>
-              <mat-option value="Phòng ban B">Phòng ban B</mat-option>
-              <mat-option value="Phòng ban C">Phòng ban C</mat-option>
-            </mat-select>
+              <mat-option
+                *ngFor="let item of filterDepartment | async"
+                [value]="item"
+              >
+                {{ item.departmentName }}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Ngân hàng</mat-label>
-            <mat-select placeholder="Nhập Text" formControlName="bank">
-              <mat-option value="Ngân hàng A">Ngân hàng A</mat-option>
-              <mat-option value="Ngân hàng B">Ngân hàng B</mat-option>
-              <mat-option value="Ngân hàng C">Phòng ban C</mat-option>
-            </mat-select>
+            <input
+              [readonly]="!isEdit"
+              placeholder="Nhập Text"
+              matInput
+              type="text"
+              formControlName="bankName"
+            />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Chức vụ</mat-label>
-            <mat-select placeholder="Nhập Text" formControlName="position">
-              <mat-option value="Giám đốc">Giám đốc</mat-option>
-              <mat-option value="Nhân viên">Nhân viên</mat-option>
-            </mat-select>
+            <input
+              [readonly]="!isEdit"
+              matInput
+              type="text"
+              formControlName="idChucVu"
+              [matAutocomplete]="autoRole"
+            />
+            <mat-autocomplete
+              autoActiveFirstOption
+              #autoRole="matAutocomplete"
+              [displayWith]="roleDisplayFn"
+            >
+              <mat-option
+                *ngFor="let item of filterRole | async"
+                [value]="item"
+              >
+                {{ item.positionName }}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Bằng cấp</mat-label>
-            <input matInput placeholder="Nhập Text" formControlName="bangCap" />
+            <input
+              [readonly]="!isEdit"
+              matInput
+              placeholder="Nhập Text"
+              formControlName="degree"
+            />
           </mat-form-field>
           <mat-form-field appearance="outline" width-100>
             <mat-label>Quê quán</mat-label>
             <input
+              [readonly]="!isEdit"
               matInput
               placeholder="Nhập Text"
-              formControlName="homeTown"
+              formControlName="address"
             />
           </mat-form-field>
-          <mat-form-field appearance="outline" width-100>
+          <!-- <mat-form-field appearance="outline" width-100>
             <mat-label>Nơi ở hiện đại</mat-label>
             <input
+            [readonly]='!isEdit'
               matInput
               placeholder="Nhập Text"
               formControlName="currentResidence"
             />
-          </mat-form-field>
+          </mat-form-field> -->
           <mat-form-field appearance="outline" width-100>
             <mat-label>Hộ khẩu thường trú</mat-label>
             <input
+              [readonly]="!isEdit"
               matInput
               placeholder="Nhập Text"
               formControlName="permanentResidence"
@@ -141,52 +210,87 @@
         <div class="tab">
           <mat-form-field appearance="outline">
             <mat-label>Số HĐ</mat-label>
-            <input matInput placeholder="Nhập Text" formControlName="soHD" />
+            <input
+              [readonly]="!isEdit"
+              matInput
+              placeholder="Nhập Text"
+              formControlName="contractCode"
+            />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Ngày kí</mat-label>
             <input
+              [readonly]="!isEdit"
               matInput
-              [matDatepicker]="ngayKiPicker"
-              formControlName="ngayKi"
+              [matDatepicker]="signDatePicker"
+              formControlName="signDate"
             />
-            <mat-datepicker-toggle matSuffix [for]="ngayKiPicker">
+            <mat-datepicker-toggle
+              [disabled]="!isEdit"
+              matSuffix
+              [for]="signDatePicker"
+            >
             </mat-datepicker-toggle>
-            <mat-datepicker #ngayKiPicker></mat-datepicker>
+            <mat-datepicker #signDatePicker></mat-datepicker>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Loại hợp đồng</mat-label>
-            <input matInput placeholder="Nhập Text" formControlName="loaiHD" />
+            <input
+              [readonly]="!isEdit"
+              matInput
+              placeholder="Nhập Text"
+              formControlName="idLoaiHopDong"
+            />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Mức lương</mat-label>
             <input
+              [readonly]="!isEdit"
               matInput
               placeholder="Nhập Text"
-              formControlName="mucLuong"
+              formControlName="workingSalary"
             />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Ngày hết hạn</mat-label>
             <input
+              [readonly]="!isEdit"
               matInput
-              [matDatepicker]="ngayHHPicker"
-              formControlName="ngayHH"
+              [matDatepicker]="contractDateEndPicker"
+              formControlName="contractDateEnd"
             />
-            <mat-datepicker-toggle matSuffix [for]="ngayHHPicker">
+            <mat-datepicker-toggle
+              [disabled]="!isEdit"
+              matSuffix
+              [for]="contractDateEndPicker"
+            >
             </mat-datepicker-toggle>
-            <mat-datepicker #ngayHHPicker></mat-datepicker>
+            <mat-datepicker #contractDateEndPicker></mat-datepicker>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Tình trạng HĐ</mat-label>
-            <input matInput placeholder="Nhập Text" formControlName="ttHD" />
+            <mat-select
+              [disabled]="!isEdit"
+              placeholder="Vui lòng chọn..."
+              formControlName="status"
+            >
+              <mat-option value="Có hiệu lực">Có hiệu lực</mat-option>
+              <mat-option value="Hết hiệu lực">Hết hiệu lực</mat-option>
+              <mat-option value="Tạm dừng">Tạm dừng</mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
         <div class="d-flex justify-content-center" style="padding-bottom: 2%">
-          <button mat-raised-button color="accent" style="margin-right: 1%">
+          <button
+            mat-raised-button
+            type="button"
+            color="accent"
+            style="margin-right: 1%"
+            (click)="isEdit = true"
+          >
             <mat-icon>edit</mat-icon>Chỉnh sửa
           </button>
-          <button mat-raised-button color="warn" (click)="onClickClear()">
+          <button mat-raised-button color="warn" type="submit">
             <mat-icon>save</mat-icon>Lưu
           </button>
         </div>

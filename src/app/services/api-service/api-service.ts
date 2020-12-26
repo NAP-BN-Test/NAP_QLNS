@@ -2,16 +2,10 @@ import { ApiCmd } from './api-service-cmd';
 import { HttpClient } from '../core/http/http-client';
 import { LOCAL_STORAGE_KEY } from '../constant/app-constant';
 import { ParamBuilder } from '../core/http/param-builder';
-import { Headers } from '@angular/http';
 
 export class ApiService extends HttpClient {
   mUrl: string = 'http://192.168.1.101:3100/';
   // mUrl: string = 'http://118.27.192.106:3100/';
-
-  headers = new Headers({
-    Authorization: localStorage.getItem('token'),
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', // thêm phần này vào header thì mới gửi body cho backend được
-  });
 
   userID = localStorage.getItem(LOCAL_STORAGE_KEY.USER_INFO)
     ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY.USER_INFO)).id
@@ -83,8 +77,7 @@ export class ApiService extends HttpClient {
         .add('itemPerPage', this.itemPerPage)
         .add('dataSearch', dataSearch)
         .add('type', type)
-        .add('page', page),
-      this.headers
+        .add('page', page)
     );
   }
 
@@ -98,8 +91,7 @@ export class ApiService extends HttpClient {
       ParamBuilder.builder()
         .add('itemPerPage', this.itemPerPage)
         .add('dataSearch', dataSearch)
-        .add('page', page),
-      this.headers
+        .add('page', page)
     );
   }
 
@@ -110,8 +102,7 @@ export class ApiService extends HttpClient {
       ParamBuilder.builder()
         .add('itemPerPage', this.itemPerPage)
         .add('dataSearch', dataSearch)
-        .add('page', page),
-      this.headers
+        .add('page', page)
     );
   }
 
@@ -122,8 +113,7 @@ export class ApiService extends HttpClient {
       ParamBuilder.builder()
         .add('itemPerPage', this.itemPerPage)
         .add('dataSearch', dataSearch)
-        .add('page', page),
-      this.headers
+        .add('page', page)
     );
   }
 
@@ -134,8 +124,7 @@ export class ApiService extends HttpClient {
       ParamBuilder.builder()
         .add('itemPerPage', this.itemPerPage)
         .add('dataSearch', dataSearch)
-        .add('page', page),
-      this.headers
+        .add('page', page)
     );
   }
 
@@ -147,8 +136,7 @@ export class ApiService extends HttpClient {
         .add('code', obj.code)
         .add('name', obj.name)
         .add('description', obj.description)
-        .add('type', obj.type),
-      this.headers
+        .add('type', obj.type)
     );
   }
 
@@ -162,8 +150,7 @@ export class ApiService extends HttpClient {
         .add('address', obj.address)
         .add('phoneNumber', obj.phoneNumber)
         .add('faxNumber', obj.faxNumber)
-        .add('email', obj.email),
-      this.headers
+        .add('email', obj.email)
     );
   }
 
@@ -178,8 +165,7 @@ export class ApiService extends HttpClient {
         .add('address', obj.address)
         .add('phoneNumber', obj.phoneNumber)
         .add('faxNumber', obj.faxNumber)
-        .add('email', obj.email),
-      this.headers
+        .add('email', obj.email)
     );
   }
 
@@ -190,8 +176,7 @@ export class ApiService extends HttpClient {
       ParamBuilder.builder()
         .add('statusCode', obj.statusCode)
         .add('statusName', obj.statusName)
-        .add('description', obj.description),
-      this.headers
+        .add('description', obj.description)
     );
   }
 
@@ -200,30 +185,73 @@ export class ApiService extends HttpClient {
     return this.requestPost(
       this.mUrl + ApiCmd.ADD_TBL_DMNHANVIEN,
       ParamBuilder.builder()
-        .add('staffCode', obj.staffCode)
-        .add('staffName', obj.staffName)
-        .add('cmndNumber', obj.cmndNumber)
-        .add('address', obj.address)
-        .add('idNation', obj.idNation)
-        .add('phoneNumber', obj.phoneNumber)
-        .add('gender', obj.gender)
-        .add('idBoPhan', obj.idBoPhan)
-        .add('idChucVu', obj.idChucVu)
-        .add('taxCode', obj.taxCode)
-        .add('bankNumber', obj.bankNumber)
-        .add('bankName', obj.bankName)
-        .add('birthday', obj.birthday)
-        .add('degree', obj.degree)
-        .add('permanentResidence', obj.permanentResidence)
-        .add('probationaryDate', obj.probationaryDate)
-        .add('probationarySalary', obj.probationarySalary)
-        .add('workingDate', obj.workingDate)
-        .add('workingSalary', obj.workingSalary)
-        .add('bhxhSalary', obj.bhxhSalary)
-        .add('contactUrgent', obj.contactUrgent)
-        .add('idMayChamCong', obj.idMayChamCong)
-        .add('email', obj.email),
-      this.headers
+        .addIgnoreNull('address', obj.address)
+        .addIgnoreNull('age', obj.age)
+        .addIgnoreNull('bankName', obj.bankName)
+        .addIgnoreNull('bankNumber', obj.bankNumber)
+        .addIgnoreNull('bhxhSalary', obj.bhxhSalary)
+        .addIgnoreNull('birthday', obj.birthday)
+        .addIgnoreNull('cmndNumber', obj.cmndNumber)
+        .addIgnoreNull('contactUrgent', obj.contactUrgent)
+        .addIgnoreNull('contractCode', obj.contractCode)
+        .addIgnoreNull('contractDateEnd', obj.contractDateEnd)
+        .addIgnoreNull('degree', obj.degree)
+        .addIgnoreNull('gender', obj.gender)
+        .addIgnoreNull('idBoPhan', obj.idBoPhan)
+        .addIgnoreNull('idChucVu', obj.idChucVu)
+        .addIgnoreNull('idLoaiHopDong', obj.idLoaiHopDong)
+        .addIgnoreNull('idMayChamCong', obj.idMayChamCong)
+        .addIgnoreNull('idNation', obj.idNation)
+        .addIgnoreNull('permanentResidence', obj.permanentResidence)
+        .addIgnoreNull('phoneNumber', obj.phoneNumber)
+        .addIgnoreNull('probationaryDate', obj.probationaryDate)
+        .addIgnoreNull('probationarySalary', obj.probationarySalary)
+        .addIgnoreNull('signDate', obj.signDate)
+        .addIgnoreNull('staffCode', obj.staffCode)
+        .addIgnoreNull('staffName', obj.staffName)
+        .addIgnoreNull('status', obj.status)
+        .addIgnoreNull('taxCode', obj.taxCode)
+        .addIgnoreNull('workingDate', obj.workingDate)
+        .addIgnoreNull('workingSalary', obj.workingSalary)
+        .addIgnoreNull('email', obj.email)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestUPDATE_TBL_DMNHANVIEN(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TBL_DMNHANVIEN,
+      ParamBuilder.builder()
+        .addIgnoreNull('address', obj.address)
+        .addIgnoreNull('age', obj.age)
+        .addIgnoreNull('bankName', obj.bankName)
+        .addIgnoreNull('bankNumber', obj.bankNumber)
+        .addIgnoreNull('bhxhSalary', obj.bhxhSalary)
+        .addIgnoreNull('birthday', obj.birthday)
+        .addIgnoreNull('cmndNumber', obj.cmndNumber)
+        .addIgnoreNull('contactUrgent', obj.contactUrgent)
+        .addIgnoreNull('contractCode', obj.contractCode)
+        .addIgnoreNull('contractDateEnd', obj.contractDateEnd)
+        .addIgnoreNull('degree', obj.degree)
+        .addIgnoreNull('gender', obj.gender)
+        .addIgnoreNull('idBoPhan', obj.idBoPhan)
+        .addIgnoreNull('idChucVu', obj.idChucVu)
+        .addIgnoreNull('idLoaiHopDong', obj.idLoaiHopDong)
+        .addIgnoreNull('idMayChamCong', obj.idMayChamCong)
+        .addIgnoreNull('idNation', obj.idNation)
+        .addIgnoreNull('permanentResidence', obj.permanentResidence)
+        .addIgnoreNull('phoneNumber', obj.phoneNumber)
+        .addIgnoreNull('probationaryDate', obj.probationaryDate)
+        .addIgnoreNull('probationarySalary', obj.probationarySalary)
+        .addIgnoreNull('signDate', obj.signDate)
+        .addIgnoreNull('staffCode', obj.staffCode)
+        .addIgnoreNull('staffName', obj.staffName)
+        .addIgnoreNull('status', obj.status)
+        .addIgnoreNull('taxCode', obj.taxCode)
+        .addIgnoreNull('workingDate', obj.workingDate)
+        .addIgnoreNull('workingSalary', obj.workingSalary)
+        .add('id', obj.id)
+        .addIgnoreNull('email', obj.email)
     );
   }
 
@@ -234,8 +262,7 @@ export class ApiService extends HttpClient {
       ParamBuilder.builder()
         .add('departmentCode', obj.departmentCode)
         .add('departmentName', obj.departmentName)
-        .add('idChiNhanh', obj.idChiNhanh),
-      this.headers
+        .add('idChiNhanh', obj.idChiNhanh)
     );
   }
 
@@ -247,8 +274,7 @@ export class ApiService extends HttpClient {
         .add('statusCode', obj.statusCode)
         .add('statusName', obj.statusName)
         .add('id', obj.id)
-        .add('description', obj.description),
-      this.headers
+        .add('description', obj.description)
     );
   }
 
@@ -261,8 +287,15 @@ export class ApiService extends HttpClient {
         .add('name', obj.name)
         .add('description', obj.description)
         .add('id', obj.id)
-        .add('type', obj.type),
-      this.headers
+        .add('type', obj.type)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestDETAIL_TBL_DMNHANVIEN(id): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DETAIL_TBL_DMNHANVIEN,
+      ParamBuilder.builder().add('id', id)
     );
   }
 
@@ -270,8 +303,7 @@ export class ApiService extends HttpClient {
   public sendRequestDELETE_TBL_LOAICHAMCONG(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_LOAICHAMCONG,
-      ParamBuilder.builder().add('listID', listID),
-      this.headers
+      ParamBuilder.builder().add('listID', listID)
     );
   }
 
@@ -279,8 +311,7 @@ export class ApiService extends HttpClient {
   public sendRequestDELETE_TBL_DM_TINHTRANGNV(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_DM_TINHTRANGNV,
-      ParamBuilder.builder().add('listID', listID),
-      this.headers
+      ParamBuilder.builder().add('listID', listID)
     );
   }
 
@@ -288,8 +319,7 @@ export class ApiService extends HttpClient {
   public sendRequestDELETE_TBL_DM_BOPHAN(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_DM_BOPHAN,
-      ParamBuilder.builder().add('listID', listID),
-      this.headers
+      ParamBuilder.builder().add('listID', listID)
     );
   }
 
@@ -297,8 +327,7 @@ export class ApiService extends HttpClient {
   public sendRequestDELETE_TBL_DM_CHINHANH(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_DM_CHINHANH,
-      ParamBuilder.builder().add('listID', listID),
-      this.headers
+      ParamBuilder.builder().add('listID', listID)
     );
   }
 
@@ -306,8 +335,23 @@ export class ApiService extends HttpClient {
   public sendRequestGET_LIST_NAME_TBL_DM_CHINHANH(): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.GET_LIST_NAME_TBL_DM_CHINHANH,
-      ParamBuilder.builder(),
-      this.headers
+      ParamBuilder.builder()
+    );
+  }
+
+  //===================================================================================
+  public sendRequestGET_LIST_NAME_TBL_DM_BOPHAN(): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_NAME_TBL_DM_BOPHAN,
+      ParamBuilder.builder()
+    );
+  }
+
+  //===================================================================================
+  public sendRequestGET_LIST_NAME_TBL_DMCHUCVU(): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_NAME_TBL_DMCHUCVU,
+      ParamBuilder.builder()
     );
   }
 }

@@ -93,7 +93,7 @@ export class AppModuleService {
     this.getApiService().createClient(this.mAngularHttp);
     return new Promise((resolve, reject) => {
       if (this.getAppConfig().hasData()) {
-        return resolve();
+        return resolve;
       } else {
         this.getApiService()
           .getAngularHttp()
@@ -103,7 +103,7 @@ export class AppModuleService {
               let dataObject = response.json();
               this.mAppConfig.setData(dataObject);
               this.getApiService().setData(dataObject);
-              return resolve();
+              return resolve;
             },
             (error) => {
               return reject();
@@ -173,20 +173,10 @@ export class AppModuleService {
     let array = [];
     this.activatedRoute.queryParams.subscribe((params) => {
       // GiHug ===================================================================================================================================================
-      if (params.mailMergeCampaignID)
-        array.push({
-          key: 'mailMergeCampaignID',
-          value: params.mailMergeCampaignID,
-        });
       if (params.quoteID)
         array.push({
           key: 'quoteID',
           value: params.quoteID,
-        });
-      if (params.staffName)
-        array.push({
-          key: 'staffName',
-          value: params.staffName,
         });
     });
     let paramsObj = {};

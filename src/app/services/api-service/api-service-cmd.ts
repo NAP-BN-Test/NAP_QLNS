@@ -45,4 +45,14 @@ export class ApiCmd {
     'qlnb/get_list_tbl_dmnhanvien';
 
   public static ADD_TBL_DMNHANVIEN: string = 'qlnb/add_tbl_dmnhanvien';
+
+  public static GET_LIST_NAME_TBL_DM_BOPHAN: string =
+    'qlnb/get_list_name_tbl_dm_bophan';
+
+  public static GET_LIST_NAME_TBL_DMCHUCVU: string =
+    'qlnb/get_list_name_tbl_dmchucvu';
+
+  public static UPDATE_TBL_DMNHANVIEN: string = 'qlnb/update_tbl_dmnhanvien';
+
+  public static DETAIL_TBL_DMNHANVIEN: string = 'qlnb/detail_tbl_dmnhanvien';
 }
