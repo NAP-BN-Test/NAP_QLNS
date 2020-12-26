@@ -12,12 +12,14 @@ import { AddUpdateFamilyRelationshipComponent } from 'src/app/dialogs/add-update
 import { AddUpdateStaffStatusComponent } from 'src/app/dialogs/add-update-staff-status/add-update-staff-status.component';
 import { AddUpdateTrainingAfterComponent } from 'src/app/dialogs/add-update-training-after/add-update-training-after.component';
 import { AddUpdateTrainingBeforeComponent } from 'src/app/dialogs/add-update-training-before/add-update-training-before.component';
+import { RemoveComponent } from 'src/app/dialogs/remove/remove.component';
 import { AppModuleService } from 'src/app/services/app-module.service';
 import {
   BUTTON_TYPE,
   EVENT_PUSH,
   STATUS,
 } from 'src/app/services/constant/app-constant';
+import { ParamsKey } from 'src/app/services/constant/paramskey';
 
 @Component({
   selector: 'app-detail-staff',
@@ -241,9 +243,9 @@ export class DetailStaffComponent implements OnInit {
       { name: 'HỌ TÊN', cell: 'name' },
       { name: 'NGÀY SINH', cell: 'birthday' },
       { name: 'GIỚI TÍNH', cell: 'gender' },
-      { name: 'SỐ CMT', cell: 'cmt' },
+      { name: 'SỐ CMT', cell: 'cmndNumber' },
       { name: 'NƠI Ở', cell: 'address' },
-      { name: 'NƠI LÀM VIỆC', cell: 'work' },
+      { name: 'NƠI LÀM VIỆC', cell: 'workplace' },
       { name: 'QUAN HỆ', cell: 'relationship' },
       { name: 'GIẢM TRỪ', cell: 'reduce' },
       { name: 'THAO TÁC', cell: 'undefined' },
@@ -251,53 +253,39 @@ export class DetailStaffComponent implements OnInit {
     listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
   };
 
-  dataExampleFamilyRelationship = [
-    {
-      stt: 0,
-      name: 'Nguyễn Văn A',
-      birthday: '06/09/1969',
-      gender: 'nam',
-      cmt: '124132453',
-      address: 'Bắc Ninh',
-      work: 'Hà Nội',
-      relationship: 'Bố',
-      reduce: '',
-    },
-    {
-      stt: 0,
-      name: 'Đinh Thị B',
-      birthday: '09/06/1971',
-      gender: 'nữ',
-      cmt: '122345433',
-      address: 'Hà Nội',
-      work: 'Hà Nội',
-      relationship: 'Mẹ',
-      reduce: '',
-    },
-    {
-      stt: 0,
-      name: 'Nguyễn Văn C',
-      birthday: '06/09/1996',
-      gender: 'nam',
-      cmt: '124132422',
-      address: 'Bắc Ninh',
-      work: 'Bắc Ninh',
-      relationship: 'Em trai',
-      reduce: '',
-    },
-  ];
-
   onLoadDataFamilyRelationship() {
-    this.mService.publishEvent(EVENT_PUSH.TABLE, {
-      listData: this.dataExampleFamilyRelationship,
-      listTbData: this.listTbDataFamilyRelationship,
-    });
+    this.mService
+      .getApiService()
+      .sendRequestGET_LIST_TBL_DMGIADINH(this.quoteID)
+      .then((data) => {
+        console.log(data);
+        if (data.status == STATUS.SUCCESS) {
+          this.mService.publishEvent(EVENT_PUSH.TABLE, {
+            listData: data.array,
+            listTbData: this.listTbDataFamilyRelationship,
+          });
+        }
+      });
   }
 
   onClickAddFamilyRelationship() {
     const dialogRef = this.dialog.open(AddUpdateFamilyRelationshipComponent, {
       width: '900px',
-      height: '700px',
+      maxHeight: '700px',
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        res.value['idNhanVien'] = this.quoteID;
+        this.mService
+          .getApiService()
+          .sendRequestADD_TBL_DMGIADINH(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+              this.onLoadDataFamilyRelationship();
+            }
+          });
+      }
     });
   }
 
@@ -307,15 +295,51 @@ export class DetailStaffComponent implements OnInit {
       height: '700px',
       data: {
         name: event.data.name,
-        // birthday: event.data.birthday,
+        birthday: event.data.birthday,
         gender: event.data.gender,
-        cmt: event.data.cmt,
+        cmndNumber: event.data.cmndNumber,
         address: event.data.address,
-        work: event.data.work,
+        workplace: event.data.workplace,
         relationship: event.data.relationship,
         reduce: event.data.reduce,
       },
     });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        res.value['id'] = event.data.id;
+        this.mService
+          .getApiService()
+          .sendRequestUPDATE_TBL_DMGIADINH(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+              this.onLoadDataFamilyRelationship();
+            }
+          });
+      }
+    });
+  }
+
+  onClickBtnFamilyRelationship(event) {
+    if (event.btnType == BUTTON_TYPE.DELETE) {
+      const dialogRef = this.dialog.open(RemoveComponent, {
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe((res) => {
+        if (res) {
+          this.mService
+            .getApiService()
+            .sendRequestDELETE_TBL_DMGIADINH(event.data)
+            .then((data) => {
+              this.mService.showSnackBar(data.message);
+              if (data.status == STATUS.SUCCESS) {
+                this.onLoadDataFamilyRelationship();
+              }
+            });
+        }
+      });
+    }
   }
 
   // Quản lý đào tạo sau khi đến công ty ================================

@@ -301,6 +301,7 @@
             <button
               mat-raised-button
               color="primary"
+              type="button"
               (click)="onClickAddFamilyRelationship()"
             >
               <mat-icon>add</mat-icon>Thêm mới
@@ -309,6 +310,7 @@
           <app-table-paginator
             [hasPagination]="false"
             (clickEdit)="onClickEditFamilyRelationship($event)"
+            (clickBtn)="onClickBtnFamilyRelationship($event)"
           ></app-table-paginator>
         </div>
       </mat-tab>

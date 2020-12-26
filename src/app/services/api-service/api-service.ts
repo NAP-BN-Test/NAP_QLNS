@@ -107,6 +107,14 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestGET_LIST_TBL_DMGIADINH(idNhanVien): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_DMGIADINH,
+      ParamBuilder.builder().add('idNhanVien', idNhanVien)
+    );
+  }
+
+  //===================================================================================
   public sendRequestGET_LIST_TBL_DM_CHINHANH(page, dataSearch): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.GET_LIST_TBL_DM_CHINHANH,
@@ -279,6 +287,41 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestADD_TBL_DMGIADINH(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_DMGIADINH,
+      ParamBuilder.builder()
+        .addIgnoreNull('relationship', obj.relationship)
+        .addIgnoreNull('name', obj.name)
+        .addIgnoreNull('gender', obj.gender)
+        .addIgnoreNull('birthday', obj.birthday)
+        .addIgnoreNull('idNhanVien', obj.idNhanVien)
+        .addIgnoreNull('cmndNumber', obj.cmndNumber)
+        .addIgnoreNull('address', obj.address)
+        .addIgnoreNull('workplace', obj.workplace)
+        .addIgnoreNull('reduce', obj.reduce)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestUPDATE_TBL_DMGIADINH(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TBL_DMGIADINH,
+      ParamBuilder.builder()
+        .addIgnoreNull('relationship', obj.relationship)
+        .addIgnoreNull('name', obj.name)
+        .addIgnoreNull('gender', obj.gender)
+        .addIgnoreNull('birthday', obj.birthday)
+        .addIgnoreNull('idNhanVien', obj.idNhanVien)
+        .addIgnoreNull('cmndNumber', obj.cmndNumber)
+        .addIgnoreNull('address', obj.address)
+        .addIgnoreNull('workplace', obj.workplace)
+        .addIgnoreNull('reduce', obj.reduce)
+        .add('id', obj.id)
+    );
+  }
+
+  //===================================================================================
   public sendRequestUPDATE_TBL_LOAICHAMCONG(obj): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.UPDATE_TBL_LOAICHAMCONG,
@@ -308,6 +351,14 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestDELETE_TBL_DMGIADINH(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_DMGIADINH,
+      ParamBuilder.builder().add('listID', listID)
+    );
+  }
+
+  //===================================================================================
   public sendRequestDELETE_TBL_DM_TINHTRANGNV(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_DM_TINHTRANGNV,
@@ -319,6 +370,14 @@ export class ApiService extends HttpClient {
   public sendRequestDELETE_TBL_DM_BOPHAN(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_DM_BOPHAN,
+      ParamBuilder.builder().add('listID', listID)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestDELETE_TBL_DMNHANVIEN(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_DMNHANVIEN,
       ParamBuilder.builder().add('listID', listID)
     );
   }

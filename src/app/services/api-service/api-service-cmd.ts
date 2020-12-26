@@ -55,4 +55,14 @@ export class ApiCmd {
   public static UPDATE_TBL_DMNHANVIEN: string = 'qlnb/update_tbl_dmnhanvien';
 
   public static DETAIL_TBL_DMNHANVIEN: string = 'qlnb/detail_tbl_dmnhanvien';
+
+  public static DELETE_TBL_DMNHANVIEN: string = 'qlnb/delete_tbl_dmnhanvien';
+
+  public static GET_LIST_TBL_DMGIADINH: string = 'qlnb/get_list_tbl_dmgiadinh';
+
+  public static ADD_TBL_DMGIADINH: string = 'qlnb/add_tbl_dmgiadinh';
+
+  public static UPDATE_TBL_DMGIADINH: string = 'qlnb/update_tbl_dmgiadinh';
+
+  public static DELETE_TBL_DMGIADINH: string = 'qlnb/delete_tbl_dmgiadinh';
 }

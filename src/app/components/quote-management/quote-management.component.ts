@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AddUpdateStaffComponent } from 'src/app/dialogs/add-update-staff/add-update-staff.component';
+import { RemoveComponent } from 'src/app/dialogs/remove/remove.component';
 import { AppModuleService } from 'src/app/services/app-module.service';
 import {
   BUTTON_TYPE,
@@ -130,5 +131,28 @@ export class QuoteManagementComponent implements OnInit {
     this.router.navigate(['menu/detail-staff'], {
       queryParams: { quoteID: event.data.id },
     });
+  }
+
+  onClickBtn(event) {
+    console.log(event);
+
+    if (event.btnType == BUTTON_TYPE.DELETE) {
+      const dialogRef = this.dialog.open(RemoveComponent, {
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe((res) => {
+        if (res) {
+          this.mService
+            .getApiService()
+            .sendRequestDELETE_TBL_DMNHANVIEN(event.data)
+            .then((data) => {
+              this.mService.showSnackBar(data.message);
+              if (data.status == STATUS.SUCCESS) {
+                this.onLoadData(1, this.dataSearch);
+              }
+            });
+        }
+      });
+    }
   }
 }

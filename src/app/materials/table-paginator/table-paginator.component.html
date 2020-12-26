@@ -1,7 +1,12 @@
 <div class="m-container mat-elevation-z8">
   <div class="m-option" *ngIf="listTbData && selection.selected.length > 0">
     <div padding-start *ngFor="let item of listTbData.listButton">
-      <button mat-flat-button [color]="item.color" (click)="onClickBtn(item)">
+      <button
+        mat-flat-button
+        type="button"
+        [color]="item.color"
+        (click)="onClickBtn(item)"
+      >
         {{ item.name }}
       </button>
     </div>
