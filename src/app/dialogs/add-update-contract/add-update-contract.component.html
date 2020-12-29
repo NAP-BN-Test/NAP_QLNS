@@ -2,23 +2,7 @@
   <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI HỢP ĐỒNG</h2>
   <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN HỢP ĐỒNG</h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
-  <form [formGroup]="myForm">
-    <mat-form-field appearance="outline">
-      <mat-label>Mã nhân viên</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="staffCode">
-        <mat-option value="NV0001">NV0001</mat-option>
-        <mat-option value="NV0002">NV0002</mat-option>
-        <mat-option value="NV0003">NV0003</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Tên nhân viên</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="staffName">
-        <mat-option value="Nhân viên A">Nhân viên A</mat-option>
-        <mat-option value="Nhân viên B">Nhân viên B</mat-option>
-        <mat-option value="Nhân viên C">Nhân viên C</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-form-field appearance="outline">
       <mat-label>Số hợp đồng</mat-label>
       <input matInput placeholder="Nhập Text" formControlName="contractCode" />
@@ -36,12 +20,12 @@
       <mat-label>Ngày ký</mat-label>
       <input
         matInput
-        [matDatepicker]="contractDateStartPicker"
-        formControlName="contractDateStart"
+        [matDatepicker]="signDatePicker"
+        formControlName="signDate"
       />
-      <mat-datepicker-toggle matSuffix [for]="contractDateStartPicker">
+      <mat-datepicker-toggle matSuffix [for]="signDatePicker">
       </mat-datepicker-toggle>
-      <mat-datepicker #contractDateStartPicker></mat-datepicker>
+      <mat-datepicker #signDatePicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Tình trạng hợp đồng</mat-label>
@@ -49,11 +33,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Loại hợp đồng</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="contractType">
-        <mat-option value="Loại hợp đồng A">Loại hợp đồng A</mat-option>
-        <mat-option value="Loại hợp đồng B">Loại hợp đồng B</mat-option>
-        <mat-option value="Loại hợp đồng C">Loại hợp đồng C</mat-option>
-      </mat-select>
+      <input matInput placeholder="Nhập Text" formControlName="idLoaiHopDong" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Ngày chấm dứt</mat-label>
@@ -66,22 +46,12 @@
       </mat-datepicker-toggle>
       <mat-datepicker #contractDateEndPicker></mat-datepicker>
     </mat-form-field>
-    <!-- <mat-form-field appearance="outline">
-      <mat-label>Lý do dừng</mat-label>
-      <textarea
-        matInput
-        placeholder="Nhập Text"
-        formControlName="reason"
-      ></textarea>
-    </mat-form-field> -->
     <div width-100 align="end">
       <button
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="onClickOk($event)"
         [disabled]="!myForm.valid"
-        cdkFocusInitial
       >
         <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
       </button>

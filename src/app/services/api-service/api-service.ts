@@ -139,6 +139,14 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestGET_LIST_HOPDONG_NHANSU_DETAIL(idNhanVien): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_HOPDONG_NHANSU_DETAIL,
+      ParamBuilder.builder().add('idNhanVien', idNhanVien)
+    );
+  }
+
+  //===================================================================================
   public sendRequestADD_TBL_WORK_HISTORY(obj): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.ADD_TBL_WORK_HISTORY,
@@ -168,6 +176,17 @@ export class ApiService extends HttpClient {
   public sendRequestGET_LIST_TBL_DM_CHINHANH(page, dataSearch): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.GET_LIST_TBL_DM_CHINHANH,
+      ParamBuilder.builder()
+        .add('itemPerPage', this.itemPerPage)
+        .add('dataSearch', dataSearch)
+        .add('page', page)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestGET_LIST_TBL_LOAIHOPDONG(page, dataSearch): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_LOAIHOPDONG,
       ParamBuilder.builder()
         .add('itemPerPage', this.itemPerPage)
         .add('dataSearch', dataSearch)
@@ -206,13 +225,13 @@ export class ApiService extends HttpClient {
         .add('idNhanVien', obj.idNhanVien)
         .addIgnoreNull('dateStart', obj.dateStart)
         .addIgnoreNull('dateEnd', obj.dateEnd)
-        .addIgnoreNull('trainningCourse', obj.trainningCourse)
+        .addIgnoreNull('trainingCourse', obj.trainingCourse)
         .addIgnoreNull('companyCost', obj.companyCost)
         .addIgnoreNull('result', obj.result)
         .addIgnoreNull('staffCost', obj.staffCost)
         .addIgnoreNull('majors', obj.majors)
         .addIgnoreNull('rangeDate', obj.rangeDate)
-        .addIgnoreNull('ExpirationDate', obj.ExpirationDate)
+        .addIgnoreNull('expirationDate', obj.expirationDate)
         .addIgnoreNull('formTraining', obj.formTraining)
     );
   }
@@ -225,13 +244,13 @@ export class ApiService extends HttpClient {
         .add('id', obj.id)
         .addIgnoreNull('dateStart', obj.dateStart)
         .addIgnoreNull('dateEnd', obj.dateEnd)
-        .addIgnoreNull('trainningCourse', obj.trainningCourse)
+        .addIgnoreNull('trainingCourse', obj.trainingCourse)
         .addIgnoreNull('companyCost', obj.companyCost)
         .addIgnoreNull('result', obj.result)
         .addIgnoreNull('staffCost', obj.staffCost)
         .addIgnoreNull('majors', obj.majors)
         .addIgnoreNull('rangeDate', obj.rangeDate)
-        .addIgnoreNull('ExpirationDate', obj.ExpirationDate)
+        .addIgnoreNull('expirationDate', obj.expirationDate)
         .addIgnoreNull('formTraining', obj.formTraining)
     );
   }
@@ -247,6 +266,21 @@ export class ApiService extends HttpClient {
         .add('phoneNumber', obj.phoneNumber)
         .add('faxNumber', obj.faxNumber)
         .add('email', obj.email)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestADD_TBL_HOPDONG_NHANSU(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_HOPDONG_NHANSU,
+      ParamBuilder.builder()
+        .add('idNhanvien', obj.idNhanvien)
+        .addIgnoreNull('contractCode', obj.contractCode)
+        .addIgnoreNull('idLoaiHopDong', obj.idLoaiHopDong)
+        .addIgnoreNull('signDate', obj.signDate)
+        .addIgnoreNull('salaryNumber', obj.salaryNumber)
+        .addIgnoreNull('contractDateEnd', obj.contractDateEnd)
+        .addIgnoreNull('status', obj.status)
     );
   }
 
@@ -403,6 +437,27 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestUPDATE_TBL_LOAIHOPDONG(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TBL_LOAIHOPDONG,
+      ParamBuilder.builder()
+        .addIgnoreNull('maLoaiHD', obj.maLoaiHD)
+        .addIgnoreNull('tenLoaiHD', obj.tenLoaiHD)
+        .add('id', obj.id)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestADD_TBL_LOAIHOPDONG(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_LOAIHOPDONG,
+      ParamBuilder.builder()
+        .addIgnoreNull('maLoaiHD', obj.maLoaiHD)
+        .addIgnoreNull('tenLoaiHD', obj.tenLoaiHD)
+    );
+  }
+
+  //===================================================================================
   public sendRequestADD_TBL_DMGIADINH(obj): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.ADD_TBL_DMGIADINH,
@@ -467,6 +522,22 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestDELETE_TBL_WORK_HISTORY(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_WORK_HISTORY,
+      ParamBuilder.builder().add('listID', listID)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestDELETE_TBL_HOPDONG_NHANSU(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_HOPDONG_NHANSU,
+      ParamBuilder.builder().add('listID', listID)
+    );
+  }
+
+  //===================================================================================
   public sendRequestDELETE_TBL_TRAINING_AFTER(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_TRAINING_AFTER,
@@ -478,6 +549,14 @@ export class ApiService extends HttpClient {
   public sendRequestDELETE_TBL_DMGIADINH(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_DMGIADINH,
+      ParamBuilder.builder().add('listID', listID)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestDELETE_TBL_LOAIHOPDONG(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_LOAIHOPDONG,
       ParamBuilder.builder().add('listID', listID)
     );
   }

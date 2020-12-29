@@ -64,6 +64,8 @@ import { RemoveComponent } from './dialogs/remove/remove.component';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS } from './services/constant/app-constant';
 import { DatePipe } from '@angular/common';
+import { TypeContractComponent } from './components/category-management/type-contract/type-contract.component';
+import { AddUpdateTypeContractComponent } from './dialogs/add-update-type-contract/add-update-type-contract.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +103,8 @@ import { DatePipe } from '@angular/common';
     AddUpdateBranchComponent,
     KeepTrackOfPremiumsComponent,
     RemoveComponent,
+    TypeContractComponent,
+    AddUpdateTypeContractComponent,
   ],
   imports: [
     BrowserModule,

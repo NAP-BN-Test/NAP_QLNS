@@ -1,0 +1,43 @@
+<div class="container-anl">
+  <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI LOẠI HỢP ĐỒNG</h2>
+  <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN LOẠI HỢP ĐỒNG</h2>
+  <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
+    <mat-form-field appearance="outline" width-100>
+      <mat-label>Mã loại hợp đồng</mat-label>
+      <input
+        required
+        matInput
+        placeholder="Nhập Text"
+        formControlName="maLoaiHD"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" width-100>
+      <mat-label>Tên loại hợp đồng</mat-label>
+      <input
+        required
+        matInput
+        placeholder="Nhập Text"
+        formControlName="tenLoaiHD"
+      />
+    </mat-form-field>
+    <div width-100 align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!myForm.valid"
+      >
+        <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="margin-left1"
+        mat-dialog-close
+      >
+        <mat-icon>close</mat-icon> Hủy
+      </button>
+    </div>
+  </form>
+</div>

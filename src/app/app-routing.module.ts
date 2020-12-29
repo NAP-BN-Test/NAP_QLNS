@@ -5,6 +5,7 @@ import { BranchComponent } from './components/category-management/branch/branch.
 import { DepartmentComponent } from './components/category-management/department/department.component';
 import { EmployeeStatusComponent } from './components/category-management/employee-status/employee-status.component';
 import { HolidayComponent } from './components/category-management/holiday/holiday.component';
+import { TypeContractComponent } from './components/category-management/type-contract/type-contract.component';
 import { TypeTimekeepingComponent } from './components/category-management/type-timekeeping/type-timekeeping.component';
 import { ContractManagementComponent } from './components/contract-management/contract-management.component';
 import { DecidedToIncreaseTheSalariesComponent } from './components/decided-to-increase-the-salaries/decided-to-increase-the-salaries.component';
@@ -83,6 +84,10 @@ const routes: Routes = [
       {
         path: 'keep-track-of-premiums',
         component: KeepTrackOfPremiumsComponent,
+      },
+      {
+        path: 'type-contract',
+        component: TypeContractComponent,
       },
     ],
   },

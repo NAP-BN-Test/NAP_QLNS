@@ -29,6 +29,11 @@ export const ModulesList = [
         label: 'Danh mục chi nhánh',
         link: 'branch',
       },
+      {
+        indexMenu: 0,
+        label: 'Danh mục loại hợp đồng',
+        link: 'type-contract',
+      },
     ],
   },
   {

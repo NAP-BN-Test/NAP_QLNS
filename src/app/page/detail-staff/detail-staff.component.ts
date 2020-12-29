@@ -347,10 +347,10 @@ export class DetailStaffComponent implements OnInit {
     listColum: [
       { name: 'SỐ THỨ TỰ', cell: 'stt' },
       { name: 'KHÓA ĐÀO TẠO', cell: 'trainingCourse' },
-      { name: 'CHUYÊN NGÀNH', cell: 'chuyenNganh' },
+      { name: 'CHUYÊN NGÀNH', cell: 'majors' },
       { name: 'SỐ TIỀN CÔNG TY', cell: 'companyCost' },
-      { name: 'SỐ TIỀN CÁ NHÂN', cell: 'personCost' },
-      { name: 'SỐ CHỨNG CHỈ', cell: 'soCC' },
+      { name: 'SỐ TIỀN CÁ NHÂN', cell: 'staffCost' },
+      { name: 'SỐ CHỨNG CHỈ', cell: 'numberCertificates' },
       { name: 'NGÀY CẤP', cell: 'dateStart' },
       { name: 'NGÀY HẾT HẠN', cell: 'dateEnd' },
       { name: 'THAO TÁC', cell: 'undefined' },
@@ -621,6 +621,27 @@ export class DetailStaffComponent implements OnInit {
     });
   }
 
+  onClickBtnStaffStatus(event) {
+    if (event.btnType == BUTTON_TYPE.DELETE) {
+      const dialogRef = this.dialog.open(RemoveComponent, {
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe((res) => {
+        if (res) {
+          this.mService
+            .getApiService()
+            .sendRequestDELETE_TBL_WORK_HISTORY(event.data)
+            .then((data) => {
+              this.mService.showSnackBar(data.message);
+              if (data.status == STATUS.SUCCESS) {
+                this.onLoadDataStaffStatus();
+              }
+            });
+        }
+      });
+    }
+  }
+
   // Quản lý hợp đồng =======================================================
 
   listTbDataContract = {
@@ -632,36 +653,45 @@ export class DetailStaffComponent implements OnInit {
       { name: 'MỨC LƯƠNG', cell: 'salary' },
       { name: 'TÌNH TRẠNG HỢP ĐỒNG', cell: 'contractStatus' },
       { name: 'NGÀY CHẤM DỨT', cell: 'dateEnd' },
-      // { name: 'LÝ DO', cell: 'description' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
     listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
   };
 
-  dataExampleContract = [
-    {
-      stt: 0,
-      description: 'Mô tả tình trạng A',
-      employeeStatus: 'Tình trạng 1',
-      dateStart: '11-11-2020',
-      dateEnd: '11-11-2022',
-      contractCode: 'SA8724823',
-      contactType: 'Hợp đồng lao động',
-      salary: '9000000',
-      contractStatus: 'Còn hiệu lực',
-    },
-  ];
-
   onLoadDataContract() {
-    this.mService.publishEvent(EVENT_PUSH.TABLE, {
-      listData: this.dataExampleContract,
-      listTbData: this.listTbDataContract,
-    });
+    this.mService
+      .getApiService()
+      .sendRequestGET_LIST_HOPDONG_NHANSU_DETAIL(this.quoteID)
+      .then((data) => {
+        console.log(data);
+        if (data.status == STATUS.SUCCESS) {
+          this.mService.publishEvent(EVENT_PUSH.TABLE, {
+            listData: data.array,
+            listTbData: this.listTbDataContract,
+          });
+        }
+      });
   }
 
   onClickAddContract() {
     const dialogRef = this.dialog.open(AddUpdateContractComponent, {
       width: '900px',
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        res.value['idNhanvien'] = this.quoteID;
+        console.log(res.value);
+
+        this.mService
+          .getApiService()
+          .sendRequestADD_TBL_HOPDONG_NHANSU(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+              this.onLoadDataContract();
+            }
+          });
+      }
     });
   }
 
@@ -681,7 +711,26 @@ export class DetailStaffComponent implements OnInit {
     });
   }
 
-  onClickBtnContract(event) {}
+  onClickBtnContract(event) {
+    if (event.btnType == BUTTON_TYPE.DELETE) {
+      const dialogRef = this.dialog.open(RemoveComponent, {
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe((res) => {
+        if (res) {
+          this.mService
+            .getApiService()
+            .sendRequestDELETE_TBL_HOPDONG_NHANSU(event.data)
+            .then((data) => {
+              this.mService.showSnackBar(data.message);
+              if (data.status == STATUS.SUCCESS) {
+                this.onLoadDataContract();
+              }
+            });
+        }
+      });
+    }
+  }
 
   // Quyết định tăng lương =======================================================
 

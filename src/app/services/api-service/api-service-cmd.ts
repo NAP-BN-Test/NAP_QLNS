@@ -95,4 +95,24 @@ export class ApiCmd {
 
   public static UPDATE_TBL_WORK_HISTORY: string =
     'qlnb/update_tbl_work_history';
+
+  public static GET_LIST_HOPDONG_NHANSU_DETAIL: string =
+    'qlnb/get_list_tbl_hopdong_nhansu_detail';
+
+  public static ADD_TBL_HOPDONG_NHANSU: string = 'qlnb/add_tbl_hopdong_nhansu';
+
+  public static DELETE_TBL_WORK_HISTORY: string =
+    'qlnb/delete_tbl_work_history';
+
+  public static DELETE_TBL_HOPDONG_NHANSU: string =
+    'qlnb/delete_tbl_hopdong_nhansu';
+
+  public static GET_LIST_TBL_LOAIHOPDONG: string =
+    'qlnb/get_list_tbl_loaihopdong';
+
+  public static DELETE_TBL_LOAIHOPDONG: string = 'qlnb/delete_tbl_loaihopdong';
+
+  public static UPDATE_TBL_LOAIHOPDONG: string = 'qlnb/update_tbl_loaihopdong';
+
+  public static ADD_TBL_LOAIHOPDONG: string = 'qlnb/add_tbl_loaihopdong';
 }

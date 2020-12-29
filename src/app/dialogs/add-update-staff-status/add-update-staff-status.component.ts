@@ -29,8 +29,12 @@ export class AddUpdateStaffStatusComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit(value) {
-    value.dateStart = this.datePipe.transform(value.dateStart, 'yyyy-MM-dd');
-    value.dateEnd = this.datePipe.transform(value.dateEnd, 'yyyy-MM-dd');
+    value.dateStart = value.dateStart
+      ? this.datePipe.transform(value.dateStart, 'yyyy-MM-dd')
+      : null;
+    value.dateEnd = value.dateEnd
+      ? this.datePipe.transform(value.dateEnd, 'yyyy-MM-dd')
+      : null;
     console.log(value);
 
     this.dialogRef.close({

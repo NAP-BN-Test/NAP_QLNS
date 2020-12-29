@@ -35,13 +35,18 @@ export class AddUpdateTrainingAfterComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit(value) {
-    value.dateStart = this.datePipe.transform(value.dateStart, 'yyyy-MM-dd');
-    value.dateEnd = this.datePipe.transform(value.dateEnd, 'yyyy-MM-dd');
-    value.expirationDate = this.datePipe.transform(
-      value.expirationDate,
-      'yyyy-MM-dd'
-    );
-    value.rangeDate = this.datePipe.transform(value.rangeDate, 'yyyy-MM-dd');
+    value.dateStart = value.dateStart
+      ? this.datePipe.transform(value.dateStart, 'yyyy-MM-dd')
+      : null;
+    value.dateEnd = value.dateEnd
+      ? this.datePipe.transform(value.dateEnd, 'yyyy-MM-dd')
+      : null;
+    value.expirationDate = value.expirationDate
+      ? this.datePipe.transform(value.expirationDate, 'yyyy-MM-dd')
+      : null;
+    value.rangeDate = value.rangeDate
+      ? this.datePipe.transform(value.rangeDate, 'yyyy-MM-dd')
+      : null;
     this.dialogRef.close({
       value: value,
     });

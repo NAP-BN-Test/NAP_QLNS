@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,33 +14,31 @@ export class AddUpdateContractComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public mService: AppModuleService,
+    private datePipe: DatePipe,
     @Inject(MAT_DIALOG_DATA) public mData: any,
     public dialogRef: MatDialogRef<AddUpdateContractComponent>
   ) {
     this.myForm = this.formBuilder.group({
       contractCode: [mData ? mData.contractCode : ''],
-      contractType: [mData ? mData.contractType : ''],
-      contractDateStart: [mData ? mData.contractDateStart : ''],
+      idLoaiHopDong: [mData ? mData.idLoaiHopDong : ''],
+      signDate: [mData ? mData.signDate : null],
       salaryNumber: [mData ? mData.salaryNumber : ''],
-      contractDateEnd: [mData ? mData.contractDateEnd : ''],
-      reason: [mData ? mData.reason : ''],
+      contractDateEnd: [mData ? mData.contractDateEnd : null],
       status: [mData ? mData.status : ''],
-      staffCode: [''],
-      staffName: [mData ? mData.staffName : ''],
     });
   }
 
   ngOnInit() {}
 
-  onClickOk(event) {
+  onSubmit(value) {
+    value.signDate = value.signDate
+      ? this.datePipe.transform(value.signDate, 'yyyy-MM-dd')
+      : null;
+    value.contractDateEnd = value.contractDateEnd
+      ? this.datePipe.transform(value.contractDateEnd, 'yyyy-MM-dd')
+      : null;
     this.dialogRef.close({
-      contractCode: this.myForm.value.contractCode,
-      contractType: this.myForm.value.contractType,
-      contractDateStart: this.myForm.value.contractDateStart,
-      salaryNumber: this.myForm.value.salaryNumber,
-      contractDateEnd: this.myForm.value.contractDateEnd,
-      reason: this.myForm.value.reason,
-      status: this.myForm.value.status,
+      value: value,
     });
   }
 }
