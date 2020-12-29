@@ -6,7 +6,9 @@ import { AppModuleService } from 'src/app/services/app-module.service';
 import {
   BUTTON_TYPE,
   EVENT_PUSH,
+  STATUS,
 } from 'src/app/services/constant/app-constant';
+import { ParamsKey } from 'src/app/services/constant/paramskey';
 
 @Component({
   selector: 'app-insurance-management',
@@ -23,7 +25,6 @@ export class InsuranceManagementComponent implements OnInit {
       { name: 'MỨC ĐÓNG BHXH NV', cell: 'staffBHXH' },
       { name: 'MỨC ĐÓNG BHYT NV', cell: 'staffBHYT' },
       { name: 'MỨC ĐÓNG BHTN NV', cell: 'staffBHTN' },
-      { name: 'MỨC ĐÓNG CÔNG ĐOÀN', cell: 'staffCD' },
       { name: 'TỪ NGÀY', cell: 'dateStart' },
       { name: 'ĐẾN NGÀY', cell: 'dateEnd' },
       { name: 'THAO TÁC', cell: 'undefined' },
@@ -87,18 +88,18 @@ export class InsuranceManagementComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.mService.LoadAppConfig();
-    // if (this.mService.getUser()) {
-    //   let params: any = this.mService.handleActivatedRoute();
-    //   this.page = params.page ? params.page : 1;
-    this.onLoadData(this.page, this.dataSearch);
-    // } else {
-    //   this.mService.publishPageRoute('login');
-    // }
+    this.mService.LoadAppConfig();
+    if (this.mService.getUser()) {
+      let params: any = this.mService.handleActivatedRoute();
+      this.page = params.page ? params.page : 1;
+      this.onLoadData(this.page, this.dataSearch);
+    } else {
+      this.mService.publishPageRoute('login');
+    }
   }
 
   async onLoadData(page, dataSearch) {
-    // this.spinner.show();
+    this.spinner.show();
     // await this.mService
     //   .getApiService()
     //   .sendRequestGET_LIST_LABOR_MANAGEMENT_BOOK(
@@ -107,16 +108,16 @@ export class InsuranceManagementComponent implements OnInit {
     //   )
     //   .then((data) => {
     //     if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
-    this.collectionSize = 3;
-    this.mService.publishEvent(EVENT_PUSH.TABLE, {
-      page: this.page,
-      collectionSize: this.collectionSize,
-      listData: this.dataExample,
-      listTbData: this.listTbData,
-    });
+    //       this.collectionSize = 3;
+    //       this.mService.publishEvent(EVENT_PUSH.TABLE, {
+    //         page: this.page,
+    //         collectionSize: this.collectionSize,
+    //         listData: this.dataExample,
+    //         listTbData: this.listTbData,
+    //       });
     //     }
     //   });
-    // this.spinner.hide();
+    this.spinner.hide();
   }
 
   onClickBtn(event) {

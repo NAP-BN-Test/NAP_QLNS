@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AppModuleService } from 'src/app/services/app-module.service';
-import { BUTTON_TYPE } from 'src/app/services/constant/app-constant';
+import {
+  BUTTON_TYPE,
+  EVENT_PUSH,
+  STATUS,
+} from 'src/app/services/constant/app-constant';
 import { FormControl } from '@angular/forms';
 import {
   MomentDateAdapter,
@@ -22,6 +26,8 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { Moment } from 'moment';
+import { ParamsKey } from 'src/app/services/constant/paramskey';
+import { DatePipe } from '@angular/common';
 
 const moment = _moment;
 
@@ -59,14 +65,14 @@ export class PayrollTemplateComponent implements OnInit {
   listTbData = {
     listColum: [
       { name: 'STT', cell: 'stt' },
-      { name: 'HỌ VÀ TÊN', cell: 'staffName' },
+      { name: 'HỌ VÀ TÊN', cell: 'nameStaff' },
       {
         name: 'LƯƠNG CHÍNH',
-        cell: 'luongChinh',
+        cell: 'workingSalary',
       },
       {
         name: 'LƯƠNG BHXH',
-        cell: 'luongBHXH',
+        cell: 'bhxhSalary',
       },
       {
         name: 'BHXH 8%',
@@ -86,7 +92,7 @@ export class PayrollTemplateComponent implements OnInit {
       },
       {
         name: 'GT GIA CẢNH',
-        cell: 'gtGiaCanh',
+        cell: 'reduce',
       },
       {
         name: 'LƯƠNG TÍNH THUẾ TNCN',
@@ -106,78 +112,36 @@ export class PayrollTemplateComponent implements OnInit {
 
   displayedColumns = [
     'stt',
-    'staffName',
-    'luongChinh',
-    'luongBHXH',
+    'nameStaff',
+    'workingSalary',
+    'bhxhSalary',
     'bhxh',
     'bhyt',
-    'congDoan',
     'bhtn',
-    'gtGiaCanh',
+    'reduce',
     'luongTinhThueTNCN',
     'thueTNCN',
     'tongKhoanTru',
     'thucLinh',
   ];
 
-  dataExample = [
-    {
-      stt: 1,
-      staffName: 'Nhân viên A',
-      luongChinh: '10,000,000',
-      luongBHXH: '10,000,000',
-      bhxh: '800,000',
-      bhyt: '150,000',
-      congDoan: '50,000',
-      bhtn: '100,000',
-      gtGiaCanh: 0,
-      luongTinhThueTNCN: '10,000,000',
-      thueTNCN: '1,000,000',
-      tongKhoanTru: '2,100,000',
-      thucLinh: '7,900,000',
-    },
-    {
-      stt: 2,
-      staffName: 'Nhân viên B',
-      luongChinh: '10,000,000',
-      luongBHXH: '10,000,000',
-      bhxh: '800,000',
-      bhyt: '150,000',
-      congDoan: '50,000',
-      bhtn: '100,000',
-      gtGiaCanh: 0,
-      luongTinhThueTNCN: '10,000,000',
-      thueTNCN: '1,000,000',
-      tongKhoanTru: '2,100,000',
-      thucLinh: '7,900,000',
-    },
-    {
-      stt: 3,
-      staffName: 'Nhân viên C',
-      luongChinh: '10,000,000',
-      luongBHXH: '10,000,000',
-      bhxh: '800,000',
-      bhyt: '150,000',
-      congDoan: '50,000',
-      bhtn: '100,000',
-      gtGiaCanh: 0,
-      luongTinhThueTNCN: '10,000,000',
-      thueTNCN: '1,000,000',
-      tongKhoanTru: '2,100,000',
-      thucLinh: '7,900,000',
-    },
-  ];
-
-  collectionSize;
-  page: number = 1;
+  staffBHTN;
+  staffBHXH;
+  staffBHYT;
 
   constructor(
     public mService: AppModuleService,
     public dialog: MatDialog,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private datePipe: DatePipe
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.mService.LoadAppConfig();
+    if (!this.mService.getUser()) {
+      this.mService.publishPageRoute('login');
+    }
+  }
 
   isEdit = false;
 
@@ -199,31 +163,37 @@ export class PayrollTemplateComponent implements OnInit {
     datepicker.close();
   }
 
-  onLoadData(page) {
-    // this.spinner.show();
-    // this.mService
-    //   .getApiService()
-    //   .sendRequestGET_LIST_MANAGEMENT_JOB_HR(page, JSON.stringify(dataSearch))
-    //   .then((data) => {
-    //     if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
-    //       this.collectionSize = data.count;
-    //       this.mService.publishEvent(EVENT_PUSH.TABLE, {
-    //         page: this.page,
-    //         collectionSize: this.collectionSize,
-    //         listData: data.array,
-    //         listTbData: this.listTbData,
-    //       });
-    //     }
-    //   });
-    // this.spinner.hide();
+  dataTable;
+
+  onLoadData() {
+    let date = this.monthYear
+      ? this.datePipe.transform(this.monthYear.value, 'yyyy-MM')
+      : null;
+    console.log(date);
+
+    this.spinner.show();
+    this.mService
+      .getApiService()
+      .sendRequestGET_LIST_TBL_BANGLUONG(date)
+      .then((data) => {
+        if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+          console.log(data);
+          this.dataTable = data.array;
+          this.staffBHTN = data.objInsurance.staffBHTN;
+          this.staffBHXH = data.objInsurance.staffBHXH;
+          this.staffBHYT = data.objInsurance.staffBHYT;
+        }
+      });
+    this.spinner.hide();
   }
 
-  onClickPagination(event) {
-    this.page = event;
-    this.onLoadData(event);
+  compute(event, element) {
+    let salaryTaxCompute = Number(event.target.innerHTML);
+    if (salaryTaxCompute) {
+      console.log(salaryTaxCompute);
+      console.log(element);
+    } else {
+      event.target.innerHTML = '';
+    }
   }
-
-  onClickEdit(event) {}
-
-  onClickSort(event) {}
 }

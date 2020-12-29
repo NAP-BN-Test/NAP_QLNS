@@ -157,6 +157,14 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestGET_LIST_TBL_BANGLUONG(date): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_BANGLUONG,
+      ParamBuilder.builder().add('date', date)
+    );
+  }
+
+  //===================================================================================
   public sendRequestADD_TBL_WORK_HISTORY(obj): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.ADD_TBL_WORK_HISTORY,

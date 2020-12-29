@@ -133,4 +133,6 @@ export class ApiCmd {
 
   public static UPDATE_TBL_HOPDONG_NHANSU: string =
     'qlnb/update_tbl_hopdong_nhansu';
+
+  public static GET_LIST_TBL_BANGLUONG: string = 'qlnb/get_list_tbl_bangluong';
 }

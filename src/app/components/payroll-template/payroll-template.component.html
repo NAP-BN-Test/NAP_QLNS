@@ -15,13 +15,18 @@
       ></mat-datepicker>
     </mat-form-field>
     <div class="button-search">
-      <button mat-raised-button color="primary" class="margin-left1">
+      <button
+        mat-raised-button
+        color="primary"
+        class="margin-left1"
+        (click)="onLoadData()"
+      >
         <mat-icon>search</mat-icon> Tìm kiếm
       </button>
     </div>
   </form>
   <div class="container-table mat-elevation-z8">
-    <table mat-table [dataSource]="dataExample">
+    <table mat-table [dataSource]="dataTable">
       <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
 
@@ -38,80 +43,72 @@
       </ng-container>
 
       <!-- Họ và tên Column display none-->
-      <ng-container matColumnDef="staffName">
+      <ng-container matColumnDef="nameStaff">
         <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
           HỌ VÀ TÊN
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.staffName }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.nameStaff }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="StaffName">
+      <ng-container matColumnDef="NameStaff">
         <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">HỌ VÀ TÊN</th>
       </ng-container>
 
       <!-- LƯƠNG CHÍNH Column display none-->
-      <ng-container matColumnDef="luongChinh">
+      <ng-container matColumnDef="workingSalary">
         <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
           LƯƠNG CHÍNH
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.luongChinh }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.workingSalary }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="LuongChinh">
+      <ng-container matColumnDef="WorkingSalary">
         <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">
           LƯƠNG CHÍNH
         </th>
       </ng-container>
 
       <!-- LƯƠNG BHXH Column display none-->
-      <ng-container matColumnDef="luongBHXH">
+      <ng-container matColumnDef="bhxhSalary">
         <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
           LƯƠNG BHXH
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.luongBHXH }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.bhxhSalary }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="LuongBHXH">
+      <ng-container matColumnDef="BhxhSalary">
         <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">LƯƠNG BHXH</th>
       </ng-container>
 
       <!-- BHXH Column display none-->
       <ng-container matColumnDef="bhxh">
-        <th mat-header-cell *matHeaderCellDef>BHXH 8%</th>
+        <th mat-header-cell *matHeaderCellDef>BHXH {{ staffBHXH }}%</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.bhxh }}
+          {{ ((element.bhxhSalary * staffBHXH) / 100).toFixed(2) }}
         </td>
       </ng-container>
 
       <!-- BHYT Column display none-->
       <ng-container matColumnDef="bhyt">
-        <th mat-header-cell *matHeaderCellDef>BHYT 1.5%</th>
+        <th mat-header-cell *matHeaderCellDef>BHYT {{ staffBHYT }}%</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.bhyt }}
-        </td>
-      </ng-container>
-
-      <!-- CÔNG ĐOÀN Column display none-->
-      <ng-container matColumnDef="congDoan">
-        <th mat-header-cell *matHeaderCellDef>CÔNG ĐOÀN</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.congDoan }}
+          {{ ((element.bhxhSalary * staffBHYT) / 100).toFixed(2) }}
         </td>
       </ng-container>
 
       <!-- BHTN 1% Column display none-->
       <ng-container matColumnDef="bhtn">
-        <th mat-header-cell *matHeaderCellDef>BHTN 1%</th>
+        <th mat-header-cell *matHeaderCellDef>BHTN {{ staffBHTN }}%</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.bhtn }}
+          {{ ((element.bhxhSalary * staffBHTN) / 100).toFixed(2) }}
         </td>
       </ng-container>
 
       <!-- GT GIA CẢNH Column display none-->
-      <ng-container matColumnDef="gtGiaCanh">
+      <ng-container matColumnDef="reduce">
         <th mat-header-cell *matHeaderCellDef>GT GIA CẢNH</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.gtGiaCanh }}
+          {{ element.reduce }}
         </td>
       </ng-container>
 
@@ -120,7 +117,13 @@
         <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
           LƯƠNG TÍNH THUẾ TNCN
         </th>
-        <td mat-cell *matCellDef="let element">
+        <td
+          tappable
+          mat-cell
+          *matCellDef="let element"
+          [contentEditable]="true"
+          (blur)="compute($event, element)"
+        >
           {{ element.luongTinhThueTNCN }}
         </td>
       </ng-container>
@@ -171,7 +174,7 @@
 
       <!-- Header row second group -->
       <ng-container matColumnDef="header-row-second-group">
-        <th mat-header-cell *matHeaderCellDef [attr.colspan]="5">
+        <th mat-header-cell *matHeaderCellDef [attr.colspan]="4">
           CÁC KHOẢN GIẢM TRỪ
         </th>
       </ng-container>
@@ -180,9 +183,9 @@
         mat-header-row
         *matHeaderRowDef="[
           'STT',
-          'StaffName',
-          'LuongChinh',
-          'LuongBHXH',
+          'NameStaff',
+          'WorkingSalary',
+          'BhxhSalary',
           'header-row-second-group',
           'LuongTinhThueTNCN',
           'ThueTNCN',
