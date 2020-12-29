@@ -648,11 +648,11 @@ export class DetailStaffComponent implements OnInit {
     listColum: [
       { name: 'SỐ THỨ TỰ', cell: 'stt' },
       { name: 'SỐ HỢP ĐỒNG', cell: 'contractCode' },
-      { name: 'NGÀY KÝ', cell: 'dateStart' },
-      { name: 'LOẠI HỢP ĐỒNG', cell: 'contactType' },
-      { name: 'MỨC LƯƠNG', cell: 'salary' },
-      { name: 'TÌNH TRẠNG HỢP ĐỒNG', cell: 'contractStatus' },
-      { name: 'NGÀY CHẤM DỨT', cell: 'dateEnd' },
+      { name: 'NGÀY KÝ', cell: 'signDate' },
+      { name: 'LOẠI HỢP ĐỒNG', cell: 'loaiHopDong' },
+      { name: 'MỨC LƯƠNG', cell: 'salaryNumber' },
+      { name: 'TÌNH TRẠNG HỢP ĐỒNG', cell: 'status' },
+      { name: 'NGÀY CHẤM DỨT', cell: 'contractDateEnd' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
     listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
@@ -679,7 +679,7 @@ export class DetailStaffComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        res.value['idNhanvien'] = this.quoteID;
+        res.value['idNhanVien'] = this.quoteID;
         console.log(res.value);
 
         this.mService
@@ -700,14 +700,28 @@ export class DetailStaffComponent implements OnInit {
       width: '900px',
       data: {
         contractCode: event.data.contractCode,
-        salaryNumber: event.data.salary,
+        idLoaiHopDong: event.data.idLoaiHopDong,
+        signDate: event.data.signDate,
+        salaryNumber: event.data.salaryNumber,
+        contractDateEnd: event.data.contractDateEnd,
         status: event.data.status,
-        stt: 0,
-        description: 'Mô tả tình trạng A',
-        decisionStatus: 'Có hiệu lực',
-        contractStatus: 'Còn hiệu lực',
-        // staffName: this.nameStaff,
       },
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        res.value['id'] = event.data.id;
+        console.log(res.value);
+
+        this.mService
+          .getApiService()
+          .sendRequestUPDATE_TBL_HOPDONG_NHANSU(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+              this.onLoadDataContract();
+            }
+          });
+      }
     });
   }
 
@@ -740,31 +754,25 @@ export class DetailStaffComponent implements OnInit {
       { name: 'SỐ QUYẾT ĐỊNH', cell: 'decisionCode' },
       { name: 'NGÀY KÝ', cell: 'decisionDate' },
       { name: 'MỨC LƯƠNG', cell: 'salaryIncrease' },
-      { name: 'TÌNH TRẠNG QUYẾT ĐỊNH', cell: 'decisionStatus' },
-      { name: 'NGÀY DỪNG', cell: 'stopEnd' },
-      // { name: 'LÝ DO', cell: 'description' },
+      { name: 'TÌNH TRẠNG QUYẾT ĐỊNH', cell: 'status' },
+      { name: 'NGÀY DỪNG', cell: 'stopDate' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
   };
 
-  dataExampleSalaryIncrease = [
-    {
-      stt: 0,
-      description: 'Mô tả tình trạng A',
-      decisionStatus: 'Có hiệu lực',
-      decisionDate: '11-11-2020',
-      stopEnd: '11-11-2022',
-      decisionCode: 'SA8724823',
-      salaryIncrease: '9000000',
-      contractStatus: 'Còn hiệu lực',
-    },
-  ];
-
   onLoadDataSalaryIncrease() {
-    this.mService.publishEvent(EVENT_PUSH.TABLE, {
-      listData: this.dataExampleSalaryIncrease,
-      listTbData: this.listTbDataSalaryIncrease,
-    });
+    this.mService
+      .getApiService()
+      .sendRequestGET_DETAIL_TBL_QUYETDINH_TANGLUONG(this.quoteID)
+      .then((data) => {
+        console.log(data);
+        if (data.status == STATUS.SUCCESS) {
+          this.mService.publishEvent(EVENT_PUSH.TABLE, {
+            listData: data.array,
+            listTbData: this.listTbDataSalaryIncrease,
+          });
+        }
+      });
   }
 
   onClickAddSalaryIncrease() {
@@ -774,6 +782,22 @@ export class DetailStaffComponent implements OnInit {
         width: '900px',
       }
     );
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        res.value['idNhanVien'] = this.quoteID;
+        console.log(res.value);
+
+        this.mService
+          .getApiService()
+          .sendRequestADD_TBL_QUYETDINH_TANGLUONG(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+              this.onLoadDataSalaryIncrease();
+            }
+          });
+      }
+    });
   }
 
   onClickEditSalaryIncrease(event) {
@@ -785,13 +809,50 @@ export class DetailStaffComponent implements OnInit {
           decisionCode: event.data.decisionCode,
           salaryIncrease: event.data.salaryIncrease,
           status: event.data.status,
-          stt: 0,
-          description: 'Mô tả tình trạng A',
-          decisionStatus: 'Có hiệu lực',
-          contractStatus: 'Còn hiệu lực',
-          // staffName: this.nameStaff,
+          description: event.data.description,
+          decisionStatus: event.data.decisionStatus,
+          contractStatus: event.data.contractStatus,
+          stopDate: event.data.stopDate,
+          decisionDate: event.data.decisionDate,
         },
       }
     );
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        res.value['id'] = event.data.id;
+        console.log(res.value);
+
+        this.mService
+          .getApiService()
+          .sendRequestUPDATE_TBL_QUYETDINH_TANGLUONG(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+              this.onLoadDataSalaryIncrease();
+            }
+          });
+      }
+    });
+  }
+
+  onClickBtnSalaryIncrease(event) {
+    if (event.btnType == BUTTON_TYPE.DELETE) {
+      const dialogRef = this.dialog.open(RemoveComponent, {
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe((res) => {
+        if (res) {
+          this.mService
+            .getApiService()
+            .sendRequestDELETE_TBL_QUYETDINH_TANGLUONG(event.data)
+            .then((data) => {
+              this.mService.showSnackBar(data.message);
+              if (data.status == STATUS.SUCCESS) {
+                this.onLoadDataSalaryIncrease();
+              }
+            });
+        }
+      });
+    }
   }
 }

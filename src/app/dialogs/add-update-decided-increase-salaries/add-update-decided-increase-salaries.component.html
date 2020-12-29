@@ -2,23 +2,7 @@
   <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI QUYẾT ĐỊNH TĂNG LƯƠNG</h2>
   <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN QUYẾT ĐỊNH TĂNG LƯƠNG</h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
-  <form [formGroup]="myForm">
-    <mat-form-field appearance="outline">
-      <mat-label>Mã nhân viên</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="staffCode">
-        <mat-option value="NV0001">NV0001</mat-option>
-        <mat-option value="NV0002">NV0002</mat-option>
-        <mat-option value="NV0003">NV0003</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Tên nhân viên</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="staffName">
-        <mat-option value="Nhân viên A">Nhân viên A</mat-option>
-        <mat-option value="Nhân viên B">Nhân viên B</mat-option>
-        <mat-option value="Nhân viên C">Nhân viên C</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-form-field appearance="outline">
       <mat-label>Số quyết định</mat-label>
       <input matInput placeholder="Nhập Text" formControlName="decisionCode" />
@@ -44,12 +28,8 @@
       <mat-datepicker #decisionDatePicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Tình trạng quyết định</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="status">
-        <mat-option value="Tình trạng A">Tình trạng A</mat-option>
-        <mat-option value="Tình trạng B">Tình trạng B</mat-option>
-        <mat-option value="Tình trạng C">Tình trạng C</mat-option>
-      </mat-select>
+      <mat-label>Tình trạng quyết định</mat-label
+      ><input matInput placeholder="Nhập Text" formControlName="status" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Ngày dừng quyết định</mat-label>
@@ -62,22 +42,12 @@
       </mat-datepicker-toggle>
       <mat-datepicker #stopDatePicker></mat-datepicker>
     </mat-form-field>
-    <!-- <mat-form-field appearance="outline">
-      <mat-label>Lý do dừng quyết định</mat-label>
-      <textarea
-        matInput
-        placeholder="Nhập Text"
-        formControlName="stopReason"
-      ></textarea>
-    </mat-form-field> -->
     <div width-100 align="end">
       <button
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="onClickOk($event)"
         [disabled]="!myForm.valid"
-        cdkFocusInitial
       >
         <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
       </button>

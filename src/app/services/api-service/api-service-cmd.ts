@@ -115,4 +115,22 @@ export class ApiCmd {
   public static UPDATE_TBL_LOAIHOPDONG: string = 'qlnb/update_tbl_loaihopdong';
 
   public static ADD_TBL_LOAIHOPDONG: string = 'qlnb/add_tbl_loaihopdong';
+
+  public static GET_LIST_NAME_TBL_LOAIHOPDONG: string =
+    'qlnb/get_list_name_tbl_loaihopdong';
+
+  public static GET_DETAIL_TBL_QUYETDINH_TANGLUONG: string =
+    'qlnb/get_detail_tbl_quyetdinh_tangluong';
+
+  public static ADD_TBL_QUYETDINH_TANGLUONG: string =
+    'qlnb/add_tbl_quyetdinh_tangluong';
+
+  public static DELETE_TBL_QUYETDINH_TANGLUONG: string =
+    'qlnb/delete_tbl_quyetdinh_tangluong';
+
+  public static UPDATE_TBL_QUYETDINH_TANGLUONG: string =
+    'qlnb/update_tbl_quyetdinh_tangluong';
+
+  public static UPDATE_TBL_HOPDONG_NHANSU: string =
+    'qlnb/update_tbl_hopdong_nhansu';
 }
