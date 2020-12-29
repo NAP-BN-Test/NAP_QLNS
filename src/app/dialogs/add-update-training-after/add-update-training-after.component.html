@@ -4,7 +4,7 @@
     SỬA THÔNG TIN ĐÀO TẠO SAU KHI ĐẾN CÔNG TY
   </h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-form-field appearance="outline">
       <mat-label>Khóa đào tạo</mat-label>
       <input
@@ -19,33 +19,26 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Hình thức đào tạo</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="hTTT" />
+      <input matInput placeholder="Nhập Text" formControlName="formTraining" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Số tiền cá nhân</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="personCost" />
+      <input matInput placeholder="Nhập Text" formControlName="staffCost" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Chuyên ngành</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="chuyenNganh" />
+      <input matInput placeholder="Nhập Text" formControlName="majors" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Số chứng chỉ</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="soCC" />
+      <input
+        matInput
+        placeholder="Nhập Text"
+        formControlName="numberCertificates"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Ngày bắt đầu</mat-label>
-      <input
-        matInput
-        [matDatepicker]="stkNHpicker"
-        formControlName="ngayBatDau"
-      />
-      <mat-datepicker-toggle matSuffix [for]="stkNHpicker">
-      </mat-datepicker-toggle>
-      <mat-datepicker #stkNHpicker></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Ngày cấp</mat-label>
       <input
         matInput
         [matDatepicker]="dateStartpicker"
@@ -56,18 +49,18 @@
       <mat-datepicker #dateStartpicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Ngày kết thúc</mat-label>
+      <mat-label>Ngày cấp</mat-label>
       <input
         matInput
-        [matDatepicker]="dateEndpicker"
-        formControlName="ngayKetThuc"
+        [matDatepicker]="rangeDatepicker"
+        formControlName="rangeDate"
       />
-      <mat-datepicker-toggle matSuffix [for]="dateEndpicker">
+      <mat-datepicker-toggle matSuffix [for]="rangeDatepicker">
       </mat-datepicker-toggle>
-      <mat-datepicker #dateEndpicker></mat-datepicker>
+      <mat-datepicker #rangeDatepicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Ngày hết hạn</mat-label>
+      <mat-label>Ngày kết thúc</mat-label>
       <input
         matInput
         [matDatepicker]="dateEndpicker"
@@ -77,14 +70,23 @@
       </mat-datepicker-toggle>
       <mat-datepicker #dateEndpicker></mat-datepicker>
     </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ngày hết hạn</mat-label>
+      <input
+        matInput
+        [matDatepicker]="expirationDatepicker"
+        formControlName="expirationDate"
+      />
+      <mat-datepicker-toggle matSuffix [for]="expirationDatepicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #expirationDatepicker></mat-datepicker>
+    </mat-form-field>
     <div width-100 align="end">
       <button
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="onClickOk($event)"
         [disabled]="!myForm.valid"
-        cdkFocusInitial
       >
         <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
       </button>

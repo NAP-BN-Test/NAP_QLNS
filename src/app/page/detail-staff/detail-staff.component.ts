@@ -358,29 +358,40 @@ export class DetailStaffComponent implements OnInit {
     listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
   };
 
-  dataExampleTrainingAfter = [
-    {
-      stt: 0,
-      trainingCourse: 'Khóa đào tạo nghiệp vụ',
-      chuyenNganh: 'Công nghệ thông tin',
-      companyCost: '6000000',
-      personCost: '9000000',
-      soCC: 'CT38293',
-      dateStart: '11-11-2020',
-      dateEnd: '11-11-2022',
-    },
-  ];
-
   onLoadDataTrainingAfter() {
-    this.mService.publishEvent(EVENT_PUSH.TABLE, {
-      listData: this.dataExampleTrainingAfter,
-      listTbData: this.listTbDataTrainingAfter,
-    });
+    this.mService
+      .getApiService()
+      .sendRequestGET_LIST_TBL_TRAINING_AFTER(this.quoteID)
+      .then((data) => {
+        console.log(data);
+        if (data.status == STATUS.SUCCESS) {
+          this.mService.publishEvent(EVENT_PUSH.TABLE, {
+            listData: data.array,
+            listTbData: this.listTbDataTrainingAfter,
+          });
+        }
+      });
   }
 
   onClickAddTrainingAfter() {
     const dialogRef = this.dialog.open(AddUpdateTrainingAfterComponent, {
       width: '900px',
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        res.value['idNhanVien'] = this.quoteID;
+        console.log(res.value);
+
+        this.mService
+          .getApiService()
+          .sendRequestADD_TBL_TRAINING_AFTER(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+              this.onLoadDataTrainingAfter();
+            }
+          });
+      }
     });
   }
 
@@ -389,12 +400,52 @@ export class DetailStaffComponent implements OnInit {
       width: '900px',
       data: {
         trainingCourse: event.data.trainingCourse,
-        chuyenNganh: event.data.chuyenNganh,
+        majors: event.data.majors,
         companyCost: event.data.companyCost,
-        personCost: event.data.personCost,
-        soCC: event.data.soCC,
+        staffCost: event.data.staffCost,
+        numberCertificates: event.data.numberCertificates,
+        dateStart: event.data.dateStart,
+        dateEnd: event.data.dateEnd,
+        formTraining: event.data.formTraining,
+        expirationDate: event.data.expirationDate,
+        rangeDate: event.data.rangeDate,
       },
     });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        res.value['id'] = event.data.id;
+        this.mService
+          .getApiService()
+          .sendRequestUPDATE_TBL_TRAINING_AFTER(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+              this.onLoadDataTrainingAfter();
+            }
+          });
+      }
+    });
+  }
+
+  onClickBtnTrainingAfter(event) {
+    if (event.btnType == BUTTON_TYPE.DELETE) {
+      const dialogRef = this.dialog.open(RemoveComponent, {
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe((res) => {
+        if (res) {
+          this.mService
+            .getApiService()
+            .sendRequestDELETE_TBL_TRAINING_AFTER(event.data)
+            .then((data) => {
+              this.mService.showSnackBar(data.message);
+              if (data.status == STATUS.SUCCESS) {
+                this.onLoadDataTrainingAfter();
+              }
+            });
+        }
+      });
+    }
   }
 
   // Quản lý đào tạo trước khi đến công ty ===========================================
@@ -412,27 +463,38 @@ export class DetailStaffComponent implements OnInit {
     listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
   };
 
-  dataExampleTrainingBefore = [
-    {
-      stt: 0,
-      degree: 'Hoàn thành khóa đào tạo nghiệp vụ',
-      major: 'Công nghệ thông tin',
-      trainingPlace: 'Bắc Ninh',
-      dateStart: '11-11-2020',
-      dateEnd: '11-11-2022',
-    },
-  ];
-
   onLoadDataTrainingBefore() {
-    this.mService.publishEvent(EVENT_PUSH.TABLE, {
-      listData: this.dataExampleTrainingBefore,
-      listTbData: this.listTbDataTrainingBefore,
-    });
+    this.mService
+      .getApiService()
+      .sendRequestGET_LIST_TBL_PRE_TRAINING(this.quoteID)
+      .then((data) => {
+        console.log(data);
+        if (data.status == STATUS.SUCCESS) {
+          this.mService.publishEvent(EVENT_PUSH.TABLE, {
+            listData: data.array,
+            listTbData: this.listTbDataTrainingBefore,
+          });
+        }
+      });
   }
 
   onClickAddTrainingBefore() {
     const dialogRef = this.dialog.open(AddUpdateTrainingBeforeComponent, {
       width: '900px',
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        res.value['idNhanVien'] = this.quoteID;
+        this.mService
+          .getApiService()
+          .sendRequestADD_TBL_PRE_TRAINING(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+              this.onLoadDataTrainingBefore();
+            }
+          });
+      }
     });
   }
 
@@ -443,8 +505,45 @@ export class DetailStaffComponent implements OnInit {
         degree: event.data.degree,
         major: event.data.major,
         trainingPlace: event.data.trainingPlace,
+        dateStart: event.data.dateStart,
+        dateEnd: event.data.dateEnd,
       },
     });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        res.value['id'] = event.data.id;
+        this.mService
+          .getApiService()
+          .sendRequestUPDATE_TBL_PRE_TRAINING(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+              this.onLoadDataTrainingBefore();
+            }
+          });
+      }
+    });
+  }
+
+  onClickBtnTrainingBefore(event) {
+    if (event.btnType == BUTTON_TYPE.DELETE) {
+      const dialogRef = this.dialog.open(RemoveComponent, {
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe((res) => {
+        if (res) {
+          this.mService
+            .getApiService()
+            .sendRequestDELETE_TBL_PRE_TRAINING(event.data)
+            .then((data) => {
+              this.mService.showSnackBar(data.message);
+              if (data.status == STATUS.SUCCESS) {
+                this.onLoadDataTrainingBefore();
+              }
+            });
+        }
+      });
+    }
   }
 
   // Lịch sử công tác =================================================================
@@ -454,33 +553,45 @@ export class DetailStaffComponent implements OnInit {
       { name: 'SỐ THỨ TỰ', cell: 'stt' },
       { name: 'TỪ NGÀY', cell: 'dateStart' },
       { name: 'ĐẾN NGÀY', cell: 'dateEnd' },
-      { name: 'TÌNH TRẠNG', cell: 'employeeStatus' },
-      { name: 'MÔ TẢ', cell: 'description' },
+      { name: 'TÌNH TRẠNG', cell: 'status' },
+      { name: 'MÔ TẢ', cell: 'describe' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
     listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
   };
 
-  dataExampleStaffStatus = [
-    {
-      stt: 0,
-      description: 'Mô tả tình trạng A',
-      employeeStatus: 'Tình trạng 1',
-      dateStart: '11-11-2020',
-      dateEnd: '11-11-2022',
-    },
-  ];
-
   onLoadDataStaffStatus() {
-    this.mService.publishEvent(EVENT_PUSH.TABLE, {
-      listData: this.dataExampleStaffStatus,
-      listTbData: this.listTbDataStaffStatus,
-    });
+    this.mService
+      .getApiService()
+      .sendRequestGET_LIST_TBL_WORK_HISTORY(this.quoteID)
+      .then((data) => {
+        console.log(data);
+        if (data.status == STATUS.SUCCESS) {
+          this.mService.publishEvent(EVENT_PUSH.TABLE, {
+            listData: data.array,
+            listTbData: this.listTbDataStaffStatus,
+          });
+        }
+      });
   }
 
   onClickAddStaffStatus() {
     const dialogRef = this.dialog.open(AddUpdateStaffStatusComponent, {
       width: '900px',
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        res.value['idNhanVien'] = this.quoteID;
+        this.mService
+          .getApiService()
+          .sendRequestADD_TBL_WORK_HISTORY(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+              this.onLoadDataStaffStatus();
+            }
+          });
+      }
     });
   }
 
@@ -488,9 +599,25 @@ export class DetailStaffComponent implements OnInit {
     const dialogRef = this.dialog.open(AddUpdateStaffStatusComponent, {
       width: '900px',
       data: {
-        employeeStatus: event.data.employeeStatus,
         description: event.data.description,
+        status: event.data.status,
+        dateStart: event.data.dateStart,
+        dateEnd: event.data.dateEnd,
       },
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        res.value['id'] = event.data.id;
+        this.mService
+          .getApiService()
+          .sendRequestUPDATE_TBL_WORK_HISTORY(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+              this.onLoadDataStaffStatus();
+            }
+          });
+      }
     });
   }
 

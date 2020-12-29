@@ -318,6 +318,7 @@
         <div class="tab1">
           <div align="end" style="padding-bottom: 1%">
             <button
+              type="button"
               mat-raised-button
               color="primary"
               (click)="onClickAddTrainingAfter()"
@@ -328,6 +329,7 @@
           <app-table-paginator
             [hasPagination]="false"
             (clickEdit)="onClickEditTrainingAfter($event)"
+            (clickBtn)="onClickBtnTrainingAfter($event)"
           ></app-table-paginator>
         </div>
       </mat-tab>
@@ -335,6 +337,7 @@
         <div class="tab1">
           <div align="end" style="padding-bottom: 1%">
             <button
+              type="button"
               mat-raised-button
               color="primary"
               (click)="onClickAddTrainingBefore()"
@@ -345,6 +348,7 @@
           <app-table-paginator
             [hasPagination]="false"
             (clickEdit)="onClickEditTrainingBefore($event)"
+            (clickBtn)="onClickBtnTrainingBefore($event)"
           ></app-table-paginator>
         </div>
       </mat-tab>
@@ -352,6 +356,7 @@
         <div class="tab1">
           <div align="end" style="padding-bottom: 1%">
             <button
+              type="button"
               mat-raised-button
               color="primary"
               (click)="onClickAddStaffStatus()"
@@ -369,6 +374,7 @@
         <div class="tab1">
           <div align="end" style="padding-bottom: 1%">
             <button
+              type="button"
               mat-raised-button
               color="primary"
               (click)="onClickAddContract()"
@@ -387,6 +393,7 @@
         <div class="tab1">
           <div align="end" style="padding-bottom: 1%">
             <button
+              type="button"
               mat-raised-button
               color="primary"
               (click)="onClickAddSalaryIncrease()"

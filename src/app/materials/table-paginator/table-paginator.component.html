@@ -47,7 +47,7 @@
           {{ row[item.cell] }}
         </div>
         <div *ngIf="item.cell === 'undefined'" (click)="onClickEdit(row)">
-          <button mat-raised-button color="accent">
+          <button mat-raised-button type="button" color="accent">
             <mat-icon>edit</mat-icon>Sửa
           </button>
         </div>

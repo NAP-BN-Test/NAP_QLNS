@@ -6,7 +6,7 @@
     SỬA THÔNG TIN ĐÀO TẠO TRƯỚC KHI ĐẾN CÔNG TY
   </h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-form-field appearance="outline">
       <mat-label>Ngày bắt đầu</mat-label>
       <input
@@ -46,9 +46,7 @@
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="onClickOk($event)"
         [disabled]="!myForm.valid"
-        cdkFocusInitial
       >
         <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
       </button>

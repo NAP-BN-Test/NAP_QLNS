@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -12,6 +13,7 @@ export class AddUpdateTrainingBeforeComponent implements OnInit {
   myForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
+    private datePipe: DatePipe,
     public mService: AppModuleService,
     @Inject(MAT_DIALOG_DATA) public mData: any,
     public dialogRef: MatDialogRef<AddUpdateTrainingBeforeComponent>
@@ -27,24 +29,13 @@ export class AddUpdateTrainingBeforeComponent implements OnInit {
 
   ngOnInit() {}
 
-  onClickOk(event) {
+  onSubmit(value) {
+    value.dateStart = this.datePipe.transform(value.dateStart, 'yyyy-MM-dd');
+    value.dateEnd = this.datePipe.transform(value.dateEnd, 'yyyy-MM-dd');
+    console.log(value);
+
     this.dialogRef.close({
-      // codeStaff: this.myForm.value.codeStaff,
-      // timekeeperCode: this.myForm.value.timekeeperCode,
-      // personalTaxCode: this.myForm.value.personalTaxCode,
-      // staffName: this.myForm.value.staffName,
-      // phone: this.myForm.value.phone,
-      // birthday: this.myForm.value.birthday,
-      // email: this.myForm.value.email,
-      // gender: this.myForm.value.gender,
-      // stkNH: this.myForm.value.stkNH,
-      // departmentName: this.myForm.value.departmentName,
-      // homeTown: this.myForm.value.homeTown,
-      // currentResidence: this.myForm.value.currentResidence,
-      // permanentResidence: this.myForm.value.permanentResidence,
-      // age: this.myForm.value.age,
-      // bank: this.myForm.value.bank,
-      // position: this.myForm.value.position,
+      value: value,
     });
   }
 }

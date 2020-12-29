@@ -65,4 +65,34 @@ export class ApiCmd {
   public static UPDATE_TBL_DMGIADINH: string = 'qlnb/update_tbl_dmgiadinh';
 
   public static DELETE_TBL_DMGIADINH: string = 'qlnb/delete_tbl_dmgiadinh';
+
+  public static GET_LIST_TBL_TRAINING_AFTER: string =
+    'qlnb/get_list_tbl_training_after';
+
+  public static ADD_TBL_TRAINING_AFTER: string = 'qlnb/add_tbl_training_after';
+
+  public static UPDATE_TBL_TRAINING_AFTER: string =
+    'qlnb/update_tbl_training_after';
+
+  public static DELETE_TBL_TRAINING_AFTER: string =
+    'qlnb/delete_tbl_training_after';
+
+  public static GET_LIST_TBL_PRE_TRAINING: string =
+    'qlnb/get_list_tbl_pre_training';
+
+  public static ADD_TBL_PRE_TRAINING: string = 'qlnb/add_tbl_pre_training';
+
+  public static UPDATE_TBL_PRE_TRAINING: string =
+    'qlnb/update_tbl_pre_training';
+
+  public static DELETE_TBL_PRE_TRAINING: string =
+    'qlnb/delete_tbl_pre_training';
+
+  public static GET_LIST_TBL_WORK_HISTORY: string =
+    'qlnb/get_list_tbl_work_history';
+
+  public static ADD_TBL_WORK_HISTORY: string = 'qlnb/add_tbl_work_history';
+
+  public static UPDATE_TBL_WORK_HISTORY: string =
+    'qlnb/update_tbl_work_history';
 }

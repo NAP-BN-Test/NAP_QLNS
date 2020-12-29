@@ -1,10 +1,8 @@
 <div class="container-anl">
-  <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI ĐÀO TẠO SAU KHI ĐẾN CÔNG TY</h2>
-  <h2 mat-dialog-title *ngIf="mData">
-    SỬA THÔNG TIN ĐÀO TẠO SAU KHI ĐẾN CÔNG TY
-  </h2>
+  <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI LỊCH SỬ CÔNG TÁC</h2>
+  <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN LỊCH SỬ CÔNG TÁC</h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-form-field appearance="outline">
       <mat-label>Từ ngày</mat-label>
       <input
@@ -29,18 +27,14 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Tình trạng</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="employeeStatus">
-        <mat-option value="Tình trạng 1">Tình trạng 1</mat-option>
-        <mat-option value="Tình trạng 2">Tình trạng 2</mat-option>
-        <mat-option value="Tình trạng 3">Tình trạng 3</mat-option>
-      </mat-select>
+      <input matInput placeholder="Nhập Text" formControlName="status" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Mô tả</mat-label>
       <textarea
         matInput
         placeholder="Nhập Text"
-        formControlName="description"
+        formControlName="describe"
       ></textarea>
     </mat-form-field>
     <div width-100 align="end">
@@ -48,9 +42,7 @@
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="onClickOk($event)"
         [disabled]="!myForm.valid"
-        cdkFocusInitial
       >
         <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
       </button>

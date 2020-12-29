@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -12,44 +13,37 @@ export class AddUpdateTrainingAfterComponent implements OnInit {
   myForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
+    private datePipe: DatePipe,
     public mService: AppModuleService,
     @Inject(MAT_DIALOG_DATA) public mData: any,
     public dialogRef: MatDialogRef<AddUpdateTrainingAfterComponent>
   ) {
     this.myForm = this.formBuilder.group({
       trainingCourse: [mData ? mData.trainingCourse : ''],
-      chuyenNganh: [mData ? mData.chuyenNganh : ''],
+      majors: [mData ? mData.majors : ''],
       companyCost: [mData ? mData.companyCost : ''],
-      personCost: [mData ? mData.personCost : ''],
-      soCC: [mData ? mData.soCC : ''],
-      dateStart: [mData ? mData.dateStart : ''],
-      dateEnd: [mData ? mData.dateEnd : ''],
-      hTTT: [''],
-      ngayBatDau: [''],
-      ngayKetThuc: [''],
+      staffCost: [mData ? mData.staffCost : ''],
+      numberCertificates: [mData ? mData.numberCertificates : ''],
+      dateStart: [mData ? mData.dateStart : null],
+      dateEnd: [mData ? mData.dateEnd : null],
+      formTraining: [mData ? mData.formTraining : null],
+      expirationDate: [mData ? mData.expirationDate : null],
+      rangeDate: [mData ? mData.rangeDate : null],
     });
   }
 
   ngOnInit() {}
 
-  onClickOk(event) {
+  onSubmit(value) {
+    value.dateStart = this.datePipe.transform(value.dateStart, 'yyyy-MM-dd');
+    value.dateEnd = this.datePipe.transform(value.dateEnd, 'yyyy-MM-dd');
+    value.expirationDate = this.datePipe.transform(
+      value.expirationDate,
+      'yyyy-MM-dd'
+    );
+    value.rangeDate = this.datePipe.transform(value.rangeDate, 'yyyy-MM-dd');
     this.dialogRef.close({
-      // codeStaff: this.myForm.value.codeStaff,
-      // timekeeperCode: this.myForm.value.timekeeperCode,
-      // personalTaxCode: this.myForm.value.personalTaxCode,
-      // staffName: this.myForm.value.staffName,
-      // phone: this.myForm.value.phone,
-      // birthday: this.myForm.value.birthday,
-      // email: this.myForm.value.email,
-      // gender: this.myForm.value.gender,
-      // stkNH: this.myForm.value.stkNH,
-      // departmentName: this.myForm.value.departmentName,
-      // homeTown: this.myForm.value.homeTown,
-      // currentResidence: this.myForm.value.currentResidence,
-      // permanentResidence: this.myForm.value.permanentResidence,
-      // age: this.myForm.value.age,
-      // bank: this.myForm.value.bank,
-      // position: this.myForm.value.position,
+      value: value,
     });
   }
 }

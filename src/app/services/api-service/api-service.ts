@@ -115,6 +115,56 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestGET_LIST_TBL_PRE_TRAINING(idNhanVien): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_PRE_TRAINING,
+      ParamBuilder.builder().add('idNhanVien', idNhanVien)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestGET_LIST_TBL_TRAINING_AFTER(idNhanVien): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_TRAINING_AFTER,
+      ParamBuilder.builder().add('idNhanVien', idNhanVien)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestGET_LIST_TBL_WORK_HISTORY(idNhanVien): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_WORK_HISTORY,
+      ParamBuilder.builder().add('idNhanVien', idNhanVien)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestADD_TBL_WORK_HISTORY(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_WORK_HISTORY,
+      ParamBuilder.builder()
+        .add('idNhanVien', obj.idNhanVien)
+        .addIgnoreNull('describe', obj.describe)
+        .addIgnoreNull('status', obj.status)
+        .addIgnoreNull('dateStart', obj.dateStart)
+        .addIgnoreNull('dateEnd', obj.dateEnd)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestUPDATE_TBL_WORK_HISTORY(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TBL_WORK_HISTORY,
+      ParamBuilder.builder()
+        .addIgnoreNull('id', obj.id)
+        .addIgnoreNull('describe', obj.describe)
+        .addIgnoreNull('status', obj.status)
+        .addIgnoreNull('dateStart', obj.dateStart)
+        .addIgnoreNull('dateEnd', obj.dateEnd)
+    );
+  }
+
+  //===================================================================================
   public sendRequestGET_LIST_TBL_DM_CHINHANH(page, dataSearch): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.GET_LIST_TBL_DM_CHINHANH,
@@ -145,6 +195,44 @@ export class ApiService extends HttpClient {
         .add('name', obj.name)
         .add('description', obj.description)
         .add('type', obj.type)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestADD_TBL_TRAINING_AFTER(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_TRAINING_AFTER,
+      ParamBuilder.builder()
+        .add('idNhanVien', obj.idNhanVien)
+        .addIgnoreNull('dateStart', obj.dateStart)
+        .addIgnoreNull('dateEnd', obj.dateEnd)
+        .addIgnoreNull('trainningCourse', obj.trainningCourse)
+        .addIgnoreNull('companyCost', obj.companyCost)
+        .addIgnoreNull('result', obj.result)
+        .addIgnoreNull('staffCost', obj.staffCost)
+        .addIgnoreNull('majors', obj.majors)
+        .addIgnoreNull('rangeDate', obj.rangeDate)
+        .addIgnoreNull('ExpirationDate', obj.ExpirationDate)
+        .addIgnoreNull('formTraining', obj.formTraining)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestUPDATE_TBL_TRAINING_AFTER(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TBL_TRAINING_AFTER,
+      ParamBuilder.builder()
+        .add('id', obj.id)
+        .addIgnoreNull('dateStart', obj.dateStart)
+        .addIgnoreNull('dateEnd', obj.dateEnd)
+        .addIgnoreNull('trainningCourse', obj.trainningCourse)
+        .addIgnoreNull('companyCost', obj.companyCost)
+        .addIgnoreNull('result', obj.result)
+        .addIgnoreNull('staffCost', obj.staffCost)
+        .addIgnoreNull('majors', obj.majors)
+        .addIgnoreNull('rangeDate', obj.rangeDate)
+        .addIgnoreNull('ExpirationDate', obj.ExpirationDate)
+        .addIgnoreNull('formTraining', obj.formTraining)
     );
   }
 
@@ -287,6 +375,34 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestADD_TBL_PRE_TRAINING(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_PRE_TRAINING,
+      ParamBuilder.builder()
+        .add('idNhanVien', obj.idNhanVien)
+        .addIgnoreNull('dateStart', obj.dateStart)
+        .addIgnoreNull('dateEnd', obj.dateEnd)
+        .addIgnoreNull('trainingPlace', obj.trainingPlace)
+        .addIgnoreNull('major', obj.major)
+        .addIgnoreNull('degree', obj.degree)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestUPDATE_TBL_PRE_TRAINING(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TBL_PRE_TRAINING,
+      ParamBuilder.builder()
+        .addIgnoreNull('dateStart', obj.dateStart)
+        .addIgnoreNull('dateEnd', obj.dateEnd)
+        .addIgnoreNull('trainingPlace', obj.trainingPlace)
+        .addIgnoreNull('major', obj.major)
+        .addIgnoreNull('degree', obj.degree)
+        .add('id', obj.id)
+    );
+  }
+
+  //===================================================================================
   public sendRequestADD_TBL_DMGIADINH(obj): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.ADD_TBL_DMGIADINH,
@@ -351,9 +467,25 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestDELETE_TBL_TRAINING_AFTER(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_TRAINING_AFTER,
+      ParamBuilder.builder().add('listID', listID)
+    );
+  }
+
+  //===================================================================================
   public sendRequestDELETE_TBL_DMGIADINH(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_DMGIADINH,
+      ParamBuilder.builder().add('listID', listID)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestDELETE_TBL_PRE_TRAINING(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_PRE_TRAINING,
       ParamBuilder.builder().add('listID', listID)
     );
   }
