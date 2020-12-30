@@ -37,11 +37,11 @@
         matInput
         type="text"
         formControlName="idLoaiHopDong"
-        [matAutocomplete]="autoDepartment"
+        [matAutocomplete]="autoTypeContact"
       />
       <mat-autocomplete
         autoActiveFirstOption
-        #autoDepartment="matAutocomplete"
+        #autoTypeContact="matAutocomplete"
         [displayWith]="typeContractDisplayFn"
       >
         <mat-option

@@ -123,11 +123,13 @@
               type="text"
               formControlName="idBoPhan"
               [matAutocomplete]="autoDepartment"
+              required
             />
             <mat-autocomplete
               autoActiveFirstOption
               #autoDepartment="matAutocomplete"
               [displayWith]="departmentDisplayFn"
+              required
             >
               <mat-option
                 *ngFor="let item of filterDepartment | async"
@@ -155,11 +157,13 @@
               type="text"
               formControlName="idChucVu"
               [matAutocomplete]="autoRole"
+              required
             />
             <mat-autocomplete
               autoActiveFirstOption
               #autoRole="matAutocomplete"
               [displayWith]="roleDisplayFn"
+              required
             >
               <mat-option
                 *ngFor="let item of filterRole | async"
@@ -236,11 +240,24 @@
           <mat-form-field appearance="outline">
             <mat-label>Loại hợp đồng</mat-label>
             <input
-              [readonly]="!isEdit"
+              required
               matInput
-              placeholder="Nhập Text"
+              type="text"
               formControlName="idLoaiHopDong"
+              [matAutocomplete]="autoTypeContract"
             />
+            <mat-autocomplete
+              autoActiveFirstOption
+              #autoTypeContract="matAutocomplete"
+              [displayWith]="typeContractDisplayFn"
+            >
+              <mat-option
+                *ngFor="let item of filterTypeContract | async"
+                [value]="item"
+              >
+                {{ item.tenLoaiHD }}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Mức lương</mat-label>
@@ -287,10 +304,16 @@
             color="accent"
             style="margin-right: 1%"
             (click)="isEdit = true"
+            [disabled]="isEdit"
           >
             <mat-icon>edit</mat-icon>Chỉnh sửa
           </button>
-          <button mat-raised-button color="warn" type="submit">
+          <button
+            mat-raised-button
+            color="warn"
+            type="submit"
+            [disabled]="myForm.invalid"
+          >
             <mat-icon>save</mat-icon>Lưu
           </button>
         </div>
@@ -404,6 +427,7 @@
           </div>
           <app-table-paginator
             [hasPagination]="false"
+            (clickBtn)="onClickBtnSalaryIncrease($event)"
             (clickEdit)="onClickEditSalaryIncrease($event)"
           ></app-table-paginator>
         </div>

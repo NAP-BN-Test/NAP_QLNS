@@ -294,6 +294,7 @@ export class ApiService extends HttpClient {
         .addIgnoreNull('stopDate', obj.stopDate)
         .addIgnoreNull('stopReason', obj.stopReason)
         .addIgnoreNull('salaryIncrease', obj.salaryIncrease)
+        .addIgnoreNull('status', obj.status)
     );
   }
 
@@ -308,6 +309,7 @@ export class ApiService extends HttpClient {
         .addIgnoreNull('IncreaseDate', obj.IncreaseDate)
         .addIgnoreNull('stopDate', obj.stopDate)
         .addIgnoreNull('stopReason', obj.stopReason)
+        .addIgnoreNull('status', obj.status)
         .addIgnoreNull('salaryIncrease', obj.salaryIncrease)
     );
   }
@@ -328,6 +330,7 @@ export class ApiService extends HttpClient {
         .addIgnoreNull('rangeDate', obj.rangeDate)
         .addIgnoreNull('expirationDate', obj.expirationDate)
         .addIgnoreNull('formTraining', obj.formTraining)
+        .addIgnoreNull('numberCertificates', obj.numberCertificates)
     );
   }
 
@@ -346,6 +349,7 @@ export class ApiService extends HttpClient {
         .addIgnoreNull('majors', obj.majors)
         .addIgnoreNull('rangeDate', obj.rangeDate)
         .addIgnoreNull('expirationDate', obj.expirationDate)
+        .addIgnoreNull('numberCertificates', obj.numberCertificates)
         .addIgnoreNull('formTraining', obj.formTraining)
     );
   }

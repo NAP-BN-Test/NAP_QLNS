@@ -81,6 +81,26 @@ export class DetailStaffComponent implements OnInit {
 
     this.mService
       .getApiService()
+      .sendRequestGET_LIST_NAME_TBL_LOAIHOPDONG()
+      .then((data) => {
+        this.listTypeContract = data.array;
+        this.filterTypeContract = this.myForm.controls.idLoaiHopDong.valueChanges.pipe(
+          startWith(''),
+          map((value) =>
+            typeof value === 'string' || value === null
+              ? value
+              : value.idLoaiHopDong
+          ),
+          map((name: string | null) =>
+            name
+              ? this._filterTypeContract(name)
+              : this.listTypeContract.slice()
+          )
+        );
+      });
+
+    this.mService
+      .getApiService()
       .sendRequestDETAIL_TBL_DMNHANVIEN(this.quoteID)
       .then((data) => {
         if (data.status == STATUS.SUCCESS) {
@@ -101,13 +121,11 @@ export class DetailStaffComponent implements OnInit {
             gender: data.obj.gender,
             idBoPhan: {
               id: Number(data.obj.idBoPhan),
-              departmentName: data.obj.departmentName,
             },
             idChucVu: {
               id: Number(data.obj.idChucVu),
-              positionName: data.obj.positionName,
             },
-            idLoaiHopDong: data.obj.idLoaiHopDong,
+            idLoaiHopDong: { id: Number(data.obj.idLoaiHopDong) },
             idMayChamCong: data.obj.idMayChamCong,
             idNation: data.obj.idNation,
             permanentResidence: data.obj.permanentResidence,
@@ -193,8 +211,9 @@ export class DetailStaffComponent implements OnInit {
       'yyyy-MM-dd'
     );
     value.signDate = this.datePipe.transform(value.signDate, 'yyyy-MM-dd');
-    value.idBoPhan = value.idBoPhan.id;
-    value.idChucVu = value.idChucVu.id;
+    value.idBoPhan = value.idBoPhan ? value.idBoPhan.id : '';
+    value.idChucVu = value.idChucVu ? value.idChucVu.id : '';
+    value.idLoaiHopDong = value.idLoaiHopDong ? value.idLoaiHopDong.id : '';
     console.log(value);
 
     this.mService
@@ -218,7 +237,7 @@ export class DetailStaffComponent implements OnInit {
 
   departmentDisplayFn = (value) =>
     Object.values(this.listDepartment).find(
-      (department) => department.id === value.id
+      (department) => department.id == value.id
     )?.departmentName;
 
   //Autocomplete Chức vụ
@@ -233,8 +252,24 @@ export class DetailStaffComponent implements OnInit {
   }
 
   roleDisplayFn = (value) =>
-    Object.values(this.listRole).find((role) => role.id === value.id)
+    Object.values(this.listRole).find((role) => role.id == value.id)
       ?.positionName;
+
+  //Autocomplete Loại hợp đồng
+  filterTypeContract: Observable<string[]>;
+  listTypeContract = [];
+
+  _filterTypeContract(value): string[] {
+    const filterValue = value.toLowerCase();
+    return this.listTypeContract.filter((option: any) =>
+      option.tenLoaiHD.toLowerCase().includes(filterValue)
+    );
+  }
+
+  typeContractDisplayFn = (value) =>
+    Object.values(this.listTypeContract).find(
+      (TypeContract) => TypeContract.id === value.id
+    )?.tenLoaiHD;
 
   // Quan hệ gia đình ========================================================
   listTbDataFamilyRelationship = {
@@ -758,6 +793,8 @@ export class DetailStaffComponent implements OnInit {
       { name: 'NGÀY DỪNG', cell: 'stopDate' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
+
+    listButton: [{ id: BUTTON_TYPE.DELETE, name: 'Xóa', color: 'accent' }],
   };
 
   onLoadDataSalaryIncrease() {
@@ -810,7 +847,6 @@ export class DetailStaffComponent implements OnInit {
           salaryIncrease: event.data.salaryIncrease,
           status: event.data.status,
           description: event.data.description,
-          decisionStatus: event.data.decisionStatus,
           contractStatus: event.data.contractStatus,
           stopDate: event.data.stopDate,
           decisionDate: event.data.decisionDate,

@@ -71,7 +71,7 @@ export class AddUpdateContractComponent implements OnInit {
     });
   }
 
-  //Autocomplete Bộ phận
+  //Autocomplete Loại hợp đồng
   filterTypeContract: Observable<string[]>;
   listTypeContract = [];
 
