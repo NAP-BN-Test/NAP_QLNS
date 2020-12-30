@@ -107,6 +107,18 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestGET_LIST_TBL_NGHILE(page, dataSearch): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_NGHILE,
+      ParamBuilder.builder()
+        .add('itemPerPage', this.itemPerPage)
+        .add('dataSearch', dataSearch)
+        .add('page', page)
+        .add('type', 'holiday')
+    );
+  }
+
+  //===================================================================================
   public sendRequestGET_LIST_TBL_DMGIADINH(idNhanVien): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.GET_LIST_TBL_DMGIADINH,
@@ -560,6 +572,33 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestADD_TBL_NGHILE(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_NGHILE,
+      ParamBuilder.builder()
+        .add('idLoaiChamCong', obj.idLoaiChamCong)
+        .add('dateStartHoliday', obj.dateStartHoliday)
+        .add('dateEndHoliday', obj.dateEndHoliday)
+        .add('nameHoliday', obj.nameHoliday)
+        .add('describe', obj.describe)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestUPDATE_TBL_NGHILE(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TBL_NGHILE,
+      ParamBuilder.builder()
+        .add('idLoaiChamCong', obj.idLoaiChamCong)
+        .add('dateStartHoliday', obj.dateStartHoliday)
+        .add('dateEndHoliday', obj.dateEndHoliday)
+        .add('nameHoliday', obj.nameHoliday)
+        .add('describe', obj.describe)
+        .add('id', obj.id)
+    );
+  }
+
+  //===================================================================================
   public sendRequestADD_TBL_PRE_TRAINING(obj): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.ADD_TBL_PRE_TRAINING,
@@ -613,6 +652,14 @@ export class ApiService extends HttpClient {
     return this.requestPost(
       this.mUrl + ApiCmd.GET_LIST_NAME_TBL_LOAIHOPDONG,
       ParamBuilder.builder()
+    );
+  }
+
+  //===================================================================================
+  public sendRequestGET_LIST_NAME_TBL_LOAICHAMCONG(type): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_NAME_TBL_LOAICHAMCONG,
+      ParamBuilder.builder().add('type', type)
     );
   }
 
@@ -692,6 +739,14 @@ export class ApiService extends HttpClient {
   public sendRequestDELETE_TBL_MUCDONG_BAOHIEM(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_MUCDONG_BAOHIEM,
+      ParamBuilder.builder().add('listID', listID)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestDELETE_TBL_NGHILE(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_NGHILE,
       ParamBuilder.builder().add('listID', listID)
     );
   }

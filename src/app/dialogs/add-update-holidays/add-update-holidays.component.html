@@ -2,47 +2,53 @@
   <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI QUẢN LÝ NGHỈ LỄ TẾT</h2>
   <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN QUẢN LÝ NGHỈ LỄ TẾT</h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-form-field appearance="outline">
       <mat-label>Từ ngày</mat-label>
       <input
         matInput
-        [matDatepicker]="dateStartPicker"
-        formControlName="dateStart"
+        [matDatepicker]="dateStartHolidayPicker"
+        formControlName="dateStartHoliday"
       />
-      <mat-datepicker-toggle matSuffix [for]="dateStartPicker">
+      <mat-datepicker-toggle matSuffix [for]="dateStartHolidayPicker">
       </mat-datepicker-toggle>
-      <mat-datepicker #dateStartPicker></mat-datepicker>
+      <mat-datepicker #dateStartHolidayPicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Đến ngày</mat-label>
       <input
         matInput
-        [matDatepicker]="dateEndPicker"
-        formControlName="dateEnd"
+        [matDatepicker]="dateEndHolidayPicker"
+        formControlName="dateEndHoliday"
       />
-      <mat-datepicker-toggle matSuffix [for]="dateEndPicker">
+      <mat-datepicker-toggle matSuffix [for]="dateEndHolidayPicker">
       </mat-datepicker-toggle>
-      <mat-datepicker #dateEndPicker></mat-datepicker>
+      <mat-datepicker #dateEndHolidayPicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Loại ngày lễ</mat-label>
-      <mat-select placeholder="Nhập Text" formControlName="holidayType">
-        <mat-option value="Nghỉ lễ">Nghỉ lễ</mat-option>
-        <mat-option value="Nghỉ tết">Nghỉ tết</mat-option>
-        <mat-option value="Nghỉ kỉ nhiệm công ty">
-          Nghỉ kỉ nhiệm công ty
+      <input
+        matInput
+        type="text"
+        formControlName="idLoaiChamCong"
+        [matAutocomplete]="autoTypeHT"
+      />
+      <mat-autocomplete
+        autoActiveFirstOption
+        #autoTypeHT="matAutocomplete"
+        [displayWith]="typeHTDisplayFn"
+      >
+        <mat-option *ngFor="let item of filterTypeHT | async" [value]="item">
+          {{ item.name }}
         </mat-option>
-      </mat-select>
+      </mat-autocomplete>
     </mat-form-field>
     <div width-100 align="end">
       <button
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="onClickOk($event)"
         [disabled]="!myForm.valid"
-        cdkFocusInitial
       >
         <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
       </button>

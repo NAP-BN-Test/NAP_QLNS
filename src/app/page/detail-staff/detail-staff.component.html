@@ -12,7 +12,7 @@
         <div class="tab">
           <div class="double-input">
             <mat-form-field appearance="outline">
-              <mat-label>Mã số nhân sự</mat-label>
+              <mat-label>Mã nhân viên</mat-label>
               <input
                 required
                 [readonly]="!isEdit"
@@ -110,6 +110,15 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline">
+            <mat-label>Số chứng minh nhân dân</mat-label>
+            <input
+              [readonly]="!isEdit"
+              matInput
+              placeholder="Nhập Text"
+              formControlName="cmndNumber"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Số tài khoản ngân hàng</mat-label>
             <input
               [readonly]="!isEdit"
@@ -185,7 +194,7 @@
               formControlName="degree"
             />
           </mat-form-field>
-          <mat-form-field appearance="outline" width-100>
+          <mat-form-field appearance="outline" style="width: 66%">
             <mat-label>Quê quán</mat-label>
             <input
               [readonly]="!isEdit"
@@ -303,6 +312,15 @@
           </mat-form-field>
         </div>
         <div class="d-flex justify-content-center" style="padding-bottom: 2%">
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            style="margin-right: 1%"
+            routerLink="/menu/quote"
+          >
+            <mat-icon>exit_to_app</mat-icon>Thoát
+          </button>
           <button
             mat-raised-button
             type="button"

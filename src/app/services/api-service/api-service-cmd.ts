@@ -159,4 +159,15 @@ export class ApiCmd {
 
   public static GET_LIST_TBL_HOPDONG_NHANSU: string =
     'qlnb/get_list_tbl_hopdong_nhansu';
+
+  public static GET_LIST_TBL_NGHILE: string = 'qlnb/get_list_tbl_nghile';
+
+  public static DELETE_TBL_NGHILE: string = 'qlnb/delete_tbl_nghile';
+
+  public static ADD_TBL_NGHILE: string = 'qlnb/add_tbl_nghile';
+
+  public static UPDATE_TBL_NGHILE: string = 'qlnb/update_tbl_nghile';
+
+  public static GET_LIST_NAME_TBL_LOAICHAMCONG: string =
+    'qlnb/get_list_name_tbl_loaichamcong';
 }
