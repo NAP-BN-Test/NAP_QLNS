@@ -711,6 +711,10 @@ export class DetailStaffComponent implements OnInit {
   onClickAddContract() {
     const dialogRef = this.dialog.open(AddUpdateContractComponent, {
       width: '900px',
+      data: {
+        idNhanVien: this.quoteID,
+        isCreate: true,
+      },
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {

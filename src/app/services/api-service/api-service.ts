@@ -285,6 +285,20 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestGET_LIST_TBL_HOPDONG_NHANSU(
+    page,
+    dataSearch
+  ): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_HOPDONG_NHANSU,
+      ParamBuilder.builder()
+        .add('itemPerPage', this.itemPerPage)
+        .add('dataSearch', dataSearch)
+        .add('page', page)
+    );
+  }
+
+  //===================================================================================
   public sendRequestGET_LIST_NAME_TBL_DMNHANVIEN(): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.GET_LIST_NAME_TBL_DMNHANVIEN,

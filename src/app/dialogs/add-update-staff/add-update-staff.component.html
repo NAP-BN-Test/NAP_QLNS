@@ -171,9 +171,22 @@
         <mat-label>Loại hợp đồng</mat-label>
         <input
           matInput
-          placeholder="Nhập Text"
+          type="text"
           formControlName="idLoaiHopDong"
+          [matAutocomplete]="autoTypeContact"
         />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #autoTypeContact="matAutocomplete"
+          [displayWith]="typeContractDisplayFn"
+        >
+          <mat-option
+            *ngFor="let item of filterTypeContract | async"
+            [value]="item"
+          >
+            {{ item.tenLoaiHD }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Mức lương</mat-label>

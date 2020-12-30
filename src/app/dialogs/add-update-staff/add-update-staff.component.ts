@@ -87,6 +87,26 @@ export class AddUpdateStaffComponent implements OnInit {
           )
         );
       });
+
+    this.mService
+      .getApiService()
+      .sendRequestGET_LIST_NAME_TBL_LOAIHOPDONG()
+      .then((data) => {
+        this.listTypeContract = data.array;
+        this.filterTypeContract = this.myForm.controls.idLoaiHopDong.valueChanges.pipe(
+          startWith(''),
+          map((value) =>
+            typeof value === 'string' || value === null
+              ? value
+              : value.idLoaiHopDong
+          ),
+          map((name: string | null) =>
+            name
+              ? this._filterTypeContract(name)
+              : this.listTypeContract.slice()
+          )
+        );
+      });
   }
 
   onSubmit(value) {
@@ -134,4 +154,20 @@ export class AddUpdateStaffComponent implements OnInit {
   roleDisplayFn = (value) =>
     Object.values(this.listRole).find((role) => role.id === value.id)
       ?.positionName;
+
+  //Autocomplete Loại hợp đồng
+  filterTypeContract: Observable<string[]>;
+  listTypeContract = [];
+
+  _filterTypeContract(value): string[] {
+    const filterValue = value.toLowerCase();
+    return this.listTypeContract.filter((option: any) =>
+      option.tenLoaiHD.toLowerCase().includes(filterValue)
+    );
+  }
+
+  typeContractDisplayFn = (value) =>
+    Object.values(this.listTypeContract).find(
+      (TypeContract) => TypeContract.id === value.id
+    )?.tenLoaiHD;
 }

@@ -156,4 +156,7 @@ export class ApiCmd {
 
   public static GET_LIST_NAME_TBL_DMNHANVIEN: string =
     'qlnb/get_list_name_tbl_dmnhanvien';
+
+  public static GET_LIST_TBL_HOPDONG_NHANSU: string =
+    'qlnb/get_list_tbl_hopdong_nhansu';
 }
