@@ -118,6 +118,7 @@ export class AddUpdateStaffComponent implements OnInit {
     value.signDate = this.datePipe.transform(value.signDate, 'yyyy-MM-dd');
     value.idBoPhan = value.idBoPhan.id;
     value.idChucVu = value.idChucVu.id;
+    value.idLoaiHopDong = value.idLoaiHopDong.id;
 
     this.dialogRef.close({
       value: value,
