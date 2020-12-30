@@ -634,7 +634,7 @@ export class DetailStaffComponent implements OnInit {
     const dialogRef = this.dialog.open(AddUpdateStaffStatusComponent, {
       width: '900px',
       data: {
-        description: event.data.description,
+        describe: event.data.describe,
         status: event.data.status,
         dateStart: event.data.dateStart,
         dateEnd: event.data.dateEnd,

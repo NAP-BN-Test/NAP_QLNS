@@ -10,6 +10,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Ngày bắt đầu</mat-label>
       <input
+        required
         matInput
         [matDatepicker]="dateStartpicker"
         formControlName="dateStart"
@@ -21,6 +22,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Ngày kết thúc</mat-label>
       <input
+        required
         matInput
         [matDatepicker]="dateEndpicker"
         formControlName="dateEnd"

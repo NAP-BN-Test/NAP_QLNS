@@ -519,6 +519,7 @@ export class ApiService extends HttpClient {
         .addIgnoreNull('idLoaiHopDong', obj.idLoaiHopDong)
         .addIgnoreNull('idMayChamCong', obj.idMayChamCong)
         .addIgnoreNull('idNation', obj.idNation)
+        .addIgnoreNull('idContract', obj.idContract)
         .addIgnoreNull('permanentResidence', obj.permanentResidence)
         .addIgnoreNull('phoneNumber', obj.phoneNumber)
         .addIgnoreNull('probationaryDate', obj.probationaryDate)

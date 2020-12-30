@@ -14,6 +14,7 @@
             <mat-form-field appearance="outline">
               <mat-label>Mã số nhân sự</mat-label>
               <input
+                required
                 [readonly]="!isEdit"
                 matInput
                 placeholder="Nhập Text"
@@ -43,6 +44,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Họ và tên</mat-label>
             <input
+              required
               [readonly]="!isEdit"
               matInput
               placeholder="Nhập Text"
@@ -62,6 +64,7 @@
             <mat-form-field appearance="outline">
               <mat-label>Ngày tháng năm sinh</mat-label>
               <input
+                required
                 [readonly]="!isEdit"
                 matInput
                 [matDatepicker]="birthdayPicker"
@@ -215,6 +218,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Số HĐ</mat-label>
             <input
+              required
               [readonly]="!isEdit"
               matInput
               placeholder="Nhập Text"
@@ -240,6 +244,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Loại hợp đồng</mat-label>
             <input
+              [readonly]="!isEdit"
               required
               matInput
               type="text"

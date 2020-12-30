@@ -27,11 +27,17 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Số hợp đồng</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="contractCode" />
+      <input
+        required
+        matInput
+        placeholder="Nhập Text"
+        formControlName="contractCode"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Mức lương</mat-label>
       <input
+        required
         type="number"
         matInput
         placeholder="Nhập Text"
@@ -42,6 +48,7 @@
       <mat-label>Ngày ký</mat-label>
       <input
         matInput
+        required
         [matDatepicker]="signDatePicker"
         formControlName="signDate"
       />
@@ -78,6 +85,7 @@
       <mat-label>Ngày chấm dứt</mat-label>
       <input
         matInput
+        required
         [matDatepicker]="contractDateEndPicker"
         formControlName="contractDateEnd"
       />

@@ -29,11 +29,17 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Số quyết định</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="decisionCode" />
+      <input
+        required
+        matInput
+        placeholder="Nhập Text"
+        formControlName="decisionCode"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Mức lương</mat-label>
       <input
+        required
         type="number"
         matInput
         placeholder="Nhập Text"
@@ -43,6 +49,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Ngày ký</mat-label>
       <input
+        required
         matInput
         [matDatepicker]="decisionDatePicker"
         formControlName="decisionDate"
@@ -58,6 +65,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Ngày dừng quyết định</mat-label>
       <input
+        required
         matInput
         [matDatepicker]="stopDatePicker"
         formControlName="stopDate"
