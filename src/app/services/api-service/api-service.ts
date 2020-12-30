@@ -165,6 +165,20 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestGET_LIST_TBL_MUCDONG_BAOHIEM(
+    page,
+    dataSearch
+  ): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_MUCDONG_BAOHIEM,
+      ParamBuilder.builder()
+        .add('itemPerPage', this.itemPerPage)
+        .add('dataSearch', dataSearch)
+        .add('page', page)
+    );
+  }
+
+  //===================================================================================
   public sendRequestADD_TBL_WORK_HISTORY(obj): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.ADD_TBL_WORK_HISTORY,
@@ -174,6 +188,39 @@ export class ApiService extends HttpClient {
         .addIgnoreNull('status', obj.status)
         .addIgnoreNull('dateStart', obj.dateStart)
         .addIgnoreNull('dateEnd', obj.dateEnd)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestADD_TBL_MUCDONG_BAOHIEM(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_MUCDONG_BAOHIEM,
+      ParamBuilder.builder()
+        .addIgnoreNull('companyBHXH', obj.companyBHXH)
+        .addIgnoreNull('companyBHYT', obj.companyBHYT)
+        .addIgnoreNull('companyBHTN', obj.companyBHTN)
+        .addIgnoreNull('staffBHXH', obj.staffBHXH)
+        .addIgnoreNull('staffBHYT', obj.staffBHYT)
+        .addIgnoreNull('staffBHTN', obj.staffBHTN)
+        .addIgnoreNull('dateStart', obj.dateStart)
+        .addIgnoreNull('dateEnd', obj.dateEnd)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestUPDATE_TBL_MUCDONG_BAOHIEM(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TBL_MUCDONG_BAOHIEM,
+      ParamBuilder.builder()
+        .addIgnoreNull('companyBHXH', obj.companyBHXH)
+        .addIgnoreNull('companyBHYT', obj.companyBHYT)
+        .addIgnoreNull('companyBHTN', obj.companyBHTN)
+        .addIgnoreNull('staffBHXH', obj.staffBHXH)
+        .addIgnoreNull('staffBHYT', obj.staffBHYT)
+        .addIgnoreNull('staffBHTN', obj.staffBHTN)
+        .addIgnoreNull('dateStart', obj.dateStart)
+        .addIgnoreNull('dateEnd', obj.dateEnd)
+        .add('id', obj.id)
     );
   }
 
@@ -588,6 +635,14 @@ export class ApiService extends HttpClient {
   public sendRequestDELETE_TBL_LOAICHAMCONG(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_LOAICHAMCONG,
+      ParamBuilder.builder().add('listID', listID)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestDELETE_TBL_MUCDONG_BAOHIEM(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_MUCDONG_BAOHIEM,
       ParamBuilder.builder().add('listID', listID)
     );
   }

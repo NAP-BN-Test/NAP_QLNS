@@ -135,4 +135,16 @@ export class ApiCmd {
     'qlnb/update_tbl_hopdong_nhansu';
 
   public static GET_LIST_TBL_BANGLUONG: string = 'qlnb/get_list_tbl_bangluong';
+
+  public static GET_LIST_TBL_MUCDONG_BAOHIEM: string =
+    'qlnb/get_list_tbl_mucdong_baohiem';
+
+  public static ADD_TBL_MUCDONG_BAOHIEM: string =
+    'qlnb/add_tbl_mucdong_baohiem';
+
+  public static UPDATE_TBL_MUCDONG_BAOHIEM: string =
+    'qlnb/update_tbl_mucdong_baohiem';
+
+  public static DELETE_TBL_MUCDONG_BAOHIEM: string =
+    'qlnb/delete_tbl_mucdong_baohiem';
 }

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -12,6 +13,7 @@ export class AddUpdateInsuranceComponent implements OnInit {
   myForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
+    private datePipe: DatePipe,
     public mService: AppModuleService,
     @Inject(MAT_DIALOG_DATA) public mData: any,
     public dialogRef: MatDialogRef<AddUpdateInsuranceComponent>
@@ -25,20 +27,20 @@ export class AddUpdateInsuranceComponent implements OnInit {
       staffBHTN: [mData ? mData.staffBHTN : ''],
       dateStart: [mData ? mData.dateStart : ''],
       dateEnd: [mData ? mData.dateEnd : ''],
-      staffCD: [mData ? mData.staffCD : ''],
     });
   }
 
   ngOnInit() {}
 
-  onClickOk(event) {
+  onSubmit(value) {
+    value.dateStart = value.dateStart
+      ? this.datePipe.transform(value.dateStart, 'yyyy-MM-dd')
+      : null;
+    value.dateEnd = value.dateEnd
+      ? this.datePipe.transform(value.dateEnd, 'yyyy-MM-dd')
+      : null;
     this.dialogRef.close({
-      // decisionCode: this.myForm.value.decisionCode,
-      // decisionDate: this.myForm.value.decisionDate,
-      // salaryIncrease: this.myForm.value.salaryIncrease,
-      // status: this.myForm.value.status,
-      // stopDate: this.myForm.value.stopDate,
-      // stopReason: this.myForm.value.stopReason,
+      value: value,
     });
   }
 }

@@ -2,7 +2,7 @@
   <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI MỨC ĐÓNG BẢO HIỂM</h2>
   <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN MỨC ĐÓNG BẢO HIỂM</h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-form-field appearance="outline">
       <mat-label>Mức đóng BHXH của công ty</mat-label>
       <input matInput placeholder="Nhập Text" formControlName="companyBHXH" />
@@ -25,10 +25,6 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Mức đóng BHTN của nhân viên</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="staffBHTN" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Mức đóng công đoàn của nhân viên</mat-label>
       <input matInput placeholder="Nhập Text" formControlName="staffBHTN" />
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -58,9 +54,7 @@
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="onClickOk($event)"
         [disabled]="!myForm.valid"
-        cdkFocusInitial
       >
         <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
       </button>

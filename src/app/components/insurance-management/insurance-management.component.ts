@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AddUpdateInsuranceComponent } from 'src/app/dialogs/add-update-insurance/add-update-insurance.component';
+import { RemoveComponent } from 'src/app/dialogs/remove/remove.component';
 import { AppModuleService } from 'src/app/services/app-module.service';
 import {
   BUTTON_TYPE,
@@ -42,45 +43,6 @@ export class InsuranceManagementComponent implements OnInit {
     items: [{ conditionFields: '', fields: '', searchFields: '' }],
   };
 
-  dataExample = [
-    {
-      stt: 0,
-      companyBHXH: '17,5%',
-      companyBHYT: '3%',
-      companyBHTN: '1%',
-      staffBHXH: '8%',
-      staffBHYT: '1,5%',
-      staffBHTN: '1%',
-      dateStart: '01-11-2020',
-      dateEnd: '01-11-2021',
-      staffCD: '1%',
-    },
-    {
-      stt: 1,
-      companyBHXH: '17,5%',
-      companyBHYT: '3%',
-      companyBHTN: '1%',
-      staffBHXH: '8%',
-      staffBHYT: '1,5%',
-      staffBHTN: '1%',
-      dateStart: '01-11-2020',
-      dateEnd: '01-11-2021',
-      staffCD: '1%',
-    },
-    {
-      stt: 2,
-      companyBHXH: '17,5%',
-      companyBHYT: '3%',
-      companyBHTN: '1%',
-      staffBHXH: '8%',
-      staffBHYT: '1,5%',
-      staffBHTN: '1%',
-      dateStart: '01-11-2020',
-      dateEnd: '01-11-2021',
-      staffCD: '1%',
-    },
-  ];
-
   constructor(
     public mService: AppModuleService,
     public dialog: MatDialog,
@@ -100,44 +62,44 @@ export class InsuranceManagementComponent implements OnInit {
 
   async onLoadData(page, dataSearch) {
     this.spinner.show();
-    // await this.mService
-    //   .getApiService()
-    //   .sendRequestGET_LIST_LABOR_MANAGEMENT_BOOK(
-    //     page,
-    //     JSON.stringify(dataSearch)
-    //   )
-    //   .then((data) => {
-    //     if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
-    //       this.collectionSize = 3;
-    //       this.mService.publishEvent(EVENT_PUSH.TABLE, {
-    //         page: this.page,
-    //         collectionSize: this.collectionSize,
-    //         listData: this.dataExample,
-    //         listTbData: this.listTbData,
-    //       });
-    //     }
-    //   });
+    await this.mService
+      .getApiService()
+      .sendRequestGET_LIST_TBL_MUCDONG_BAOHIEM(page, JSON.stringify(dataSearch))
+      .then((data) => {
+        console.log(data);
+
+        if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+          this.collectionSize = data.all;
+          this.mService.publishEvent(EVENT_PUSH.TABLE, {
+            page: this.page,
+            collectionSize: this.collectionSize,
+            listData: data.array,
+            listTbData: this.listTbData,
+          });
+        }
+      });
     this.spinner.hide();
   }
 
   onClickBtn(event) {
-    // if (event.btnType == BUTTON_TYPE.DELETE) {
-    //   const dialogRef = this.dialog.open(DialogRemoveComponent, {
-    //     width: '500px',
-    //   });
-    //   dialogRef.afterClosed().subscribe((res) => {
-    //     if (res) {
-    //       this.mService
-    //         .getApiService()
-    //         .sendRequestDELETE_LABOR_MANAGEMENT_BOOK(event.data)
-    //         .then((data) => {
-    //           if (data.status == STATUS.SUCCESS) {
-    //             this.onLoadData(1, this.dataSearch);
-    //           }
-    //         });
-    //     }
-    //   });
-    // }
+    if (event.btnType == BUTTON_TYPE.DELETE) {
+      const dialogRef = this.dialog.open(RemoveComponent, {
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe((res) => {
+        if (res) {
+          this.mService
+            .getApiService()
+            .sendRequestDELETE_TBL_MUCDONG_BAOHIEM(event.data)
+            .then((data) => {
+              this.mService.showSnackBar(data.message);
+              if (data.status == STATUS.SUCCESS) {
+                this.onLoadData(1, this.dataSearch);
+              }
+            });
+        }
+      });
+    }
   }
 
   onClickEdit(event) {
@@ -150,34 +112,24 @@ export class InsuranceManagementComponent implements OnInit {
         staffBHXH: event.data.staffBHXH,
         staffBHYT: event.data.staffBHYT,
         staffBHTN: event.data.staffBHTN,
-        staffCD: event.data.staffCD,
-        // dateStart: event.data.dateStart,
-        // dateEnd: event.data.dateEnd,
+        dateStart: event.data.dateStart,
+        dateEnd: event.data.dateEnd,
       },
     });
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        let obj = {
-          companyBHXH: res.companyBHXH,
-          companyBHYT: res.companyBHYT,
-          companyBHTN: res.companyBHTN,
-          staffBHXH: res.staffBHXH,
-          staffBHYT: res.staffBHYT,
-          staffBHTN: res.staffBHTN,
-          dateStart: res.dateStart,
-          dateEnd: res.dateEnd,
-          staffCD: res.staffCD,
-        };
-        // this.mService
-        //   .getApiService()
-        //   .sendRequestADD_LABOR_MANAGEMENT_BOOK(obj)
-        //   .then((data) => {
-        //     this.mService.showSnackBar(data.message);
-        //     if (data.status == STATUS.SUCCESS) {
-        //       this.onLoadData(this.page, this.dataSearch);
-        //     }
-        //   });
+        res.value['id'] = event.data.id;
+        console.log(res.value);
+        this.mService
+          .getApiService()
+          .sendRequestUPDATE_TBL_MUCDONG_BAOHIEM(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data.status == STATUS.SUCCESS) {
+              this.onLoadData(this.page, this.dataSearch);
+            }
+          });
       }
     });
   }
@@ -189,26 +141,17 @@ export class InsuranceManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        let obj = {
-          companyBHXH: res.companyBHXH,
-          companyBHYT: res.companyBHYT,
-          companyBHTN: res.companyBHTN,
-          staffBHXH: res.staffBHXH,
-          staffBHYT: res.staffBHYT,
-          staffBHTN: res.staffBHTN,
-          dateStart: res.dateStart,
-          dateEnd: res.dateEnd,
-          staffCD: res.staffCD,
-        };
-        // this.mService
-        //   .getApiService()
-        //   .sendRequestADD_LABOR_MANAGEMENT_BOOK(obj)
-        //   .then((data) => {
-        //     this.mService.showSnackBar(data.message);
-        //     if (data.status == STATUS.SUCCESS) {
-        //       this.onLoadData(this.page, this.dataSearch);
-        //     }
-        //   });
+        console.log(res.value);
+
+        this.mService
+          .getApiService()
+          .sendRequestADD_TBL_MUCDONG_BAOHIEM(res.value)
+          .then((data) => {
+            this.mService.showSnackBar(data.message);
+            if (data.status == STATUS.SUCCESS) {
+              this.onLoadData(this.page, this.dataSearch);
+            }
+          });
       }
     });
   }
