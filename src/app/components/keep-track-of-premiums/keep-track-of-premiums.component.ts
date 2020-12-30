@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AppModuleService } from 'src/app/services/app-module.service';
-import { BUTTON_TYPE } from 'src/app/services/constant/app-constant';
+import { BUTTON_TYPE, STATUS } from 'src/app/services/constant/app-constant';
 import { FormControl } from '@angular/forms';
 import {
   MomentDateAdapter,
@@ -22,6 +22,8 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { Moment } from 'moment';
+import { DatePipe } from '@angular/common';
+import { ParamsKey } from 'src/app/services/constant/paramskey';
 
 const moment = _moment;
 
@@ -60,10 +62,10 @@ export class KeepTrackOfPremiumsComponent implements OnInit {
   listTbData = {
     listColum: [
       { name: 'STT', cell: 'stt' },
-      { name: 'HỌ VÀ TÊN', cell: 'staffName' },
+      { name: 'HỌ VÀ TÊN', cell: 'nameStaff' },
       {
         name: 'LƯƠNG BHXH',
-        cell: 'luongBHXH',
+        cell: 'bhxhSalary',
       },
       {
         name: 'Cty',
@@ -103,7 +105,7 @@ export class KeepTrackOfPremiumsComponent implements OnInit {
       },
       {
         name: 'GT GIA CẢNH',
-        cell: 'gtGiaCanh',
+        cell: 'reduce',
       },
       {
         name: 'LƯƠNG TÍNH THUẾ TNCN',
@@ -122,80 +124,18 @@ export class KeepTrackOfPremiumsComponent implements OnInit {
 
   displayedColumns = [
     'stt',
-    'staffName',
-    'luongBHXH',
+    'nameStaff',
+    'bhxhSalary',
     'bhxhCT',
     'bhxhNV',
     'bhytCT',
     'bhytNV',
     'bhtnCT',
     'bhtnNV',
-    'congdoanCT',
-    'congdoanNV',
-    'gtGiaCanh',
+    'reduce',
     'luongTinhThueTNCN',
     'thueTNCN',
     'tongKhoanTru',
-  ];
-
-  dataExample = [
-    {
-      stt: 1,
-      staffName: 'Nhân viên A',
-      luongChinh: '10,000,000',
-      luongBHXH: '10,000,000',
-      bhxhCT: '1,750,000',
-      bhxhNV: '800,000',
-      bhytNV: '150,000',
-      bhytCT: '300,000',
-      congdoanCT: '0',
-      congdoanNV: '50,000',
-      bhtnNV: '100,000',
-      bhtnCT: '100,000',
-      gtGiaCanh: 0,
-      luongTinhThueTNCN: '10,000,000',
-      thueTNCN: '1,000,000',
-      tongKhoanTru: '2,100,000',
-      thucLinh: '7,900,000',
-    },
-    {
-      stt: 2,
-      staffName: 'Nhân viên B',
-      luongChinh: '10,000,000',
-      luongBHXH: '10,000,000',
-      bhxhCT: '1,750,000',
-      bhxhNV: '800,000',
-      bhytNV: '150,000',
-      bhytCT: '300,000',
-      congdoanCT: '0',
-      congdoanNV: '50,000',
-      bhtnNV: '100,000',
-      bhtnCT: '100,000',
-      gtGiaCanh: 0,
-      luongTinhThueTNCN: '10,000,000',
-      thueTNCN: '1,000,000',
-      tongKhoanTru: '2,100,000',
-      thucLinh: '7,900,000',
-    },
-    {
-      stt: 3,
-      staffName: 'Nhân viên C',
-      luongChinh: '10,000,000',
-      luongBHXH: '10,000,000',
-      bhxhCT: '1,750,000',
-      bhxhNV: '800,000',
-      bhytNV: '150,000',
-      bhytCT: '300,000',
-      congdoanCT: '0',
-      congdoanNV: '50,000',
-      bhtnNV: '100,000',
-      bhtnCT: '100,000',
-      gtGiaCanh: 0,
-      luongTinhThueTNCN: '10,000,000',
-      thueTNCN: '1,000,000',
-      tongKhoanTru: '2,100,000',
-      thucLinh: '7,900,000',
-    },
   ];
 
   collectionSize;
@@ -204,10 +144,16 @@ export class KeepTrackOfPremiumsComponent implements OnInit {
   constructor(
     public mService: AppModuleService,
     public dialog: MatDialog,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private datePipe: DatePipe
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.mService.LoadAppConfig();
+    if (!this.mService.getUser()) {
+      this.mService.publishPageRoute('login');
+    }
+  }
 
   isEdit = false;
 
@@ -229,31 +175,55 @@ export class KeepTrackOfPremiumsComponent implements OnInit {
     datepicker.close();
   }
 
-  onLoadData(page) {
-    // this.spinner.show();
-    // this.mService
-    //   .getApiService()
-    //   .sendRequestGET_LIST_MANAGEMENT_JOB_HR(page, JSON.stringify(dataSearch))
-    //   .then((data) => {
-    //     if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
-    //       this.collectionSize = data.count;
-    //       this.mService.publishEvent(EVENT_PUSH.TABLE, {
-    //         page: this.page,
-    //         collectionSize: this.collectionSize,
-    //         listData: data.array,
-    //         listTbData: this.listTbData,
-    //       });
-    //     }
-    //   });
-    // this.spinner.hide();
+  dataTable;
+  companyBHTN;
+  companyBHXH;
+  companyBHYT;
+  staffBHTN;
+  staffBHXH;
+  staffBHYT;
+
+  async onLoadData() {
+    let date = this.monthYear
+      ? this.datePipe.transform(this.monthYear.value, 'yyyy-MM')
+      : null;
+    console.log(date);
+
+    this.spinner.show();
+    await this.mService
+      .getApiService()
+      .sendRequestTRACK_INSURANCE_PREMIUMS(date)
+      .then((data) => {
+        if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
+          console.log(data);
+          this.dataTable = data.array;
+          this.companyBHTN = data.objInsurance.companyBHTN;
+          this.companyBHXH = data.objInsurance.companyBHXH;
+          this.companyBHYT = data.objInsurance.companyBHYT;
+          this.staffBHTN = data.objInsurance.staffBHTN;
+          this.staffBHXH = data.objInsurance.staffBHXH;
+          this.staffBHYT = data.objInsurance.staffBHYT;
+        }
+      });
+    this.spinner.hide();
   }
 
   onClickPagination(event) {
     this.page = event;
-    this.onLoadData(event);
+    // this.onLoadData(event);
   }
 
   onClickEdit(event) {}
 
   onClickSort(event) {}
+
+  compute(event, element) {
+    let salaryTaxCompute = Number(event.target.innerHTML);
+    if (salaryTaxCompute) {
+      console.log(salaryTaxCompute);
+      console.log(element);
+    } else {
+      event.target.innerHTML = '';
+    }
+  }
 }

@@ -147,4 +147,13 @@ export class ApiCmd {
 
   public static DELETE_TBL_MUCDONG_BAOHIEM: string =
     'qlnb/delete_tbl_mucdong_baohiem';
+
+  public static TRACK_INSURANCE_PREMIUMS: string =
+    'qlnb/track_insurance_premiums';
+
+  public static GET_LIST_TBL_QUYETDINH_TANGLUONG: string =
+    'qlnb/get_list_tbl_quyetdinh_tangluong';
+
+  public static GET_LIST_NAME_TBL_DMNHANVIEN: string =
+    'qlnb/get_list_name_tbl_dmnhanvien';
 }

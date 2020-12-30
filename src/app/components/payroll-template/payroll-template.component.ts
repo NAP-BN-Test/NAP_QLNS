@@ -165,14 +165,14 @@ export class PayrollTemplateComponent implements OnInit {
 
   dataTable;
 
-  onLoadData() {
+  async onLoadData() {
     let date = this.monthYear
       ? this.datePipe.transform(this.monthYear.value, 'yyyy-MM')
       : null;
     console.log(date);
 
     this.spinner.show();
-    this.mService
+    await this.mService
       .getApiService()
       .sendRequestGET_LIST_TBL_BANGLUONG(date)
       .then((data) => {

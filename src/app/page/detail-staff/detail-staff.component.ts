@@ -817,6 +817,10 @@ export class DetailStaffComponent implements OnInit {
       AddUpdateDecidedIncreaseSalariesComponent,
       {
         width: '900px',
+        data: {
+          idNhanVien: this.quoteID,
+          isCreate: true,
+        },
       }
     );
     dialogRef.afterClosed().subscribe((res) => {
@@ -843,6 +847,7 @@ export class DetailStaffComponent implements OnInit {
       {
         width: '900px',
         data: {
+          idNhanVien: this.quoteID,
           decisionCode: event.data.decisionCode,
           salaryIncrease: event.data.salaryIncrease,
           status: event.data.status,

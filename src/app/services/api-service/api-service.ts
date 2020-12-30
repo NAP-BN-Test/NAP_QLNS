@@ -271,6 +271,28 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestGET_LIST_TBL_QUYETDINH_TANGLUONG(
+    page,
+    dataSearch
+  ): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_QUYETDINH_TANGLUONG,
+      ParamBuilder.builder()
+        .add('itemPerPage', this.itemPerPage)
+        .add('dataSearch', dataSearch)
+        .add('page', page)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestGET_LIST_NAME_TBL_DMNHANVIEN(): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_NAME_TBL_DMNHANVIEN,
+      ParamBuilder.builder()
+    );
+  }
+
+  //===================================================================================
   public sendRequestADD_TBL_LOAICHAMCONG(obj): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.ADD_TBL_LOAICHAMCONG,
@@ -632,6 +654,14 @@ export class ApiService extends HttpClient {
     return this.requestPost(
       this.mUrl + ApiCmd.DETAIL_TBL_DMNHANVIEN,
       ParamBuilder.builder().add('id', id)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestTRACK_INSURANCE_PREMIUMS(date): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.TRACK_INSURANCE_PREMIUMS,
+      ParamBuilder.builder().add('date', date)
     );
   }
 
