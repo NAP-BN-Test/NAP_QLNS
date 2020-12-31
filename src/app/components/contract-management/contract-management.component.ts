@@ -34,7 +34,11 @@ export class ContractManagementComponent implements OnInit {
   collectionSize;
   page: number = 1;
 
-  listFields = [{ name: 'TÊN LOẠI' }, { name: 'MÔ TẢ' }];
+  listFields = [
+    { name: 'SỐ HỢP ĐỒNG' },
+    { name: 'LOẠI HỢP ĐỒNG' },
+    { name: 'TÌNH TRẠNG HỢP ĐỒNG' },
+  ];
 
   dataSearch: any = {
     search: '',
@@ -101,7 +105,7 @@ export class ContractManagementComponent implements OnInit {
 
   onClickEdit(event) {
     console.log(event);
-    
+
     const dialogRef = this.dialog.open(AddUpdateContractComponent, {
       width: '900px',
       data: {

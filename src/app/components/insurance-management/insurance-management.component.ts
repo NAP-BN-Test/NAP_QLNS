@@ -36,7 +36,7 @@ export class InsuranceManagementComponent implements OnInit {
   collectionSize;
   page: number = 1;
 
-  listFields = [{ name: 'TÊN LOẠI' }, { name: 'MÔ TẢ' }];
+  listFields = [];
 
   dataSearch: any = {
     search: '',

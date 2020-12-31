@@ -34,7 +34,7 @@ export class DecidedToIncreaseTheSalariesComponent implements OnInit {
   collectionSize;
   page: number = 1;
 
-  listFields = [{ name: 'TÊN LOẠI' }, { name: 'MÔ TẢ' }];
+  listFields = [{ name: 'SỐ QUYẾT ĐỊNH' }, { name: 'TÌNH TRẠNG QUYẾT ĐỊNH' }];
 
   dataSearch: any = {
     search: '',
@@ -149,7 +149,6 @@ export class DecidedToIncreaseTheSalariesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        res.value['idNhanVien'] = res.value.idNhanVien.id;
         console.log(res.value);
 
         this.mService

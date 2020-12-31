@@ -171,4 +171,16 @@ export class AddUpdateStaffComponent implements OnInit {
     Object.values(this.listTypeContract).find(
       (TypeContract) => TypeContract.id === value.id
     )?.tenLoaiHD;
+
+  //Tính ngày hết hạn bảo hành
+  computeAge() {
+    if (this.myForm.controls.birthday.value) {
+      var timeDiff = Math.abs(
+        Date.now() - new Date(this.myForm.controls.birthday.value).getTime()
+      );
+      let age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
+      console.log(age);
+      this.myForm.controls.age.setValue(age);
+    }
+  }
 }

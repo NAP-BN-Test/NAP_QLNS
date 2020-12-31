@@ -40,7 +40,7 @@
         required
         type="number"
         matInput
-        placeholder="Nhập Text"
+        placeholder="Nhập số tiền"
         formControlName="salaryNumber"
       />
     </mat-form-field>
@@ -58,7 +58,11 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Tình trạng hợp đồng</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="status" />
+      <mat-select placeholder="Vui lòng chọn..." formControlName="status">
+        <mat-option value="Có hiệu lực">Có hiệu lực</mat-option>
+        <mat-option value="Hết hiệu lực">Hết hiệu lực</mat-option>
+        <mat-option value="Tạm dừng">Tạm dừng</mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Loại hợp đồng</mat-label>

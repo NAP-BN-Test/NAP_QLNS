@@ -31,7 +31,7 @@ export class HolidayComponent implements OnInit {
   collectionSize;
   page: number = 1;
 
-  listFields = [{ name: 'TÊN LOẠI' }, { name: 'MÔ TẢ' }];
+  listFields = [{ name: 'MÃ LOẠI NGHỈ LỄ' }, { name: 'TÊN LOẠI LỄ' }];
 
   dataSearch: any = {
     search: '',

@@ -31,7 +31,7 @@ export class HolidaysManagementComponent implements OnInit {
   collectionSize;
   page: number = 1;
 
-  listFields = [{ name: 'TÊN LOẠI' }, { name: 'MÔ TẢ' }];
+  listFields = [{ name: 'LOẠI NGHỈ LỄ' }];
 
   dataSearch: any = {
     search: '',

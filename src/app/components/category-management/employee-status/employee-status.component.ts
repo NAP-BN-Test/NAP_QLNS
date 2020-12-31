@@ -31,7 +31,7 @@ export class EmployeeStatusComponent implements OnInit {
   collectionSize;
   page: number = 1;
 
-  listFields = [{ name: 'TÊN LOẠI' }, { name: 'MÔ TẢ' }];
+  listFields = [{ name: 'MÃ TÌNH TRẠNG' }, { name: 'TÊN TÌNH TRẠNG' }];
 
   dataSearch: any = {
     search: '',

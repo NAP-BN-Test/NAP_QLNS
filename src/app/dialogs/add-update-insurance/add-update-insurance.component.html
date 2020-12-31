@@ -5,27 +5,57 @@
   <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <mat-form-field appearance="outline">
       <mat-label>Mức đóng BHXH của công ty</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="companyBHXH" />
+      <input
+        matInput
+        placeholder="Nhập mức đóng %"
+        type="number"
+        formControlName="companyBHXH"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Mức đóng BHYT của công ty</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="companyBHYT" />
+      <input
+        matInput
+        placeholder="Nhập mức đóng %"
+        type="number"
+        formControlName="companyBHYT"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Mức đóng BHTN của công ty</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="companyBHTN" />
+      <input
+        matInput
+        placeholder="Nhập mức đóng %"
+        type="number"
+        formControlName="companyBHTN"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Mức đóng BHXH của nhân viên</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="staffBHXH" />
+      <input
+        matInput
+        placeholder="Nhập mức đóng %"
+        type="number"
+        formControlName="staffBHXH"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Mức đóng BHYT của nhân viên</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="staffBHYT" />
+      <input
+        matInput
+        placeholder="Nhập mức đóng %"
+        type="number"
+        formControlName="staffBHYT"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Mức đóng BHTN của nhân viên</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="staffBHTN" />
+      <input
+        matInput
+        placeholder="Nhập mức đóng %"
+        type="number"
+        formControlName="staffBHTN"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Từ ngày</mat-label>

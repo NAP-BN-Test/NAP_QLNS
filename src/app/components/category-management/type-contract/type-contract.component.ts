@@ -30,7 +30,7 @@ export class TypeContractComponent implements OnInit {
   collectionSize;
   page: number = 1;
 
-  listFields = [{ name: 'TÊN LOẠI' }, { name: 'MÔ TẢ' }];
+  listFields = [{ name: 'MÃ LOẠI HỢP ĐỒNG' }, { name: 'TÊN LOẠI HỢP ĐỒNG' }];
 
   dataSearch: any = {
     search: '',

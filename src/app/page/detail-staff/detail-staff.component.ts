@@ -20,6 +20,7 @@ import {
   STATUS,
 } from 'src/app/services/constant/app-constant';
 import { ParamsKey } from 'src/app/services/constant/paramskey';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-detail-staff',
@@ -46,7 +47,6 @@ export class DetailStaffComponent implements OnInit {
     this.mService.LoadAppConfig();
     let params: any = this.mService.handleActivatedRoute();
     this.quoteID = params.quoteID ? params.quoteID : '';
-
     this.mService
       .getApiService()
       .sendRequestGET_LIST_NAME_TBL_DM_BOPHAN()
@@ -143,6 +143,7 @@ export class DetailStaffComponent implements OnInit {
             idContract: data.obj.idContract,
             id: this.quoteID,
           });
+          this.computeAge();
         }
         this.spinner.hide();
       });
@@ -222,6 +223,18 @@ export class DetailStaffComponent implements OnInit {
       .then((data) => {
         this.mService.showSnackBar(data.message);
       });
+  }
+
+  //Tính ngày hết hạn bảo hành
+  computeAge() {
+    if (this.myForm.controls.birthday.value) {
+      var timeDiff = Math.abs(
+        Date.now() - new Date(this.myForm.controls.birthday.value).getTime()
+      );
+      let age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
+      console.log(age);
+      this.myForm.controls.age.setValue(age);
+    }
   }
 
   //Autocomplete Bộ phận

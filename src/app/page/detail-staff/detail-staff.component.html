@@ -69,6 +69,7 @@
                 matInput
                 [matDatepicker]="birthdayPicker"
                 formControlName="birthday"
+                (dateChange)="computeAge()"
               />
               <mat-datepicker-toggle
                 [disabled]="!isEdit"
@@ -114,7 +115,7 @@
             <input
               [readonly]="!isEdit"
               matInput
-              placeholder="Nhập Text"
+              placeholder="Nhập số CMND"
               formControlName="cmndNumber"
             />
           </mat-form-field>
@@ -278,8 +279,9 @@
             <input
               [readonly]="!isEdit"
               matInput
-              placeholder="Nhập Text"
+              placeholder="Nhập số tiền"
               formControlName="workingSalary"
+              type="number"
             />
           </mat-form-field>
           <mat-form-field appearance="outline">
