@@ -48,7 +48,9 @@ export class SearchBoardComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.removeItem(0);
+  }
 
   createForm() {
     this.myForm = this.fb.group({
@@ -146,6 +148,12 @@ export class SearchBoardComponent implements OnInit {
   }
 
   onSubmit(value) {
+    value.items.forEach((element) => {
+      if (element.conditionFields == null || element.fields == null) {
+        value.items = [];
+        return;
+      }
+    });
     this.search.emit(value);
   }
 

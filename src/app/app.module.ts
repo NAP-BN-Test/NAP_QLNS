@@ -67,6 +67,7 @@ import { MY_FORMATS } from './services/constant/app-constant';
 import { DatePipe } from '@angular/common';
 import { TypeContractComponent } from './components/category-management/type-contract/type-contract.component';
 import { AddUpdateTypeContractComponent } from './dialogs/add-update-type-contract/add-update-type-contract.component';
+import { LogoutComponent } from './dialogs/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { AddUpdateTypeContractComponent } from './dialogs/add-update-type-contra
     RemoveComponent,
     TypeContractComponent,
     AddUpdateTypeContractComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,25 @@
+<div>
+    <div mat-dialog-content>
+      <p>Bạn có chắc chắn muốn đăng xuất không?</p>
+    </div>
+    <div mat-dialog-actions>
+      <div flex>
+        <div>
+          <button type="button" class="btn btn-secondary" (click)="onNoClick()">
+            Không
+          </button>
+        </div>
+        <div padding-start>
+          <button
+            type="button"
+            class="btn btn-danger"
+            [mat-dialog-close]="1"
+            cdkFocusInitial
+          >
+            Có
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

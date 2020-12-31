@@ -166,6 +166,8 @@ export class TypeTimekeepingComponent implements OnInit {
   }
 
   onClickSort(event) {
+    console.log(event);
+
     this.dataSearch = event;
     this.onLoadData(1, event);
   }

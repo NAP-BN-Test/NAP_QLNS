@@ -117,11 +117,15 @@
 
 <mat-menu background-primary #userDetail="matMenu">
   <br />
-  <button mat-menu-item><mat-icon>account_circle</mat-icon>Ngô Gia Hưng</button>
-  <button mat-menu-item><mat-icon>qr_code</mat-icon>NV00001</button>
-  <button mat-menu-item (click)="onClickLogout()">
-    <mat-icon>published_with_changes</mat-icon>Đổi mật khẩu
+  <button mat-menu-item>
+    <mat-icon>account_circle</mat-icon>{{ userInfo.staffName }}
   </button>
+  <button mat-menu-item>
+    <mat-icon>qr_code</mat-icon>{{ userInfo.staffCode }}
+  </button>
+  <!-- <button mat-menu-item (click)="onClickLogout()">
+    <mat-icon>published_with_changes</mat-icon>Đổi mật khẩu
+  </button> -->
   <button mat-menu-item (click)="onClickLogout()">
     <mat-icon>exit_to_app</mat-icon>Đăng xuất
   </button>

@@ -1,5 +1,6 @@
 import { Component, Renderer2 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { LogoutComponent } from 'src/app/dialogs/logout/logout.component';
 import { AppModuleService } from 'src/app/services/app-module.service';
 import { ModulesList } from './menu';
 
@@ -15,6 +16,8 @@ export class MenuComponent {
   isMatMenu2Open = false;
   prevButtonTrigger;
   indexMenu: number;
+
+  userInfo = JSON.parse(localStorage.getItem('user-info'));
 
   constructor(
     private ren: Renderer2,
@@ -148,16 +151,17 @@ export class MenuComponent {
   }
 
   onClickLogout() {
-    // const dialogRef = this.dialog.open(LogoutComponent, {
-      // width: '500px',
-    // });
+    const dialogRef = this.dialog.open(LogoutComponent, {
+      width: '500px',
+    });
 
-    // dialogRef.afterClosed().subscribe((res) => {
-      // if (res) {
-        // localStorage.removeItem('user-login');
-        // this.mService.publishPageRoute('login');
-      // }
-    // });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        localStorage.removeItem('user-login');
+        localStorage.removeItem('token');
+        this.mService.publishPageRoute('login');
+      }
+    });
   }
 
   onclickChildMenu(indexMenu) {
