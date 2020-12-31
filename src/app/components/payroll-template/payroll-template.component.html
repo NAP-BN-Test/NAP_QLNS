@@ -59,7 +59,9 @@
         <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
           LƯƠNG CHÍNH
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.workingSalary }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ element.workingSalary | numberConvert }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="WorkingSalary">
@@ -73,7 +75,9 @@
         <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
           LƯƠNG BHXH
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.bhxhSalary }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ element.bhxhSalary | numberConvert }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="BhxhSalary">
@@ -84,7 +88,9 @@
       <ng-container matColumnDef="bhxh">
         <th mat-header-cell *matHeaderCellDef>BHXH {{ staffBHXH }}%</th>
         <td mat-cell *matCellDef="let element">
-          {{ ((element.bhxhSalary * staffBHXH) / 100).toFixed(2) }}
+          {{
+            ((element.bhxhSalary * staffBHXH) / 100).toFixed(2) | numberConvert
+          }}
         </td>
       </ng-container>
 
@@ -92,7 +98,9 @@
       <ng-container matColumnDef="bhyt">
         <th mat-header-cell *matHeaderCellDef>BHYT {{ staffBHYT }}%</th>
         <td mat-cell *matCellDef="let element">
-          {{ ((element.bhxhSalary * staffBHYT) / 100).toFixed(2) }}
+          {{
+            ((element.bhxhSalary * staffBHYT) / 100).toFixed(2) | numberConvert
+          }}
         </td>
       </ng-container>
 
@@ -100,7 +108,9 @@
       <ng-container matColumnDef="bhtn">
         <th mat-header-cell *matHeaderCellDef>BHTN {{ staffBHTN }}%</th>
         <td mat-cell *matCellDef="let element">
-          {{ ((element.bhxhSalary * staffBHTN) / 100).toFixed(2) }}
+          {{
+            ((element.bhxhSalary * staffBHTN) / 100).toFixed(2) | numberConvert
+          }}
         </td>
       </ng-container>
 
@@ -120,11 +130,11 @@
         <td
           tappable
           mat-cell
-          *matCellDef="let element"
+          *matCellDef="let element; let index = index"
           [contentEditable]="true"
-          (blur)="compute($event, element)"
+          (blur)="compute($event, element, index)"
         >
-          {{ element.luongTinhThueTNCN }}
+          0
         </td>
       </ng-container>
 
@@ -139,7 +149,9 @@
         <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
           THUẾ TNCN
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.thueTNCN }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ (element.thueTNCN ? element.thueTNCN : 0) | numberConvert }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="ThueTNCN">
@@ -151,7 +163,11 @@
         <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
           TỔNG CÁC KHOẢN TRỪ
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.tongKhoanTru }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{
+            (element.tongKhoanTru ? element.tongKhoanTru : 0) | numberConvert
+          }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="TongKhoanTru">
@@ -165,7 +181,9 @@
         <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
           THỰC LĨNH
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.thucLinh }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ (element.thucLinh ? element.thucLinh : 0) | numberConvert }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="ThucLinh">

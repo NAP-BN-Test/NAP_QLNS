@@ -27,11 +27,23 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Số điện thoại</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="phoneNumber" />
+      <input
+        matInput
+        placeholder="Nhập Text"
+        formControlName="phoneNumber"
+        pattern="^[0-9\\+\\ \\]*$"
+      />
+      <mat-error>Số điện thoại không hợp lệ.</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Fax</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="faxNumber" />
+      <input
+        matInput
+        placeholder="Nhập Text"
+        formControlName="faxNumber"
+        pattern="^[0-9]*$"
+      />
+      <mat-error>Số fax không hợp lệ.</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>

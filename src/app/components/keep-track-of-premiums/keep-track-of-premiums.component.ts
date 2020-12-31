@@ -208,22 +208,19 @@ export class KeepTrackOfPremiumsComponent implements OnInit {
     this.spinner.hide();
   }
 
-  onClickPagination(event) {
-    this.page = event;
-    // this.onLoadData(event);
-  }
-
-  onClickEdit(event) {}
-
-  onClickSort(event) {}
-
-  compute(event, element) {
+  compute(event, element, i) {
     let salaryTaxCompute = Number(event.target.innerHTML);
-    if (salaryTaxCompute) {
-      console.log(salaryTaxCompute);
-      console.log(element);
+    if (salaryTaxCompute || salaryTaxCompute === 0) {
+      this.dataTable[i].thueTNCN = salaryTaxCompute - this.dataTable[i].reduce;
+      this.dataTable[i].tongKhoanTru =
+        this.dataTable[i].thueTNCN +
+        (element.bhxhSalary * this.staffBHTN) / 100 +
+        (element.bhxhSalary * this.staffBHXH) / 100 +
+        (element.bhxhSalary * this.staffBHYT) / 100;
     } else {
-      event.target.innerHTML = '';
+      event.target.innerHTML = 0;
+      this.dataTable[i].thueTNCN = 0;
+      this.dataTable[i].tongKhoanTru = 0;
     }
   }
 }

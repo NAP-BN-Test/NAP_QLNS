@@ -443,7 +443,7 @@ export class DetailStaffComponent implements OnInit {
     });
   }
 
-  onClickEditTrainingAfter(event) {
+  onClickEditTrainingAfter(event) {    
     const dialogRef = this.dialog.open(AddUpdateTrainingAfterComponent, {
       width: '900px',
       data: {

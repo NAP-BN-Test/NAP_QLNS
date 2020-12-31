@@ -187,13 +187,22 @@ export class PayrollTemplateComponent implements OnInit {
     this.spinner.hide();
   }
 
-  compute(event, element) {
+  compute(event, element, i) {
     let salaryTaxCompute = Number(event.target.innerHTML);
-    if (salaryTaxCompute) {
-      console.log(salaryTaxCompute);
-      console.log(element);
+    if (salaryTaxCompute || salaryTaxCompute === 0) {
+      this.dataTable[i].thueTNCN = salaryTaxCompute - this.dataTable[i].reduce;
+      this.dataTable[i].tongKhoanTru =
+        this.dataTable[i].thueTNCN +
+        (element.bhxhSalary * this.staffBHTN) / 100 +
+        (element.bhxhSalary * this.staffBHXH) / 100 +
+        (element.bhxhSalary * this.staffBHYT) / 100;
+      this.dataTable[i].thucLinh =
+        element.workingSalary - this.dataTable[i].tongKhoanTru;
     } else {
-      event.target.innerHTML = '';
+      event.target.innerHTML = 0;
+      this.dataTable[i].thueTNCN = 0;
+      this.dataTable[i].tongKhoanTru = 0;
+      this.dataTable[i].thucLinh = 0;
     }
   }
 }

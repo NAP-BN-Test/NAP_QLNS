@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { PipesModule } from './pipes/pipes.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -130,6 +131,7 @@ import { AddUpdateTypeContractComponent } from './dialogs/add-update-type-contra
     MatNativeDateModule,
     MatSelectModule,
     MatTabsModule,
+    PipesModule,
   ],
   providers: [
     DatePipe,

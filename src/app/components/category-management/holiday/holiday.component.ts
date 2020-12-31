@@ -21,7 +21,7 @@ export class HolidayComponent implements OnInit {
     listColum: [
       { name: 'SỐ THỨ TỰ', cell: 'stt' },
       { name: 'MÃ LOẠI NGHỈ LỄ', cell: 'code' },
-      { name: 'TÊN LOẠI LỄ', cell: 'name' },
+      { name: 'TÊN LOẠI NGHỈ LỄ', cell: 'name' },
       { name: 'MÔ TẢ', cell: 'description' },
       { name: 'THAO TÁC', cell: 'undefined' },
     ],
@@ -31,7 +31,7 @@ export class HolidayComponent implements OnInit {
   collectionSize;
   page: number = 1;
 
-  listFields = [{ name: 'MÃ LOẠI NGHỈ LỄ' }, { name: 'TÊN LOẠI LỄ' }];
+  listFields = [{ name: 'MÃ LOẠI NGHỈ LỄ' }, { name: 'TÊN LOẠI NGHỈ LỄ' }];
 
   dataSearch: any = {
     search: '',
