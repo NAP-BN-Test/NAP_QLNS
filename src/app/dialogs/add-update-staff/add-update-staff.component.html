@@ -1,12 +1,17 @@
 <div class="container-anl">
-  <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI TÌNH TRẠNG NHÂN VIÊN</h2>
-  <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN TÌNH TRẠNG NHÂN VIÊN</h2>
+  <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI NHÂN VIÊN</h2>
+  <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN NHÂN VIÊN</h2>
   <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
   <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
     <div width-50 style="padding-right: 1%">
       <mat-form-field appearance="outline">
         <mat-label>Mã nhân viên</mat-label>
-        <input matInput placeholder="Nhập Text" formControlName="staffCode" />
+        <input
+          matInput
+          placeholder="Nhập Text"
+          formControlName="staffCode"
+          required
+        />
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>ID máy chấm công</mat-label>
@@ -20,11 +25,21 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Mã số thuế cá nhân</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="taxCode" />
+      <input
+        matInput
+        placeholder="Nhập Text"
+        formControlName="taxCode"
+        type="number"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Họ và tên</mat-label>
-      <input matInput placeholder="Nhập Text" formControlName="staffName" />
+      <input
+        matInput
+        placeholder="Nhập Text"
+        formControlName="staffName"
+        required
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Điện thoại</mat-label>
@@ -121,6 +136,7 @@
         type="text"
         formControlName="idChucVu"
         [matAutocomplete]="autoRole"
+        required
       />
       <mat-autocomplete
         autoActiveFirstOption

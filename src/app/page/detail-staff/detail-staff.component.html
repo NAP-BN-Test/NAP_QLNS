@@ -58,7 +58,9 @@
               matInput
               placeholder="Nhập Text"
               formControlName="phoneNumber"
+              pattern="^[0-9\\+\\ \\]*$"
             />
+            <mat-error>Số điện thoại không hợp lệ.</mat-error>
           </mat-form-field>
           <div class="double-input">
             <mat-form-field appearance="outline">

@@ -25,17 +25,4 @@ export class NumberConvertPipe implements PipeTransform {
       return amount;
     }
   }
-
-  // transform(value): any {
-  //   // if (value >= 1000000) {
-  //   //   return parseFloat(value / 1000000 + "");
-  //   // }
-  //   // else if (value >= 1000 && value < 1000000) {
-  //   //   return parseFloat(value / 1000 + "");
-  //   // }
-  //   // else {
-  //   //   return value;
-  //   // }
-  //   value.Format("{0:#.00}", Convert.ToDecimal(myMoneyString) / 100);
-  // }
 }
