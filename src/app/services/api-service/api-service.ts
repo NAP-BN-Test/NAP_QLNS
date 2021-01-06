@@ -177,6 +177,14 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestDATA_TIMEKEEPING(date): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DATA_TIMEKEEPING,
+      ParamBuilder.builder().add('date', date)
+    );
+  }
+
+  //===================================================================================
   public sendRequestGET_LIST_TBL_MUCDONG_BAOHIEM(
     page,
     dataSearch

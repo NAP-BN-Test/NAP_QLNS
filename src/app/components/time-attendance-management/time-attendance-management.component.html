@@ -15,7 +15,12 @@
       ></mat-datepicker>
     </mat-form-field>
     <div class="button-search">
-      <button mat-raised-button color="primary" class="margin-left1">
+      <button
+        mat-raised-button
+        color="primary"
+        class="margin-left1"
+        (click)="onLoadData()"
+      >
         <mat-icon>search</mat-icon> Tìm kiếm
       </button>
       <button
@@ -29,10 +34,10 @@
     </div>
   </form>
   <div class="container-table mat-elevation-z8">
-    <table mat-table [dataSource]="dataExample">
-      <ng-container matColumnDef="nameStaff" sticky width-20>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="staffName" sticky width-20>
         <th mat-header-cell *matHeaderCellDef>Tên nhân viên</th>
-        <td mat-cell *matCellDef="let element">{{ element.nameStaff }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.staffName }}</td>
       </ng-container>
 
       <ng-container
@@ -54,29 +59,29 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="ngayLV" stickyEnd>
+      <ng-container matColumnDef="workingDay" stickyEnd>
         <th mat-header-cell *matHeaderCellDef>Ngày làm việc</th>
-        <td mat-cell *matCellDef="let element">{{ element.ngayLV }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.workingDay }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="ngayN" stickyEnd>
+      <ng-container matColumnDef="dayOff" stickyEnd>
         <th mat-header-cell *matHeaderCellDef>Ngày nghỉ</th>
-        <td mat-cell *matCellDef="let element">{{ element.ngayN }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.dayOff }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="nghiPhep" stickyEnd>
+      <ng-container matColumnDef="takeLeave" stickyEnd>
         <th mat-header-cell *matHeaderCellDef>Nghỉ phép</th>
-        <td mat-cell *matCellDef="let element">{{ element.nghiPhep }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.takeLeave }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="nghiLe" stickyEnd>
+      <ng-container matColumnDef="holiday" stickyEnd>
         <th mat-header-cell *matHeaderCellDef>Nghỉ lễ</th>
-        <td mat-cell *matCellDef="let element">{{ element.nghiLe }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.holiday }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="nghiTuDo" stickyEnd>
+      <ng-container matColumnDef="freeBreak" stickyEnd>
         <th mat-header-cell *matHeaderCellDef>Nghỉ tự do</th>
-        <td mat-cell *matCellDef="let element">{{ element.nghiTuDo }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.freeBreak }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
