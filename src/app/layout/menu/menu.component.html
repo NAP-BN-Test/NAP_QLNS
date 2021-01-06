@@ -13,7 +13,6 @@
           class="button-menu"
           [class.selected]="menuItem.indexMenu == indexMenu"
           [routerLink]="menuItem.link"
-          (click)="onclickChildMenu(menuItem.indexMenu)"
         >
           <span class="icon fa"></span>
           <span>
@@ -33,7 +32,6 @@
           class="button-menu"
           [class.selected]="menuItem.indexMenu == indexMenu"
           [routerLink]="menuItem.link"
-          (click)="onclickChildMenu(menuItem.indexMenu)"
         >
           <span class="icon fa"></span>
           <span>
@@ -54,7 +52,6 @@
                 *ngIf="!childL1.children"
                 mat-menu-item
                 [routerLink]="childL1.link"
-                (click)="onclickChildMenu(childL1.indexMenu)"
               >
                 <span class="nav-link">
                   {{ childL1.label }}
@@ -81,12 +78,7 @@
                     "
                   >
                     <ng-container *ngFor="let childL2 of childL1.children">
-                      <li
-                        class="p-0"
-                        mat-menu-item
-                        [routerLink]="childL2.link"
-                        (click)="onclickChildMenu(childL2.indexMenu)"
-                      >
+                      <li class="p-0" mat-menu-item [routerLink]="childL2.link">
                         <span class="nav-link">
                           {{ childL2.label }}
                           <i *ngIf="childL2.icon"></i>

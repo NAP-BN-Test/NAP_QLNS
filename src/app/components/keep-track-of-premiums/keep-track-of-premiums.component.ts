@@ -149,7 +149,7 @@ export class KeepTrackOfPremiumsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mService.LoadAppConfig();
+    this.mService.LoadAppConfig(4);
     if (!this.mService.getUser()) {
       this.mService.publishPageRoute('login');
     }

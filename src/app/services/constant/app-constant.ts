@@ -28,6 +28,7 @@ export const TIME_TYPE = {
 export const EVENT_PUSH = {
   TABLE: 'table-event',
   SELECTION: 'table-selection',
+  INDEX_MENU: 'indexMenu',
 };
 
 export const BUTTON_TYPE = {

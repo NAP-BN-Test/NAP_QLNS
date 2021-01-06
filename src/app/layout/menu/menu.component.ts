@@ -1,7 +1,13 @@
-import { Component, Renderer2 } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectorRef,
+  Component,
+  Renderer2,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutComponent } from 'src/app/dialogs/logout/logout.component';
 import { AppModuleService } from 'src/app/services/app-module.service';
+import { EVENT_PUSH } from 'src/app/services/constant/app-constant';
 import { ModulesList } from './menu';
 
 @Component({
@@ -9,7 +15,7 @@ import { ModulesList } from './menu';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.less'],
 })
-export class MenuComponent {
+export class MenuComponent implements AfterViewChecked {
   modulesList: Array<any>;
   enteredButton = false;
   isMatMenuOpen = false;
@@ -22,10 +28,20 @@ export class MenuComponent {
   constructor(
     private ren: Renderer2,
     public dialog: MatDialog,
-    public mService: AppModuleService
+    public mService: AppModuleService,
+    private cdRef: ChangeDetectorRef
   ) {
     this.modulesList = ModulesList;
-    this.indexMenu = this.mService.getIndexMenu();
+    this.mService.currentEvent.subscribe((sData) => {
+      if (sData.name == EVENT_PUSH.INDEX_MENU) {
+        //thông tin pagination
+        this.indexMenu = sData.params.indexMenu;
+      }
+    });
+  }
+
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges();
   }
 
   menuenter() {
@@ -162,10 +178,5 @@ export class MenuComponent {
         this.mService.publishPageRoute('login');
       }
     });
-  }
-
-  onclickChildMenu(indexMenu) {
-    this.indexMenu = indexMenu;
-    this.mService.setIndexMenu(indexMenu);
   }
 }

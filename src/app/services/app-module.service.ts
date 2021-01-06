@@ -5,6 +5,7 @@ import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import {
+  EVENT_PUSH,
   LOCAL_STORAGE_KEY,
   TIME_SELECT,
   TIME_TYPE,
@@ -73,23 +74,10 @@ export class AppModuleService {
     this.token = token;
   }
 
-  public getIndexMenu(): number {
-    if (localStorage.getItem(LOCAL_STORAGE_KEY.INDEX_MENU)) {
-      this.indexMenu = JSON.parse(
-        localStorage.getItem(LOCAL_STORAGE_KEY.INDEX_MENU)
-      );
-    }
-    return this.indexMenu;
-  }
-
-  public setIndexMenu(indexMenu: string) {
-    localStorage.setItem(LOCAL_STORAGE_KEY.INDEX_MENU, indexMenu);
-    this.indexMenu = Number(indexMenu);
-  }
-
   //----------------------------------------------------//
 
-  public LoadAppConfig() {
+  public LoadAppConfig(indexMenu) {
+    this.setMenu(indexMenu);
     this.getApiService().createClient(this.mAngularHttp);
     return new Promise((resolve, reject) => {
       if (this.getAppConfig().hasData()) {
@@ -110,6 +98,14 @@ export class AppModuleService {
             }
           );
       }
+    });
+  }
+
+  //----------------------------------------------------//
+
+  setMenu(indexMenu) {
+    this.publishEvent(EVENT_PUSH.INDEX_MENU, {
+      indexMenu: indexMenu,
     });
   }
 

@@ -44,7 +44,7 @@ export class DetailStaffComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.mService.LoadAppConfig();
+    this.mService.LoadAppConfig(1);
     let params: any = this.mService.handleActivatedRoute();
     this.quoteID = params.quoteID ? params.quoteID : '';
     this.mService

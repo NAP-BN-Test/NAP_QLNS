@@ -325,7 +325,7 @@ export class ApiService extends HttpClient {
       ParamBuilder.builder()
         .add('code', obj.code)
         .add('name', obj.name)
-        .add('description', obj.description)
+        .addIgnoreNull('description', obj.description)
         .add('type', obj.type)
     );
   }
@@ -468,7 +468,7 @@ export class ApiService extends HttpClient {
       ParamBuilder.builder()
         .add('statusCode', obj.statusCode)
         .add('statusName', obj.statusName)
-        .add('description', obj.description)
+        .addIgnoreNull('description', obj.description)
     );
   }
 
@@ -567,7 +567,7 @@ export class ApiService extends HttpClient {
         .add('statusCode', obj.statusCode)
         .add('statusName', obj.statusName)
         .add('id', obj.id)
-        .add('description', obj.description)
+        .addIgnoreNull('description', obj.description)
     );
   }
 
@@ -705,7 +705,7 @@ export class ApiService extends HttpClient {
       ParamBuilder.builder()
         .add('code', obj.code)
         .add('name', obj.name)
-        .add('description', obj.description)
+        .addIgnoreNull('description', obj.description)
         .add('id', obj.id)
         .add('type', obj.type)
     );

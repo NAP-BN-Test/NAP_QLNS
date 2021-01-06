@@ -29,7 +29,7 @@ export class AddUpdateDepartmentComponent implements OnInit {
   listBranch = [];
 
   ngOnInit() {
-    this.mService.LoadAppConfig();
+    this.mService.LoadAppConfig(0);
     this.mService
       .getApiService()
       .sendRequestGET_LIST_NAME_TBL_DM_CHINHANH()

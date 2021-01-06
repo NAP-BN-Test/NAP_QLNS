@@ -48,7 +48,7 @@ export class DecidedToIncreaseTheSalariesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mService.LoadAppConfig();
+    this.mService.LoadAppConfig(7);
     if (this.mService.getUser()) {
       let params: any = this.mService.handleActivatedRoute();
       this.page = params.page ? params.page : 1;

@@ -137,7 +137,7 @@ export class PayrollTemplateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mService.LoadAppConfig();
+    this.mService.LoadAppConfig(2);
     if (!this.mService.getUser()) {
       this.mService.publishPageRoute('login');
     }

@@ -18,6 +18,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { Moment } from 'moment';
+import { AppModuleService } from 'src/app/services/app-module.service';
 
 const moment = _moment;
 
@@ -54,9 +55,11 @@ export const MY_FORMATS = {
 })
 export class TimeAttendanceManagementComponent implements OnInit {
   isEdit = false;
-  constructor() {}
+
+  constructor(public mService: AppModuleService) {}
+
   ngOnInit() {
-    // console.log(getDaysInMonth(2, 2021));
+    this.mService.LoadAppConfig(5);
   }
 
   monthYear = new FormControl(moment());
