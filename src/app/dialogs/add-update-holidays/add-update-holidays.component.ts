@@ -14,7 +14,7 @@ import { AppModuleService } from 'src/app/services/app-module.service';
 export class AddUpdateHolidaysComponent implements OnInit {
   myForm: FormGroup;
 
-  //Autocomplete Bộ phận
+  //Autocomplete loại nghỉ lễ, chấm công
   filterTypeHT: Observable<string[]>;
   listTypeHT = [];
 

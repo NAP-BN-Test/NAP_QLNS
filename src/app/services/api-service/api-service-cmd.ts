@@ -170,4 +170,12 @@ export class ApiCmd {
 
   public static GET_LIST_NAME_TBL_LOAICHAMCONG: string =
     'qlnb/get_list_name_tbl_loaichamcong';
+
+  public static ADD_TBL_NGHIPHEP: string = 'qlnb/add_tbl_nghiphep';
+
+  public static UPDATE_TBL_NGHIPHEP: string = 'qlnb/update_tbl_nghiphep';
+
+  public static DELETE_TBL_NGHIPHEP: string = 'qlnb/delete_tbl_nghiphep';
+
+  public static GET_LIST_TBL_NGHIPHEP: string = 'qlnb/get_list_tbl_nghiphep';
 }

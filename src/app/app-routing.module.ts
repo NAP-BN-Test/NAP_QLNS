@@ -12,6 +12,7 @@ import { DecidedToIncreaseTheSalariesComponent } from './components/decided-to-i
 import { HolidaysManagementComponent } from './components/holidays-management/holidays-management.component';
 import { InsuranceManagementComponent } from './components/insurance-management/insurance-management.component';
 import { KeepTrackOfPremiumsComponent } from './components/keep-track-of-premiums/keep-track-of-premiums.component';
+import { TakeLeaveManagementComponent } from './components/take-leave-management/take-leave-management.component';
 import { PayrollTemplateComponent } from './components/payroll-template/payroll-template.component';
 import { QuoteManagementComponent } from './components/quote-management/quote-management.component';
 import { TimeAttendanceManagementComponent } from './components/time-attendance-management/time-attendance-management.component';
@@ -88,6 +89,10 @@ const routes: Routes = [
       {
         path: 'type-contract',
         component: TypeContractComponent,
+      },
+      {
+        path: 'take-leave',
+        component: TakeLeaveManagementComponent,
       },
     ],
   },

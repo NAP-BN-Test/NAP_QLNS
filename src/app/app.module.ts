@@ -68,6 +68,8 @@ import { DatePipe } from '@angular/common';
 import { TypeContractComponent } from './components/category-management/type-contract/type-contract.component';
 import { AddUpdateTypeContractComponent } from './dialogs/add-update-type-contract/add-update-type-contract.component';
 import { LogoutComponent } from './dialogs/logout/logout.component';
+import { TakeLeaveManagementComponent } from './components/take-leave-management/take-leave-management.component';
+import { AddUpdateTakeLeaveComponent } from './dialogs/add-update-take-leave/add-update-take-leave/add-update-take-leave.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +110,8 @@ import { LogoutComponent } from './dialogs/logout/logout.component';
     TypeContractComponent,
     AddUpdateTypeContractComponent,
     LogoutComponent,
+    TakeLeaveManagementComponent,
+    AddUpdateTakeLeaveComponent,
   ],
   imports: [
     BrowserModule,

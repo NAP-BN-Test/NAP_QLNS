@@ -250,6 +250,31 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestADD_TBL_NGHIPHEP(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.ADD_TBL_NGHIPHEP,
+      ParamBuilder.builder()
+        .add('idNhanVien', obj.idNhanVien)
+        .add('idLoaiChamCong', obj.idLoaiChamCong)
+        .addIgnoreNull('dateStart', obj.dateStart)
+        .addIgnoreNull('dateEnd', obj.dateEnd)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestUPDATE_TBL_NGHIPHEP(obj): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TBL_NGHIPHEP,
+      ParamBuilder.builder()
+        .add('idNhanVien', obj.idNhanVien)
+        .add('id', obj.id)
+        .add('idLoaiChamCong', obj.idLoaiChamCong)
+        .addIgnoreNull('dateStart', obj.dateStart)
+        .addIgnoreNull('dateEnd', obj.dateEnd)
+    );
+  }
+
+  //===================================================================================
   public sendRequestGET_LIST_TBL_DM_CHINHANH(page, dataSearch): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.GET_LIST_TBL_DM_CHINHANH,
@@ -303,6 +328,17 @@ export class ApiService extends HttpClient {
   ): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.GET_LIST_TBL_HOPDONG_NHANSU,
+      ParamBuilder.builder()
+        .add('itemPerPage', this.itemPerPage)
+        .add('dataSearch', dataSearch)
+        .add('page', page)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestGET_LIST_TBL_NGHIPHEP(page, dataSearch): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.GET_LIST_TBL_NGHIPHEP,
       ParamBuilder.builder()
         .add('itemPerPage', this.itemPerPage)
         .add('dataSearch', dataSearch)
@@ -731,6 +767,14 @@ export class ApiService extends HttpClient {
   public sendRequestDELETE_TBL_LOAICHAMCONG(listID): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.DELETE_TBL_LOAICHAMCONG,
+      ParamBuilder.builder().add('listID', listID)
+    );
+  }
+
+  //===================================================================================
+  public sendRequestDELETE_TBL_NGHIPHEP(listID): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DELETE_TBL_NGHIPHEP,
       ParamBuilder.builder().add('listID', listID)
     );
   }

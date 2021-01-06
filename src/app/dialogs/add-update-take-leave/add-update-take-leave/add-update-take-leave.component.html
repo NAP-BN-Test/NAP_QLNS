@@ -1,0 +1,87 @@
+<div class="container-anl">
+  <h2 mat-dialog-title *ngIf="!mData">THÊM MỚI QUẢN LÝ NGHỈ PHÉP</h2>
+  <h2 mat-dialog-title *ngIf="mData">SỬA THÔNG TIN QUẢN LÝ NGHỈ PHÉP</h2>
+  <span>Vui lòng nhập đầy đủ thông tin bên dưới</span>
+  <form [formGroup]="myForm" #form="ngForm" (submit)="onSubmit(form.value)">
+    <mat-form-field appearance="outline">
+      <mat-label>Từ ngày</mat-label>
+      <input
+        matInput
+        [matDatepicker]="dateStartPicker"
+        formControlName="dateStart"
+        required
+      />
+      <mat-datepicker-toggle matSuffix [for]="dateStartPicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #dateStartPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Đến ngày</mat-label>
+      <input
+        matInput
+        [matDatepicker]="dateEndPicker"
+        formControlName="dateEnd"
+      />
+      <mat-datepicker-toggle matSuffix [for]="dateEndPicker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #dateEndPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Loại chấm công</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="idLoaiChamCong"
+        [matAutocomplete]="autoTypeHT"
+        required
+      />
+      <mat-autocomplete
+        autoActiveFirstOption
+        #autoTypeHT="matAutocomplete"
+        [displayWith]="typeHTDisplayFn"
+      >
+        <mat-option *ngFor="let item of filterTypeHT | async" [value]="item">
+          {{ item.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Tên nhân viên</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="idNhanVien"
+        [matAutocomplete]="autoStaff"
+        required
+      />
+      <mat-autocomplete
+        autoActiveFirstOption
+        #autoStaff="matAutocomplete"
+        [displayWith]="staffDisplayFn"
+        required
+      >
+        <mat-option *ngFor="let item of filterStaff | async" [value]="item">
+          {{ item.staffName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <div width-100 align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!myForm.valid"
+      >
+        <mat-icon>save</mat-icon> {{ mData ? "Lưu và đóng" : "Thêm và đóng" }}
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="margin-left1"
+        mat-dialog-close
+      >
+        <mat-icon>close</mat-icon> Hủy
+      </button>
+    </div>
+  </form>
+</div>
