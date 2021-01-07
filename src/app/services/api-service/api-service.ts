@@ -2,10 +2,10 @@ import { ApiCmd } from './api-service-cmd';
 import { HttpClient } from '../core/http/http-client';
 import { LOCAL_STORAGE_KEY } from '../constant/app-constant';
 import { ParamBuilder } from '../core/http/param-builder';
+import { ParamsKey } from '../constant/paramskey';
 
 export class ApiService extends HttpClient {
-  mUrl: string = 'http://192.168.1.101:3100/';
-  // mUrl: string = 'http://118.27.192.106:3100/';
+  mUrl: string = ParamsKey.URL;
 
   userID = localStorage.getItem(LOCAL_STORAGE_KEY.USER_INFO)
     ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY.USER_INFO)).id

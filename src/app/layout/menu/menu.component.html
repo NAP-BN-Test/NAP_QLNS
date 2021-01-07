@@ -96,7 +96,11 @@
   </div>
   <div width-10 class="header-back d-flex flex-row">
     <div width-60 class="d-flex flex-row user">
-      <button mat-icon-button [matMenuTriggerFor]="userDetail">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="userDetail"
+        style="height: -webkit-fill-available"
+      >
         <mat-icon>account_circle</mat-icon>
       </button>
     </div>
