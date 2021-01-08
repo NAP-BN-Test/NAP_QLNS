@@ -47,15 +47,22 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           {{ item.name }}
         </th>
-        <td
-          tappable
-          mat-cell
-          *matCellDef="let row"
-          spellcheck="false"
-          [contentEditable]="isEdit"
-          (blur)="updateList($event, i, row, item)"
-        >
-          {{ row[item.cell] }}
+        <td tappable mat-cell *matCellDef="let row" spellcheck="false">
+          <ul type="none">
+            <li
+              [contentEditable]="isEdit"
+              (blur)="updateList($event, i, row, item, 'morning')"
+            >
+              {{ row[item.cell]?.S }}
+            </li>
+            <hr />
+            <li
+              [contentEditable]="isEdit"
+              (blur)="updateList($event, i, row, item, 'afternoon')"
+            >
+              {{ row[item.cell]?.C }}
+            </li>
+          </ul>
         </td>
       </ng-container>
 

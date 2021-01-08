@@ -116,11 +116,12 @@ export class TimeAttendanceManagementComponent implements OnInit {
   displayedColumnsAll;
   displayedColumns;
 
-  updateList(event, i, row, item) {
-    console.log(event);
+  updateList(event, i, row, item, type) {
+    console.log(event.target.innerHTML);
     console.log(i);
     console.log(row);
     console.log(item);
+    console.log(type);
   }
 
   getDaysInMonth(date) {
