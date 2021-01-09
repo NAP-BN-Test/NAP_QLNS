@@ -61,6 +61,7 @@ export const MY_FORMATS = {
 export class TimeAttendanceManagementComponent implements OnInit {
   isEdit = false;
   dataSource = [];
+  listDays = [];
 
   constructor(
     public mService: AppModuleService,
@@ -77,19 +78,20 @@ export class TimeAttendanceManagementComponent implements OnInit {
 
   async onLoadData() {
     this.spinner.show();
+    this.listDays = [];
     this.displayedColumnsAll = [];
     this.displayedColumns = ['staffName'];
     let date = this.monthYear
       ? this.datePipe.transform(this.monthYear.value, 'yyyy-MM')
       : null;
-    await this.getDaysInMonth(date);
     await this.mService
       .getApiService()
       .sendRequestDATA_TIMEKEEPING(date)
       .then((data) => {
         if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
-          console.log(data);
           this.dataSource = data.array;
+          this.listDays = data.arrayDays;
+          this.getDaysInMonth();
         }
       });
     this.spinner.hide();
@@ -116,30 +118,20 @@ export class TimeAttendanceManagementComponent implements OnInit {
   displayedColumnsAll;
   displayedColumns;
 
-  updateList(event, i, row, item, type) {
-    console.log(event.target.innerHTML);
-    console.log(i);
-    console.log(row);
-    console.log(item);
-    console.log(type);
+  updateList(event, id) {
+    this.mService
+      .getApiService()
+      .sendRequestUPDATE_TIMEKEEPING(id, event.target.innerText);
   }
 
-  getDaysInMonth(date) {
-    let month = moment(date, 'YYYY-MM').format('MM');
-    let totalDay = moment(date, 'YYYY-MM').daysInMonth();
-    for (let index = 1; index <= totalDay; index++) {
-      let date;
-      if (index < 10) {
-        date = '0' + index + '/' + month;
-      } else {
-        date = index + '/' + month;
-      }
+  async getDaysInMonth() {
+    await this.listDays.forEach((element) => {
       this.displayedColumnsAll.push({
-        name: date,
-        cell: date,
+        name: element,
+        cell: element,
       });
-      this.displayedColumns.push(date);
-    }
+      this.displayedColumns.push(element);
+    });
     this.displayedColumns.push(
       'workingDay',
       'dayOff',

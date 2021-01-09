@@ -355,6 +355,14 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestUPDATE_TIMEKEEPING(id, status): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.UPDATE_TIMEKEEPING,
+      ParamBuilder.builder().add('id', id).add('status', status)
+    );
+  }
+
+  //===================================================================================
   public sendRequestGET_LIST_NAME_TBL_DMNHANVIEN(): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.GET_LIST_NAME_TBL_DMNHANVIEN,

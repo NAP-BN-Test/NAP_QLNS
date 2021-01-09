@@ -180,4 +180,6 @@ export class ApiCmd {
   public static GET_LIST_TBL_NGHIPHEP: string = 'qlnb/get_list_tbl_nghiphep';
 
   public static DATA_TIMEKEEPING: string = 'qlnb/data_timekeeping';
+
+  public static UPDATE_TIMEKEEPING: string = 'qlnb/update_timekeeping';
 }

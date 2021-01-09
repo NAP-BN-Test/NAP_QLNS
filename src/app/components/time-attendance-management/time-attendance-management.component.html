@@ -19,7 +19,7 @@
         mat-raised-button
         color="primary"
         class="margin-left1"
-        (click)="onLoadData()"
+        (click)="onLoadData(); isEdit = true"
       >
         <mat-icon>search</mat-icon> Tìm kiếm
       </button>
@@ -27,7 +27,8 @@
         mat-raised-button
         color="accent"
         class="margin-left1"
-        (click)="isEdit = !isEdit"
+        [disabled]="!isEdit"
+        (click)="isEdit = false"
       >
         <mat-icon>edit</mat-icon> Chỉnh sửa
       </button>
@@ -50,17 +51,20 @@
         <td tappable mat-cell *matCellDef="let row" spellcheck="false">
           <ul type="none">
             <li
-              [contentEditable]="isEdit"
-              (blur)="updateList($event, i, row, item, 'morning')"
+              [contentEditable]="!isEdit"
+              (blur)="updateList($event, row[item.cell]?.idS)"
+              [class.color-status]="
+                row[item.cell].S == 1 && row[item.cell]?.status == 'F'
+              "
             >
-              {{ row[item.cell]?.S }}
+              <span>{{ row[item.cell].S }}</span>
             </li>
             <hr />
             <li
-              [contentEditable]="isEdit"
-              (blur)="updateList($event, i, row, item, 'afternoon')"
+              [contentEditable]="!isEdit"
+              (blur)="updateList($event, row[item.cell]?.idC)"
             >
-              {{ row[item.cell]?.C }}
+              <span>{{ row[item.cell].C }}</span>
             </li>
           </ul>
         </td>
