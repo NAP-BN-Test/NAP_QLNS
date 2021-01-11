@@ -88,6 +88,8 @@ export class TimeAttendanceManagementComponent implements OnInit {
       .getApiService()
       .sendRequestDATA_TIMEKEEPING(date)
       .then((data) => {
+        console.log(data);
+        
         if (data[ParamsKey.STATUS] == STATUS.SUCCESS) {
           this.dataSource = data.array;
           this.listDays = data.arrayDays;

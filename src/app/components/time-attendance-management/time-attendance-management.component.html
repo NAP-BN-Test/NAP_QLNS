@@ -54,17 +54,17 @@
               [contentEditable]="!isEdit"
               (blur)="updateList($event, row[item.cell]?.idS)"
               [class.color-status]="
-                row[item.cell].S == 1 && row[item.cell]?.status == 'F'
+                row[item.cell]?.S == 1 && row[item.cell]?.status == 'F'
               "
             >
-              <span>{{ row[item.cell].S }}</span>
+              <span>{{ row[item.cell]?.S }}</span>
             </li>
             <hr />
             <li
               [contentEditable]="!isEdit"
               (blur)="updateList($event, row[item.cell]?.idC)"
             >
-              <span>{{ row[item.cell].C }}</span>
+              <span>{{ row[item.cell]?.C }}</span>
             </li>
           </ul>
         </td>
