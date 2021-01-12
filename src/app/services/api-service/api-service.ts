@@ -185,6 +185,14 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
+  public sendRequestDATA_EXPORT_EXCEL(date): Promise<any> {
+    return this.requestPost(
+      this.mUrl + ApiCmd.DATA_EXPORT_EXCEL,
+      ParamBuilder.builder().add('date', date)
+    );
+  }
+
+  //===================================================================================
   public sendRequestGET_LIST_TBL_MUCDONG_BAOHIEM(
     page,
     dataSearch

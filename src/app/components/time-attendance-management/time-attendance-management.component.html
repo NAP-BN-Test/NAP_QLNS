@@ -2,7 +2,7 @@
   <div class="title">
     <span>QUẢN LÝ CHẤM CÔNG</span>
   </div>
-  <form>
+  <form class="d-flex">
     <mat-form-field appearance="outline">
       <mat-label>Chọn tháng/năm</mat-label>
       <input matInput [matDatepicker]="dp" [formControl]="monthYear" />
@@ -31,6 +31,15 @@
         (click)="isEdit = false"
       >
         <mat-icon>edit</mat-icon> Chỉnh sửa
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="margin-left1"
+        [disabled]="dataSource.length < 1"
+        (click)="ExportToExcel()"
+      >
+        <mat-icon>import_export</mat-icon> Export
       </button>
     </div>
   </form>

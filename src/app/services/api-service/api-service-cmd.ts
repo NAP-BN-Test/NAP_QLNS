@@ -182,4 +182,6 @@ export class ApiCmd {
   public static DATA_TIMEKEEPING: string = 'qlnb/data_timekeeping';
 
   public static UPDATE_TIMEKEEPING: string = 'qlnb/update_timekeeping';
+
+  public static DATA_EXPORT_EXCEL: string = 'qlnb/data_export_excel';
 }
