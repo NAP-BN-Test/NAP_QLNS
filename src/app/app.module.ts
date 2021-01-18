@@ -17,7 +17,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MenuComponent } from './layout/menu/menu.component';
-import { TypeTimekeepingComponent } from './components/category-management/type-timekeeping/type-timekeeping.component';
 import { HolidayComponent } from './components/category-management/holiday/holiday.component';
 import { EmployeeStatusComponent } from './components/category-management/employee-status/employee-status.component';
 import { SearchBoardComponent } from './materials/search-board/search-board.component';
@@ -76,7 +75,6 @@ import { AddUpdateTakeLeaveComponent } from './dialogs/add-update-take-leave/add
     AppComponent,
     LoginComponent,
     MenuComponent,
-    TypeTimekeepingComponent,
     HolidayComponent,
     EmployeeStatusComponent,
     SearchBoardComponent,

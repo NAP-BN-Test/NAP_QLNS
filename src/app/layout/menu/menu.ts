@@ -2,13 +2,8 @@ export const ModulesList = [
   {
     indexMenu: 0,
     label: 'DANH MỤC',
-    link: 'type-timekeeping',
+    link: 'holiday',
     children: [
-      {
-        indexMenu: 0,
-        label: 'Danh mục loại chấm công',
-        link: 'type-timekeeping',
-      },
       {
         indexMenu: 0,
         label: 'Danh mục nghỉ lễ',
