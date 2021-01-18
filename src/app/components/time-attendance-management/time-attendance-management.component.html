@@ -36,6 +36,14 @@
         mat-raised-button
         color="warn"
         class="margin-left1"
+        [disabled]="isEdit"
+        (click)="isEdit = true; onClickSave()"
+      >
+        <mat-icon>save</mat-icon> Lưu
+      </button>
+      <button
+        mat-raised-button
+        class="margin-left1"
         [disabled]="dataSource.length < 1"
         (click)="ExportToExcel()"
       >

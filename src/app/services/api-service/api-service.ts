@@ -363,10 +363,10 @@ export class ApiService extends HttpClient {
   }
 
   //===================================================================================
-  public sendRequestUPDATE_TIMEKEEPING(id, status): Promise<any> {
+  public sendRequestUPDATE_TIMEKEEPING(array): Promise<any> {
     return this.requestPost(
       this.mUrl + ApiCmd.UPDATE_TIMEKEEPING,
-      ParamBuilder.builder().add('id', id).add('status', status)
+      ParamBuilder.builder().add('array', array)
     );
   }
 

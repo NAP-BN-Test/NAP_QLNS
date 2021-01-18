@@ -120,11 +120,25 @@ export class TimeAttendanceManagementComponent implements OnInit {
 
   displayedColumnsAll;
   displayedColumns;
+  arrDataUp = [];
 
   updateList(event, id) {
-    this.mService
-      .getApiService()
-      .sendRequestUPDATE_TIMEKEEPING(id, event.target.innerText);
+    this.arrDataUp.push({
+      id: id ? id : null,
+      status: event.target.innerText,
+    });
+  }
+
+  onClickSave() {
+    if (this.arrDataUp.length) {
+      this.mService
+        .getApiService()
+        .sendRequestUPDATE_TIMEKEEPING(JSON.stringify(this.arrDataUp))
+        .then((data) => {
+          this.mService.showSnackBar(data.message);
+        });
+    }
+    this.arrDataUp = [];
   }
 
   async getDaysInMonth() {
