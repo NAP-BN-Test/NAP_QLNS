@@ -1,4 +1,5 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+// @import "compass/css3";
 
 body {
   font-family: Roboto, Arial, sans-serif;
@@ -12,10 +13,11 @@ body {
   box-shadow: 1px 0px 20px 5px #325b8c;
 
   .logo {
-    max-width: 9%;
+    max-width: 10%;
     margin: auto;
 
     img {
+      padding-left: 5%;
       max-width: 100%;
     }
   }
@@ -27,6 +29,7 @@ body {
 }
 
 .header-center {
+  width: 85%;
   .button-menu {
     z-index: 1050;
     width: 12%;
@@ -39,9 +42,12 @@ body {
 }
 
 .header-back {
+  width: 5%;
+  justify-content: center;
+
   .user {
-    align-items: center;
-    justify-content: center;
+    // align-items: center;
+    // justify-content: flex-end;
 
     span {
       align-items: center;
@@ -51,6 +57,7 @@ body {
 
     .mat-icon {
       max-width: 50px;
+      font-size: 2vw;
     }
   }
 

@@ -1,10 +1,8 @@
 <div class="basic-container">
   <div class="logo">
-    <img
-      src="https://ageless.com.vn/wp-content/uploads/2016/07/AGELESS-logo-TIENG-VIET-e1468290499166.png"
-    />
+    <img src="../../../assets/img/logoNAP.png" />
   </div>
-  <div class="d-flex justify-content-center header-center" width-80>
+  <div class="d-flex justify-content-center header-center">
     <ng-container *ngFor="let menuItem of modulesList" tappable>
       <ng-container *ngIf="menuItem.children.length < 1">
         <button
@@ -94,8 +92,8 @@
       </ng-container>
     </ng-container>
   </div>
-  <div width-10 class="header-back d-flex flex-row">
-    <div width-60 class="d-flex flex-row user">
+  <div class="header-back d-flex flex-row">
+    <div class="d-flex flex-row user">
       <button
         mat-icon-button
         [matMenuTriggerFor]="userDetail"
@@ -104,10 +102,10 @@
         <mat-icon>account_circle</mat-icon>
       </button>
     </div>
-    <div width-40 class="translate">
+    <!-- <div width-40 class="translate">
       <img src="../../../assets/img/icon-Vietnam.png" />
       <img src="../../../assets/img/icon- English.png" />
-    </div>
+    </div> -->
   </div>
 </div>
 
